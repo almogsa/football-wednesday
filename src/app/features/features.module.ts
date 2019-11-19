@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {StoreModule} from '@ngrx/store';
+import {FEATURE_NAME, reducers} from './features.state';
 
 
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
+    CommonModule,
+    StoreModule.forFeature(FEATURE_NAME, reducers),
   ]
 })
 export class FeaturesModule { }
