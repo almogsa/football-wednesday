@@ -1,50 +1,78 @@
-import { v4 as uuid } from 'uuid';
-import { createReducer, on, Action } from '@ngrx/store';
-import * as playerAction from '../actions/players.actions';
-import { Player, PlayersState } from '../models/players.model';
+import { createEntityAdapter, EntityAdapter } from '@ngrx/entity';
 
-export const initialState: PlayersState = {
-  items: [
-    { id: uuid(), name: 'Open Todo list example', done: true },
-    { id: uuid(), name: 'Check the other examples', done: false },
-    {
-      id: uuid(),
-      name: 'Use Angular ngRx Material Starter in your project',
-      done: false
+import { Player, PlayersState } from '../models/players.model';
+import { PlayersActions } from 'features/players/actions';
+import { Action, createReducer, on } from '@ngrx/store';
+
+export function sortByTitle(a: Player, b: Player): number {
+  return a.name.localeCompare(b.name);
+}
+
+export const playersAdapter: EntityAdapter<Player> = createEntityAdapter<Player>({
+  sortComparer: sortByTitle
+});
+
+export const initialState: PlayersState = playersAdapter.getInitialState({
+  ids: ['123'],
+  entities: {
+    ['123']: {
+      id: '123',
+      name: 'Oren Farhi',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 6,
+      admin: true
     }
-  ],
-  filter: 'ALL'
-};
+  }
+});
 
 const reducer = createReducer(
   initialState,
-  on(playerAction.actionTodosAdd, (state, todo) => ({
-    ...state,
-    items: [
-      {
-        id: todo.id,
-        name: todo.name,
-        done: false
-      },
-      ...state.items
-    ]
-  })),
-  on(playerAction.actionTodosToggle, (state, todo) => ({
-    ...state,
-    items: state.items.map((item: Player) =>
-      item.id === todo.id ? { ...item, done: !item.done } : item
-    )
-  })),
-  on(playerAction.actionTodosRemoveDone, (state, todo) => ({
-    ...state,
-    items: state.items.filter((item: Player) => !item.done)
-  })),
-  on(playerAction.actionTodosFilter, (state, todo) => ({
-    ...state,
-    filter: todo.filter
-  }))
+  on(PlayersActions.addPlayer, (state, { player }) => {
+    return playersAdapter.addOne(player, state);
+  }),
+  on(PlayersActions.upsertPlayer, (state, { player }) => {
+    return playersAdapter.upsertOne(player, state);
+  }),
+  on(PlayersActions.addPlayers, (state, { players }) => {
+    return playersAdapter.addMany(players, state);
+  }),
+  on(PlayersActions.upsertPlayers, (state, { players }) => {
+    return playersAdapter.upsertMany(players, state);
+  }),
+  on(PlayersActions.updatePlayer, (state, { player }) => {
+    return playersAdapter.updateOne(player, state);
+  }),
+  on(PlayersActions.updatePlayers, (state, { players }) => {
+    return playersAdapter.updateMany(players, state);
+  }),
+  on(PlayersActions.mapPlayers, (state, { entityMap }) => {
+    return playersAdapter.map(entityMap, state);
+  }),
+  on(PlayersActions.deletePlayer, (state, { id }) => {
+    return playersAdapter.removeOne(id, state);
+  }),
+  on(PlayersActions.deletePlayers, (state, { ids }) => {
+    return playersAdapter.removeMany(ids, state);
+  }),
+  on(PlayersActions.deletePlayersByPredicate, (state, { predicate }) => {
+    return playersAdapter.removeMany(predicate, state);
+  }),
+  on(PlayersActions.loadPlayers, (state, { players }) => {
+    return playersAdapter.addAll(players, state);
+  }),
+  on(PlayersActions.clearPlayers, state => {
+    return playersAdapter.removeAll({ ...state, selectedplayerId: null });
+  })
+  // on(actionPlayersUpsertOne, (state, { player }) =>
+  //   playersAdapter.upsertOne(player, state)
+  // ),
+  // on(actionPlayersDeleteOne, (state, { id }) => playersAdapter.removeOne(id, state))
 );
 
-export function playersReducer(state:PlayersState | undefined, action: Action) {
+export function playersReducer(state: PlayersState | undefined, action: Action) {
   return reducer(state, action);
 }

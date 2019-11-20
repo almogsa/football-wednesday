@@ -1,10 +1,9 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import {ActionReducerMap, createFeatureSelector} from '@ngrx/store';
 import {AppState} from '../core/core.state';
 import {PlayersState} from './players/models/players.model';
 
 
-
- import { playersReducer } from './players/reducers/players.reducer';
+import {playersReducer} from './players/reducers/players.reducer';
 // import { TodosState } from './todos/todos.model';
 // import { stockMarketReducer } from './stock-market/stock-market.reducer';
 // import { StockMarketState } from './stock-market/stock-market.model';

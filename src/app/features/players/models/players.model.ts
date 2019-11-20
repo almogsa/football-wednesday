@@ -1,12 +1,24 @@
+import {EntityState} from '@ngrx/entity';
+
 export interface Player {
   id: string;
+  description: string;
   name: string;
-  done: boolean;
+  s_name: string;
+  admin: boolean;
+  arrive: boolean;
+  number: number;
+  strength: number;
+  phone: string;
+  image: string;
+  injured: boolean;
+  position: string;
 }
 
 export type PlayersFilter = 'ALL' | 'DONE' | 'ACTIVE';
 
-export interface PlayersState {
-  items: Player[];
-  filter: PlayersFilter;
-}
+// export interface PlayersState {
+//   items: Player[];
+//   filter: PlayersFilter;
+// }
+export interface PlayersState extends EntityState<Player> {}
