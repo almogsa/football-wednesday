@@ -44,9 +44,9 @@ export class PlayersListComponent implements OnInit {
     this.counter++;
   }
 
-  deletePlayer(player: Player) {
-    console.log('delete player', player.name);
-    this.store.dispatch(PlayersActions.deletePlayer({id: player.id}));
+  onDelete(playerId: string) {
+    console.log('delete player', playerId);
+    this.store.dispatch(PlayersActions.deletePlayer({id: playerId}));
   }
 
   updatePlayer() {

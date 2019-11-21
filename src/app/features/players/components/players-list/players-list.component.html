@@ -1,11 +1,8 @@
 <p>players-list works!</p>
 <div>Players List</div>
 <div  *ngFor="let player of players$ | async">
+  <app-player [player]="player" (delete)="onDelete($event)"></app-player>
 
-  <div> {{player.name}} | {{player .arrive}}</div>
-
-
-  <button (click)="deletePlayer(player)">delete</button>
 </div>
 <button (click)="addPlayer()">Add Player</button>
 
