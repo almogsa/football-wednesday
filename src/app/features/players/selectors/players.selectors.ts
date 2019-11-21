@@ -31,6 +31,10 @@ export const selectPlayersTotal = createSelector(
   selectPlayersState,
   selectTotal
 );
+export const selectPlayersArrived = createSelector(
+  selectEntities,
+  (entities, params) => entities.filter(player => player.arrived)
+);
 // export const selectSelectedPlayer = createSelector(
 //   selectPlayersEntities,
 //   (entities, params) => params && entities[params.state.params.id]

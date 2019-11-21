@@ -27,6 +27,9 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Configure your project   
+add component
+ng g c features/players/components/field
+
 change tsconfig file - > "baseUrl": "./src/app", that enables to import short modules
 ## Add UX-Aspects
 npm config set @micro-focus:registry https://svsartifactory.swinfra.net/artifactory/api/npm/saas-npm-release-local/

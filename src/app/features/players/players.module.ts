@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlayerComponent } from './components/player/player.component';
-import { PlayersListComponent } from './components/players-list/players-list.component';
+import { PlayerComponent, PlayersListComponent, FieldComponent } from 'features/players/components';
 import {
   AccessibilityModule,
   ColorServiceModule,
@@ -17,10 +16,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
+
 @NgModule({
-  declarations: [PlayerComponent, PlayersListComponent],
+  declarations: [PlayerComponent, PlayersListComponent, FieldComponent],
   exports: [
-    PlayersListComponent
+    PlayersListComponent,
+    FieldComponent
   ],
   imports: [
     CommonModule,
