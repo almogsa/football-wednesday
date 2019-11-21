@@ -27,5 +27,14 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
 ## Configure your project   
-change tsconfig file - > "baseUrl": "./src/app", that enables to import short modules 
+change tsconfig file - > "baseUrl": "./src/app", that enables to import short modules
+## Add UX-Aspects
+npm config set @micro-focus:registry https://svsartifactory.swinfra.net/artifactory/api/npm/saas-npm-release-local/
+npm install --save @ux-aspects/ux-aspects @micro-focus/ux-aspects @micro-focus/quantum-ux-aspects
+npm install --save @angular/upgrade
+npm install --save rxjs-compat 
+npm install --save @angular/cdk
+in style.scss add those imports
+@import url("~@ux-aspects/ux-aspects/styles/ux-aspects.css");
+@import url("~@micro-focus/quantum-ux-aspects"); 
 

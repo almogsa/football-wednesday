@@ -1,0 +1,112 @@
+@import 'variables';
+
+.cdls-button {
+  cursor: pointer;
+  font-family: $font-bold;
+  display: inline-block;
+  padding: 0px 25px;
+  letter-spacing: $letter-spacing-regular;
+  font-size: $text--small;
+  -webkit-user-select: none;
+  color: $color-icon-color-2;
+  line-height: 32px;
+  box-sizing: content-box;
+
+  &.white {
+    color: $color-connect;
+  }
+  &.blue {
+    color: $color-primary;
+  }
+  &.gray {
+    color: $color-text-secondary;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+  &:focus {
+    outline: none;
+  }
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }
+  &.primary{
+    background-color: $color-background-container;
+    color: $color-button-primary;
+    height: 32px;
+    line-height: 32px;
+    &:hover {
+      box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.15);
+    }
+  }
+  &.secondary {
+    background-color: transparent;
+    border: 2px solid $color-icon-color-2;
+    color: $color-icon-color-2;
+    height: 28px;
+    line-height: 28px;
+    &:hover {
+      box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.15);
+    }
+    &.white {
+      color: $color-connect;
+      border-color: $color-connect;
+    }
+    &.blue {
+      color: $color-primary;
+      border-color: $color-primary;
+    }
+    &.gray {
+      color: $color-text-secondary;
+      border-color: $color-text-secondary;
+    }
+  }
+  &.selection {
+    background-color: transparent;
+    border: 2px solid $color-icon-color-2;
+    color: $color-icon-color-2;
+    height: 34px;
+    line-height: 34px;
+    &.gray {
+      color: $color-text-secondary;
+      border-color: $color-text-secondary;
+      border: 1px solid $color-text-secondary;
+      padding: 0px 10px;
+    }
+  }
+  &.remove{
+    padding: 0;
+  }
+}
+.cdls-button-circle {
+  border-radius: 50%;
+  border: 2px solid $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  &.primary {
+    height: 50px;
+    width: 50px;
+    border: 1px solid $color-primary;
+    cursor: pointer;
+    background-color: $color-primary ;
+    svg {
+      fill: $color-button-primary;
+    }
+  }
+  &.secondary {
+    height: 40px;
+    width: 40px;
+    svg{
+      fill: $color-primary;
+    }
+  }
+}

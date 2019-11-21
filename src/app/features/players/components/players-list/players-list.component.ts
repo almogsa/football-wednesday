@@ -15,6 +15,7 @@ import {selectAllPlayers} from 'features/players/selectors';
 export class PlayersListComponent implements OnInit {
 
   players$: Observable<Player[]>;
+  selected: Player[] = [];
   counter = 1;
   constructor(  public store: Store<State>) {
 
@@ -35,10 +36,11 @@ export class PlayersListComponent implements OnInit {
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 6,
+      strength: 60,
       admin: true,
       injured: false,
-      position: 'LR'
+      position: 'LR',
+      birth: '3/4/1976'
     };
     this.store.dispatch(PlayersActions.addPlayer({player}));
     this.counter++;

@@ -1,0 +1,23 @@
+@import 'variables';
+
+.cdls-tabs-full {
+  &.tabs-primary {
+    background-color: $tabs-header-bg-color;
+    .nav-tabs {
+      @extend .padding-l--12px;
+    }
+
+    .tab-content {
+      @extend .relative;
+      height: calc(100% - #{$tabs-header-height});
+      //border: 1px solid $color-gray-divider;
+
+      .tab-pane {
+        @extend .absolute;
+        @extend .width--100;
+        @extend .height--100;
+        background-color:$tabs-bg-color;
+      }
+    }
+  }
+}

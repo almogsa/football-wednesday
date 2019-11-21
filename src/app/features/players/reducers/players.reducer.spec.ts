@@ -1,19 +1,27 @@
 
 import { playersReducer, initialState } from '../reducers/players.reducer';
 import { Player, PlayersState } from '../models/players.model';
-import { actionPlayersDeleteOne, actionPlayersUpsertOne } from '../actions/players.actions';
+import { PlayersActions } from '../actions';
 
 
-describe('BookReducer', () => {
+describe('PlayerReducer', () => {
   const TEST_INITIAL_STATE: PlayersState = {
     ids: ['123'],
     entities: {
       ['123']: {
         id: '123',
-        title: 'Reactive Programming with Angular and ngrx',
-        author: 'Oren Farhi',
-        description:
-          'Learn to Harness the Power of Reactive Programming with RxJS and ngrx Extensions'
+        name: 'Player_' + this.counter,
+        description: 'description',
+        s_name: 'Zizo',
+        arrive: true,
+        image: '',
+        number: 8,
+        phone: '0525597072',
+        strength: 60,
+        admin: true,
+        injured: false,
+        position: 'LR',
+        birth: '3/4/1976'
       }
     }
   };
@@ -26,36 +34,53 @@ describe('BookReducer', () => {
   });
 
   it('should add a book', () => {
-    const action = actionPlayersUpsertOne({
+    const action = PlayersActions.addPlayer({
       player: {
         id: '1234',
-        title: 'test',
-        author: 'test',
-        description: 'test'
+        name: 'Player1',
+        description: 'description',
+        s_name: 'Zizo',
+        arrive: true,
+        image: '',
+        number: 8,
+        phone: '0525597072',
+        strength: 60,
+        admin: true,
+        injured: false,
+        position: 'LR',
+        birth: '3/4/1976'
       }
     });
     const state = playersReducer(TEST_INITIAL_STATE, action);
 
     expect(state.ids.length).toEqual(2);
-    expect(state.entities['1234'].title).toEqual('test');
+    expect(state.entities['1234'].name).toEqual('Player1');
   });
 
   it('should update a book', () => {
     const id = TEST_INITIAL_STATE.ids[0] as string;
-    const action = actionPlayersUpsertOne({
+    const action = PlayersActions.upsertPlayer({
       player: {
         id,
-        title: 'updated',
-        author: 'updated',
-        description: 'updated'
+        name: 'updated',
+        description: 'updated',
+        s_name: 'Zizo',
+        arrive: true,
+        image: '',
+        number: 8,
+        phone: '0525597072',
+        strength: 60,
+        admin: true,
+        injured: false,
+        position: 'LR',
+        birth: '3/4/1976'
       }
     });
 
     const state = playersReducer(TEST_INITIAL_STATE, action);
     expect(state.entities[id]).toEqual(
       jasmine.objectContaining({
-        title: 'updated',
-        author: 'updated',
+        name: 'updated',
         description: 'updated'
       })
     );
@@ -63,7 +88,7 @@ describe('BookReducer', () => {
 
   it('should remove a book', () => {
     const id = TEST_INITIAL_STATE.ids[0] as string;
-    const action = actionPlayersDeleteOne({ id });
+    const action = PlayersActions.deletePlayer({ id });
     const state = playersReducer(TEST_INITIAL_STATE, action);
     expect(state.entities[id]).toBe(undefined);
   });

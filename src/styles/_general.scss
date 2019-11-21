@@ -1,0 +1,134 @@
+@import "variables";
+
+.electron-drag-area {
+  -webkit-app-region: drag;
+}
+
+.electron-drag-area--cancel {
+  -webkit-app-region: no-drag;
+}
+.opacity-half {
+  opacity: 0.5;
+}
+.cdls-disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+.popup-background {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: $color-icon-color-2;
+  opacity: 0.6;
+  z-index:9998;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-default {
+  cursor: default;
+}
+.not-selectable {
+  user-select: none;
+}
+.no-outline-on-focus {
+  &:focus {
+    outline: none;
+  }
+}
+
+.scrollbar {
+  /* width */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 3px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $color-background-scrollbar-thumb;
+    border-radius: 10px;
+  }
+
+}
+
+.scrollbar-v {
+
+  &.scroll--auto {
+    overflow-y: auto;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    //display: none;
+    display: initial;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-background-scrollbar-track;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      display: initial;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-background-scrollbar-thumb;
+      border-radius: 4px;
+    }
+  }
+}
+
+.scrollbar-h {
+  &.scroll--overlay-force {
+    overflow-y: overlay !important;
+  }
+
+  &.scroll--auto {
+    overflow-y: auto;
+  }
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 7px;
+    //display: none;
+    display: initial;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-background-scrollbar-track;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      display: initial;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-background-scrollbar-thumb;
+      border-radius: 4px;
+    }
+  }
+}

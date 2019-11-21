@@ -1,0 +1,15 @@
+@import "variables";
+
+.cdls-dialog-close {
+  cursor: pointer;
+  fill: $color-run-result-close-button;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  right: 28px;
+  top: 16px;
+
+  &:hover {
+    fill: $color-icon-color-2;
+  }
+}

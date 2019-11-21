@@ -1,0 +1,264 @@
+
+$fa-font-path: '~@fortawesome/fontawesome-free-webfonts/webfonts';
+
+$colors: (
+  success:(
+    base: #1bab61,
+    light1: #1aab60,
+    light2: #1aac60,
+    light3: #7cfc00,
+    light4: #aff170,
+    light5: #baff78,
+    light6: #f5a623
+  ),
+  warning: (
+    base: #FF0000,
+    light1: #e5004c,
+    light2: #eb008d,
+    light3: #d10780,
+    light4: #800080,
+    light5: #8584ba,
+    light6: #dd034d,
+    light7: #ffbcaf,
+    light8: #cc7961
+
+  ),
+  brand: (
+    base: #1f1a7e,
+    light1: #0079ef,
+    light2: #2587EA,
+    light3: #79c8e2,
+    light4: #2d4a4b72,
+    light5: #2d6669af,
+    light6: #176CD9,
+    light7: #0073ee,
+    light8: #4b93db,
+    light9: #100c5a
+  ),
+  light: (
+    base: #fff,
+    light1: #d7d7d7,
+    light2: #B9C2D7,
+    light3: #a6a6a6,
+    light4: #D0D2D5,
+    light5: #dedede,
+    light6: #ced7e2,
+    light7: #b5b5b5,
+    light8: #a3a3a3,
+    light9: #eceef5,
+    light10: #f7f7ff,
+    light11: #fdfdfd,
+    light12: #f5f6fa,
+    light13: #eaecf4,
+    light14: #ecebf0,
+    light15: #EAEDF8,
+    light16: #BCBED7,
+    light17: #d3dbe7,
+    light18: #b9b8d7,
+    light19: #E8EBF4,
+    light20: #f2f3f5,
+    light21: #f5f6f8,
+    light22: #a7b8cb,
+    light23: #eff1f7
+  ),
+  dark: (
+    base: #000,
+    light1: #333,
+    light2: #2d090d60,
+    light3: #656668,
+    light4: rgba(0,0,0,0.4),
+    light5: #333333,
+    light6: #4d4a4b,
+    light7: #231f20,
+    light8: #555555
+  ),
+  gray: (
+    base: #726f70,
+    light1:#737373,
+    light2: #e2e6e9,
+    light3: #d2d2d2,
+    light4: #f5f6f7,
+    light5: #4a4a4a,
+    light6: #aaabac,
+    light7: #dcdedf,
+    light8: #fbfbfb,
+    light9: #dadada,
+    light10: #9d9d9d,
+    light11: #c8c9ca
+
+  )
+
+);
+
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+$color-gray--base: map-deep-get($colors, gray, base);
+$color-text-secondary: map-deep-get($colors, gray, light1);
+$color-gray-secondary: map-deep-get($colors, gray, light2);
+$color-gray-divider: map-deep-get($colors, gray, light3);
+$color-environment-background: map-deep-get($colors, gray, light4);
+$color-horizontal-divider: map-deep-get($colors, gray, light7);
+$color-bar-button-active: map-deep-get($colors, gray, light8);
+$color-save-button-right-border: map-deep-get($colors, gray, light9);
+
+
+$color-container: map-deep-get($colors, light, base);
+$color-logo: map-deep-get($colors, light, base);
+$color-white: map-deep-get($colors, light, base);
+$color-connect: map-deep-get($colors, light, base);
+$color-button-primary: map-deep-get($colors, light, base);
+$color-tooltip: map-deep-get($colors, light, base);
+$color-icon-background: map-deep-get($colors, light, base);
+$color-background-mat-button: map-deep-get($colors, light, base);
+$color-device: map-deep-get($colors, light, light23);
+$color-device-2: map-deep-get($colors, light, light1);
+$color-dark-grey: map-deep-get($colors, light, light2);
+$color-play: map-deep-get($colors, light, light3);
+$color-active-line: map-deep-get($colors, light, light4);
+$color-cell: map-deep-get($colors, gray, light10);
+$color-border : map-deep-get($colors, light, light6);
+$color-border-shadow: map-deep-get($colors, light, light7);
+$color-border: map-deep-get($colors, light, light8);
+$color-icon-color: map-deep-get($colors, light, light9);
+$color-hover-icon: map-deep-get($colors, light, light10);
+$color-background-primary: map-deep-get($colors, light, light11);
+$color-background-secondary: map-deep-get($colors, light, light12);
+$color-background-secondary2: map-deep-get($colors, light, light13);
+$color-background-report: map-deep-get($colors, light, light14);
+$color-background-scrollbar-track: map-deep-get($colors, light, light15);
+$color-background-scrollbar-thumb: map-deep-get($colors, gray, light6);
+$color-background-divider: map-deep-get($colors, light, light17);
+$color-background-divider-vertical-2: map-deep-get($colors, light, light18);
+$color-background-active: map-deep-get($colors, light, light19);
+$color-background-body: map-deep-get($colors, light, light20);
+$color-editor--bg: map-deep-get($colors, light, light21);
+$color-vertical-divider: map-deep-get($colors, light, light22);
+
+
+$color-primary: map-deep-get($colors, brand, base);
+$color-background-container: map-deep-get($colors, brand, light1);
+$color-background-divider-vertical: map-deep-get($colors, brand, light8);
+$color-background-container-2: map-deep-get($colors, brand, light3);
+$color-shadow: map-deep-get($colors, brand, light4);
+$color-selected-shadow: map-deep-get($colors, brand, light5);
+$color-info: map-deep-get($colors, brand, light6);
+$color-select-environment: map-deep-get($colors, brand, light7);
+$color-double-click: map-deep-get($colors, brand, light9);
+
+$color-success-font: map-deep-get($colors, success, base);
+$color-success-status: map-deep-get($colors, success, light1);
+$color-success-status-2: map-deep-get($colors, success, light2);
+$color-connect-v: map-deep-get($colors, success, light3);
+$color-recommended-star: map-deep-get($colors, success, light6);
+
+$color-icon-color-2: map-deep-get($colors, dark, base);
+$color-hover-play: map-deep-get($colors, dark, light1);
+$color-tab-item: map-deep-get($colors, dark, light1);
+$color-hover-shadow: map-deep-get($colors, dark, light2);
+$color-run-result-close-button: map-deep-get($colors, dark, light3);
+$color-background-modal-window: map-deep-get($colors, dark, light4);
+$color-device-info: map-deep-get($colors, dark, light8);
+$color-environment-device-info: map-deep-get($colors, dark, light5);
+
+
+$color-background-tooltip: map-deep-get($colors, warning, base);
+$color-failure-status-2: map-deep-get($colors, warning, base);
+$color-failure-status: map-deep-get($colors, warning, light1);
+$color-selected-icon: map-deep-get($colors, warning, light2);
+$color-hover-selected-icon: map-deep-get($colors, warning, light3);
+$color-clear-button: map-deep-get($colors, warning, light5);
+$color-mat-button:  map-deep-get($colors, warning, light4);
+$color-error:  map-deep-get($colors, warning, light6);
+
+$text--tiny: 10px;
+$text--extra-small: 13px;
+$text--small: 14px;
+$text--medium: 16px;
+$text--2medium: 17px;
+$text--big: 18px;
+$text--large: 20px;
+$text--extra-large: 22px;
+
+$text--extra-large: 24px;
+$text--2extra-large: 28px;
+
+$letter-spacing-small: 0.05px;
+$letter-spacing-small-2: 0.06px;
+$letter-spacing-regular: 0.4px;
+$letter-spacing-big: 0.93px;
+
+$cdls-primary-color:#0073E7;
+$cdls-title-color: #333333;
+
+$editor-operation-color: #0073e7;
+$editor-type-color: #eb008d;
+$editor-string-color: #9c19b7;
+$editor-active-line-color: map-deep-get($colors, light, light10);
+$editor-step-count-title-color: #333333;
+
+$spy-hover-color: #1a64bb;
+$editor-caret-color: map-deep-get($colors, dark, base);
+$right-pane-border-color: #cfcfcf;
+$step-add-color: map-deep-get($colors, gray, light11);
+$font-bold: Metric-Bold;
+$font-semi-bold: Metric-Semibold;
+$font-medium: Metric-Medium;
+$font-regular: Metric-Regular;
+
+$font-weight-normal:400;
+$font-weight-regular:500;
+$font-weight-medium:600;
+$font-weight-bold:700;
+
+$header-width: 56px;
+
+$editor-type-color: #eb008d;
+$editor-string-color: #9c19b7;
+$editor-left-size: 50px;
+$editor-is-dirty: map-deep-get($colors, warning, base);
+$editor-line-number-color: #bdbec0;
+$editor-step-border-color: #c1c1c1;
+$editor-error-indicator-color: #f8295e;
+$editor-po-class-color: #0bda7c;
+$editor-po-class-bg-color:  #e6fbf1;
+$editor-ai-class-color: #9219ab;
+$editor-ai-class-bg-color: #f4e8f6;
+$header-width: 56px;
+
+
+$bold: Metric-Bold;
+$semi-bold: Metric-Semibold;
+$medium: Metric-Medium;
+$regular: Metric-Regular;
+
+
+$title-text-color: map-deep-get($colors, dark, light5);
+$title-underline-color: map-deep-get($colors, dark, light3);
+$title-time-color: map-deep-get($colors, gray, light6);
+$save-text-color: map-deep-get($colors, dark, light6);
+$save-icon-color: map-deep-get($colors, dark, light7);
+
+$vnc-text-color: map-deep-get($colors, light, base);
+
+$progress-bar-color: map-deep-get($colors, success, light5);
+$progress-border-color: map-deep-get($colors, success, light4);
+
+$progress-bar-failed-color: map-deep-get($colors, warning, light7);
+$progress-border-failed-color: map-deep-get($colors, warning, light8);
+
+$environment-area-height: 115px;
+$environment-max-width: 290px;
+$environment-min-width: 192px;
+$progress-bar-radius: 22px;
+
+$tabs-header-height: 56px;
+$tabs-bg-color: #fcfcfd;
+$tabs-header-bg-color: #eff1f6;
+
+

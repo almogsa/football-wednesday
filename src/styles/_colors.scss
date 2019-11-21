@@ -1,0 +1,40 @@
+@import "variables";
+
+
+@mixin color_modifiers ($attribute: 'color', $prefix: '-', $separator: '--'){
+  @each $name, $color in $colors {
+    &#{$prefix}#{$name} {
+      @each $tone, $hex in $color {
+        &#{$separator}#{$tone} {
+          #{$attribute}: $hex;
+        }
+      }
+    }
+  }
+}
+.color-bg {
+  @include color_modifiers($attribute: 'background-color');
+}
+.color {
+  @include color_modifiers;
+}
+
+
+.color-editor--bg {
+  background-color: $color-editor--bg;
+}
+.cdls-primary-color {
+  color: $cdls-primary-color;
+}
+.cdls-primary--bg {
+  background-color: $cdls-primary-color;
+}
+.cdls-title-color {
+  color:$cdls-title-color;
+}
+.cdls-primary{
+  border-top: 3px solid $cdls-primary-color;
+  border-right: 3px solid $cdls-primary-color;
+  border-bottom: 3px solid $cdls-primary-color;
+  border-left: 3px solid rgba(0, 0, 0, 0);
+}

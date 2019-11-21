@@ -1,0 +1,263 @@
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-direction--column {
+  flex-direction: column;
+}
+
+.flex-direction--row {
+  flex-direction: row;
+}
+
+.align-items--start {
+  align-items: flex-start;
+}
+
+.align-items--end {
+  align-items: flex-end;
+}
+
+.align-items--center {
+  align-items: center;
+}
+
+.align-items--stretch {
+  align-items: stretch;
+}
+
+.align-self--start {
+  align-self: start;
+}
+.justify-content--between {
+  justify-content: space-between;
+}
+
+.justify-content--end {
+  justify-content: flex-end;
+}
+
+.justify-content--around {
+  justify-content: space-around;
+}
+
+.justify-content--evenly {
+  justify-content: space-evenly;
+}
+
+.justify-content--center {
+  justify-content: center;
+}
+
+.justify-content--start {
+  justify-content: start;
+}
+.flex-1 {
+  flex: 1 0 auto;
+}
+
+.flex-0 {
+  flex: 0 0 auto;
+}
+.flex-shrink--0 {
+  flex-shrink: 0;
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.height--100 {
+  height: 100%;
+}
+
+.width--100 {
+  width: 100%;
+}
+.min-width-0 {
+  min-width: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.row-nowrap {
+  flex-flow: row nowrap;
+}
+
+.align-items--baseline {
+  align-items: baseline;
+}
+
+.align-self--baseline {
+  align-self: baseline;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+.inline-block {
+  display: inline-block;
+}
+
+.rotate--45 {
+  transform: rotate(45deg);
+}
+
+.border--50 {
+  border-radius: 50%;
+}
+
+.line-height--100 {
+  line-height: 100%;
+}
+
+@mixin position($top: null, $right: null, $bottom: null, $left: null) {
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+@for $i from -10 through 30 {
+  @each $o in top right bottom left {
+    .#{$o}--#{$i}#{px} {
+      @if ($o=='top') {
+        @include position(#{$i}px)
+      }
+      @if ($o=='right') {
+        @include position(null, #{$i}px)
+      }
+      @if ($o=='bottom') {
+        @include position(null, null, #{$i}px)
+      }
+      @if ($o=='left') {
+        @include position(null, null, null, #{$i}px)
+      }
+    }
+  }
+}
+
+@for $i from 1 through 200 {
+  .height--#{$i}px {
+    height: #{$i}px;
+  }
+}
+
+@for $i from 1 through 300 {
+  .width--#{$i}px {
+    width: #{$i}px;
+  }
+}
+@for $i from 0 through 200 {
+  .min-width--#{$i}px {
+    min-width: #{$i}px;
+  }
+}
+@for $i from 0 through 200 {
+  .min-height--#{$i}px {
+    min-height: #{$i}px;
+  }
+}
+@for $i from 0 through 200 {
+  .max-width--#{$i}px {
+    max-width: #{$i}px;
+  }
+}
+@for $i from 0 through 100 {
+  .max-width--#{$i} {
+    max-width: #{$i * 1%};
+  }
+}
+@mixin spacing($type: null , $top: null, $right: null, $bottom: null, $left: null, $spacing: null) {
+  #{$type}-top: $top;
+  #{$type}-right: $right;
+  #{$type}-bottom: $bottom;
+  #{$type}-left: $left;
+  #{$type}: $spacing;
+}
+
+$spacing_format: margin, padding;
+$padding_format: t, r, b, l, v, h;
+@each $s in $spacing_format {
+  @for $i from 0 through 100 {
+    @each $o in $padding_format {
+      .#{$s}-#{$o}--#{$i}#{px} {
+        @if ($o=='t') {
+          @include spacing($s, #{$i}px)
+        }
+        @if ($o=='r') {
+          @include spacing($s, null, #{$i}px)
+        }
+        @if ($o=='b') {
+          @include spacing($s, null, null, #{$i}px)
+        }
+        @if ($o=='l') {
+          @include spacing($s, null, null, null, #{$i}px)
+        }
+        @if ($o=='v') {
+          @include spacing($s, #{$i}px, null, #{$i}px, null)
+        }
+        @if ($o=='h') {
+          @include spacing($s, null, #{$i}px, null, #{$i}px)
+        }
+      }
+    }
+    .#{$s}--#{$i}#{px} {
+      @include spacing($s, null, null, null, null, #{$i}px)
+    }
+  }
+}
+
+
+@for $i from 0 through 100 {
+  .flex-1-1--#{$i}percent {
+    flex: 1 1 #{$i * 1%};
+
+  }
+}
+
+@mixin display-grid {
+  display: -ms-grid;
+  display: grid;
+}
+
+@mixin grid-child($col-start, $col-end, $row-start:'', $row-end:'') {
+  -ms-grid-column: $col-start;
+  -ms-grid-column-span: $col-end - $col-start;
+  -ms-grid-row: $row-start;
+  -ms-grid-row-span: $row-end - $row-start;
+  grid-column: #{$col-start}/#{$col-end};
+  grid-row: #{$row-start}/#{$row-end};
+}
+.grid {
+  @include display-grid;
+}
+/* 2 column grid - key and label */
+.grid--key-value {
+  grid-template-columns: auto 1fr;
+  grid-column-gap: 10px;
+  > div:nth-child(odd) {
+    @include grid-child(1, 2);
+  }
+  > div:nth-child(even) {
+    @include grid-child(2, 3);
+  }
+}
+
+.tooltip .tooltip-inner {
+  max-width: 100% !important;
+}
+
+

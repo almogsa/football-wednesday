@@ -23,8 +23,9 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 6,
-      admin: true
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976'
     }
   }
 });

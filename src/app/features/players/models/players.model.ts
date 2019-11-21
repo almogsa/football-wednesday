@@ -13,6 +13,7 @@ export interface Player {
   image: string;
   injured: boolean;
   position: string;
+  birth: string;
 }
 
 export type PlayersFilter = 'ALL' | 'DONE' | 'ACTIVE';

@@ -7,6 +7,7 @@ import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {PlayersModule} from './features/players/players.module';
 import {FeaturesModule} from './features/features.module';
+import {TabsetModule} from '@ux-aspects/ux-aspects';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {FeaturesModule} from './features/features.module';
     CoreModule,
     SharedModule,
     FeaturesModule,
+    TabsetModule
 
   ],
   providers: [],

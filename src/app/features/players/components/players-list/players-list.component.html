@@ -1,11 +1,68 @@
 <p>players-list works!</p>
 <div>Players List</div>
-<div  *ngFor="let player of players$ | async">
-  <app-player [player]="player" (delete)="onDelete($event)"></app-player>
+<!--<div  *ngFor="let player of players$ | async">-->
+<!--  <app-player [player]="player" (delete)="onDelete($event)"></app-player>-->
 
-</div>
+<!--</div>-->
 <button (click)="addPlayer()">Add Player</button>
 
 <button (click)="updatePlayer()">Update Player</button>
 
 <button (click)="resetPlayers()">Reset Player</button>
+<table class="table table-hover">
+  <thead>
+  <tr class="table-header-dark">
+    <th>Name</th>
+    <th>Author</th>
+    <th>Date</th>
+    <th>Work Completed (%)</th>
+    <th class="text-center">Status</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody [(uxSelection)]="selected" mode="row-alt">
+  <tr *ngFor="let player of players$ | async"
+      class="hover-action-container"
+      [uxSelectionItem]="player"
+      uxHoverActionContainer>
+
+    <td class="text-black">{{ player.name }}</td>
+    <td>{{ player.position }}</td>
+    <td>{{ player.birth | date: 'shortDate' }}</td>
+    <td>
+      <ux-spark theme="chart2" [value]="player.strength" [inlineLabel]="player.strength"
+                barHeight="3"></ux-spark>
+    </td>
+    <td class="text-center">
+      <ux-icon [name]="player.arrive ? 'checkmark' : 'close'"
+               [attr.aria-label]="player.arrive ? 'Approved' : 'Not approved'">
+      </ux-icon>
+    </td>
+    <td>
+      <button type="button"
+              class="hover-action-btn"
+              aria-label="View"
+              uxTooltip="View"
+              uxHoverAction>
+        <ux-icon name="view" class="hover-action-icon"></ux-icon>
+      </button>
+      <button type="button"
+              class="hover-action-btn"
+              aria-label="Share"
+              uxTooltip="Share"
+              uxHoverAction>
+        <ux-icon name="share" class="hover-action-icon"></ux-icon>
+      </button>
+      <button type="button"
+              class="hover-action-btn"
+              aria-label="Delete"
+              uxTooltip="Delete"
+              uxHoverAction>
+        <ux-icon name="trash" class="hover-action-icon"></ux-icon>
+      </button>
+    </td>
+
+  </tr>
+  </tbody>
+</table>
