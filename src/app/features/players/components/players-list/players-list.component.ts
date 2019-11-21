@@ -50,6 +50,10 @@ export class PlayersListComponent implements OnInit {
   }
 
   updatePlayer() {
-    this.store.dispatch((PlayersActions.updatePlayer({player: {id: '1', changes: { name: 'almog'}}})));
+    this.store.dispatch((PlayersActions.updatePlayer({player: {id: '1', changes: { name: 'almog', arrive: true}}})));
+  }
+
+  resetPlayers() {
+    this.store.dispatch((PlayersActions.resetPlayers()));
   }
 }

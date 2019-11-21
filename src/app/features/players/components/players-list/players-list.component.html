@@ -2,8 +2,13 @@
 <div>Players List</div>
 <div  *ngFor="let player of players$ | async">
 
-  <div> {{player.name}}</div><button (click)="deletePlayer(player)">delete</button>
+  <div> {{player.name}} | {{player .arrive}}</div>
+
+
+  <button (click)="deletePlayer(player)">delete</button>
 </div>
 <button (click)="addPlayer()">Add Player</button>
 
 <button (click)="updatePlayer()">Update Player</button>
+
+<button (click)="resetPlayers()">Reset Player</button>

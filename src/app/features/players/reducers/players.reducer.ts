@@ -66,6 +66,18 @@ const reducer = createReducer(
   }),
   on(PlayersActions.clearPlayers, state => {
     return playersAdapter.removeAll({ ...state, selectedplayerId: null });
+  }),
+  on(PlayersActions.resetPlayers, (state) => {
+  const updates = [];
+  state.ids.forEach(playerId => {
+    updates.push({
+      id: playerId,
+      changes: {
+        arrive: false
+      }
+    });
+  });
+  return playersAdapter.updateMany(updates, state);
   })
   // on(actionPlayersUpsertOne, (state, { player }) =>
   //   playersAdapter.upsertOne(player, state)
