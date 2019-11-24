@@ -1,0 +1,8 @@
+.players-main{
+  background: url('../../../../../assets/soccer_field.png') 0% 0% / 100% 100% no-repeat;
+  // height:  calc(100% - 120px);
+  width: 100%;
+  display:flex;
+  border: 1px solid black;
+  flex-direction:column;
+}
