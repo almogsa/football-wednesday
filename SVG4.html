@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<style>
+    body {
+        height: 80vh;
+    }
+
+    .links {
+        stroke: #000;
+        stroke-opacity: 0.2;
+    }
+
+    .polygons {
+        fill: none;
+        stroke: #000;
+    }
+
+    .polygons :first-child {
+        fill: #f00;
+    }
+
+    .sites {
+        fill: #000;
+        stroke: #fff;
+    }
+
+    .sites :first-child {
+        fill: #fff;
+    }
+    .level {
+        grid-area: level;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: 25px 25px 25px 15px 15px;
+        grid-area: exec;
+        font-size: 2.5em;
+        grid-gap: 20px;
+        align-self: center;
+        justify-self: center;
+
+    }
+
+    .game-container {
+        display: grid;
+        grid-template-columns: 5% 1fr 5%;
+        grid-template-rows: 20px 40px 20px 20px 20px 1fr 0.2fr;
+        grid-gap: 5px;
+        grid-template-areas: ". . .  " ". exec .  " ". score .  " ". total .  " " . level ." ". game ." ". . .";
+        height: 100%;
+        border: 1px solid greenyellow;
+
+    }
+
+    .game {
+        grid-area: game;
+        background-color: bisque;
+    }
+
+    .score {
+        grid-area: score;
+
+    }
+
+    .total {
+        grid-area: total;
+    }
+
+    .success {
+        color: #0bda7c;
+    }
+    .fail {
+
+    }
+	svg text{
+	   -webkit-user-select: none;
+	   -moz-user-select: none;
+	   -ms-user-select: none;
+	   user-select: none;
+	}
+
+</style>
+<body>
+<div class="game-container">
+    <div class="container">
+        <div id='num1'></div>
+        <div> *</div>
+        <div id='num2'></div>
+        <div> =</div>
+        <div> ?</div>
+    </div>
+    <div id='score' class="score"> ניקוד :</div>
+    <div id='total' class="total"> סה"כ :</div>
+    <div id='level' class="level"> רמה :</div>
+    <div id="fail" class="fail" style="display: none"> </div>
+    <div class="game"></div>
+</div>
+<div id="more_players">
+    <audio id="playme1" src="https://www.baraksofer.com/officefun/sounds/DingLing.mp3" preload="auto"></audio>
+    <audio id="playme2" src="https://www.pacdv.com/sounds/people_sound_effects/yes_1.wav" preload="auto"></audio>
+    <audio id="playme3" src="https://freesound.org/data/previews/196/196250_1332991-lq.mp3" preload="auto"></audio>
+    <audio id="playme4" src="https://www.pacdv.com/sounds/people_sound_effects/you_got_it_1.wav" preload="auto"></audio>
+    <audio id="playme5" src="https://www.pacdv.com/sounds/voices/wow-1.wav" preload="auto"></audio>
+    <audio id="playme6" src="https://www.pacdv.com/sounds/voices/yes-1.wav" preload="auto"></audio>
+    <audio id="playme7" src="https://www.pacdv.com/sounds/people_sound_effects/you_got_it_1.wav" preload="auto"></audio>
+    <audio id="playme8" src="https://www.baraksofer.com/officefun/sounds/Buzz01.mp3" preload="auto"></audio>
+    <audio id="playme9" src="https://www.pacdv.com/sounds/voices/mmm-1.wav" preload="auto"></audio>
+    <audio id="playme10" src="https://www.pacdv.com/sounds/voices/no-1.wav" preload="auto"></audio>
+    <audio id="playme11" src="https://www.pacdv.com/sounds/voices/no-2.wav" preload="auto"></audio>
+    <audio id="playme12" src="https://www.pacdv.com/sounds/voices/no-4.wav" preload="auto"></audio>
+    <audio id="playme13" src="https://www.pacdv.com/sounds/voices/no-5.wav" preload="auto"></audio>
+    <audio id="playme14" src="https://www.pacdv.com/sounds/voices/oh-my-god-1.wav" preload="auto"></audio>
+    <audio id="playme15" src="https://www.pacdv.com/sounds/voices/urghhh.wav" preload="auto"></audio>
+    <audio id="playme16" src="https://www.pacdv.com/sounds/voices/what-are-you-doing.wav" preload="auto"></audio>
+    <audio id="playme17" src="https://www.pacdv.com/sounds/voices/im-sorry.wav" preload="auto"></audio>
+    <audio id="playme20" src="https://www.pacdv.com/sounds/people_sound_effects/applause-2.wav" preload="auto"></audio>
+</div>
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
+
+    var total = 0;
+    var level = 1;
+	var duration =9000;
+    var aySound = new Array();
+	 var score = 0;
+
+
+   
+   function start() {
+        total++;
+		if (score === 40) {
+		total=1;
+		score=0;
+		}		
+        if (total > 5 && score/total > 0.6 ){
+            total = 0;
+            level= level +1 ;
+			 score = 0;
+			duration = duration - (level < 4 ? 2000 : 1000);
+			console.log('duration' ,duration);
+			if (level === 4 ) {
+			duration = 8000;
+			}
+            document.getElementById('playme20').play();
+        }
+        document.getElementById('total').innerText = 'סה"כ : ' + total;
+        document.getElementById('level').innerText = 'רמה : ' + level;
+        let failElem = document.getElementById('fail');
+        if(failElem.style.display === 'block') {
+            failElem.style.display = 'none';
+        }
+        buildData();
+		clearInterval(timer);
+		timer = setInterval(start, duration);
+
+    }
+	
+		timer = setInterval(start);
+      //  clearInterval(timer);
+        //timer = setInterval(start, duration);
+	          
+
+ 
+
+    //Circle Data Set
+    var circleData = [
+        {"cx": 120, "cy": 800, "radius": 50, "color": "purple", "label": "24"},
+        {"cx": 270, "cy": 800, "radius": 50, "color": "purple", "label": "30"},
+        {"cx": 270, "cy": 800, "radius": 50, "color": "purple", "label": "30"},
+        {"cx": 270, "cy": 800, "radius": 50, "color": "purple", "label": "30"},
+        ];
+    var svgContainer = d3.select(".game").append("svg")
+        .attr("width", '100%')
+        .attr("height", '100%');
+    var width = svgContainer.style('width').replace("px", "");
+    console.log('width', width);
+   // buildData();
+
+   function clearData(){
+   
+        svgContainer.selectAll("g").remove();
+   }
+    function buildData() {
+	
+			
+	
+	
+        //Create the SVG Viewport
+
+        svgContainer.selectAll("g").remove();
+        var num1 = getRandomInt(0,5);
+
+        var num2 = getRandomInt(0,5);
+		if (level >  3 ) {
+			 num1 = getRandomInt(5,10);
+
+			 num2 = getRandomInt(5,10);
+		}
+        document.getElementById('num1').innerText = num1;
+        document.getElementById('num2').innerText = num2;
+
+        random = getRandomInt(0,circleData.length-1);
+        circleData = circleData.map(function (x, index) {
+            return {...x, label: getRandomInt(0,100), cx: index * 150 + 150}
+        });
+        circleData[random].label = num1 * num2;
+        /*Create and place the "blocks" containing the circle and the text */
+        var elemEnter =
+            svgContainer.selectAll("elem")
+                .data(circleData)
+                .enter()
+                .append("g")
+                .attr("transform", function (d) {
+                    return "translate(" + d.cx + ",800)"
+                })
+//Add circles to the svgContainer
+//var circles = elemEnter.selectAll("circle")
+        //                         .data(circleData)
+        //                         .enter()
+        //                         .append("circle");
+
+
+        var circles = elemEnter.append("circle");
+
+//Add the circle attributes
+        var circleAttributes = circles
+        //.attr("cx", function(d, i) { return i * 100 + 30; })
+        //.attr("cy", function (d) { return d.cy; })
+            .attr("r", function (d) {
+                return d.radius;
+            })
+            .style("opacity", "1")
+            .style("fill", function (d) {
+                return d.color;
+            })
+
+
+        elemEnter.append("text")
+            .attr("dx", function (d) {
+                return -15
+            })
+            .attr("dy", function (d) {
+                return 10
+            })
+            //.text(function(d){return  "( " + d.cx + ", " + d.cy +" )";});
+            .text(function (d) {
+                return d.label;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "20px")
+            
+
+
+        elemEnter
+            .on("click", handleClick)
+            .transition()
+            .ease(d3.easeLinear)
+            .duration(function (d) {
+                return duration;
+            })
+            .delay(function (d, i) {
+                return Math.random() * duration/100 * i;
+            })
+            .attr("transform", function (d) {
+                return "translate(" + d.cx + ",50)"
+            })            
+           // .style("opacity", "0.4");
+
+
+    }
+
+    function handleClick(elem) {
+        var num1 = document.getElementById('num1').innerText;
+        var num2 = document.getElementById('num2').innerText;
+        if (num1 * num2 === Number(elem.label)) {
+            console.log('good');
+
+            document.getElementById('playme'+ getRandomInt(1,7)).play();
+            score++;
+            d3.select(this)
+                .transition()
+                .duration(200)
+                .style("opacity", 0)
+                .attr("transform", "translate(0,0)")
+
+            updateScope();
+			  //buildData();
+			clearInterval(timer);
+			timer = setInterval(start, 0);
+			 clearData();
+        } else {
+            document.getElementById('playme'+ getRandomInt(8,17)).play();
+
+            let elementById = document.getElementById('fail');
+            var t = 'טעית נסה מספר  ';
+            elementById.innerText = t +  (num1 * num2  < Number(elem.label) ? 'קטן ' : ' גדול') + ' יותר ';
+            if (elementById.style.display ==='none'){
+                elementById.style.display = 'block';
+                elementById.style.color = 'red';
+
+            }
+            score--;
+            updateScope();
+        }
+
+    }
+
+    function updateScope() {
+        let elementById = document.getElementById('score');
+        if (score / total > 0.7) {
+            elementById.classList.add('success');
+        } else {
+            elementById.classList.remove('success');
+        }
+
+        elementById.innerText = ' ניקוד: ' + score;
+        ;
+    }
+
+    function getRandomInt(min,max) {
+       return  Math.floor(Math.random() * (max - min + 1)) + min;
+
+    }
+
+    //Add the SVG Text Element to the svgContainer
+    //var text = svgContainer.selectAll("text")
+    //                        .data(circleData)
+    //                        .enter()
+    //                        .append("text");
+
+    //Add SVG Text Element Attributes
+    //var textLabels = elemEnter.append("text")
+    //               .attr("x", function(d) { return d.cx; })
+    //             .attr("y", function(d) { return d.cy; })
+    //            .text( function (d) { return "( " + d.cx + ", " + d.cy +" )"; })
+    //            .attr("font-family", "sans-serif")
+    //            .attr("font-size", "20px")
+    //            .attr("fill", "red");
+
+</script>
+</body>
+</html>
