@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {Player} from 'features/players/models';
 
 @Component({
   selector: 'app-field',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FieldComponent implements OnInit {
 
-  constructor() { }
+  @Input() players: Player[];
+  constructor() { 
+    console.log('field players : ', this.players)
+  }
 
   ngOnInit() {
   }
