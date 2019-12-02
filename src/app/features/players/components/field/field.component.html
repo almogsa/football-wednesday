@@ -1,10 +1,14 @@
 
 <div>Players: {{players.length}}</div>
-<div class=" players-main height--100">
-
+<div class="game-container">
+<div class="header bench-background ">Header</div>
+<div class=" players-main field height--100">
+    
     <div *ngFor="let player of players">
+        <div> <img  class="avatar" [src]="avatar"/> </div>
         <div>{{player.name}}</div>
     </div>
 
 </div>
-
+<div class="footer bench-background">Footer</div>
+</div>

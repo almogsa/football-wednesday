@@ -9,6 +9,7 @@ import {Player} from 'features/players/models';
 export class FieldComponent implements OnInit {
 
   @Input() players: Player[];
+  avatar:string = '../../../../../assets/empty_profile.png';
   constructor() { 
     console.log('field players : ', this.players)
   }

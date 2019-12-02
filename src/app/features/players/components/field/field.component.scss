@@ -6,3 +6,36 @@
   border: 1px solid black;
  // flex-direction:column;
 }
+ .avatar {
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 2px #999, 0 0px 5px 4px rgba(0, 0, 0, 0.2);
+  
+}
+.bench-background {
+  background-image: url(../../../../../assets/playersBase.png);
+  background-position: 100% 100%;
+}
+.game-container {
+  display: grid;
+  height: 100%;
+  grid-template-areas: "header header header"
+                       "field field field"
+                      "footer footer footer";
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 1fr 100px;
+}
+.header{
+  grid-area: header;
+
+
+}
+.footer{
+  grid-area: footer;
+
+}
+.field{
+  grid-area: field;
+}
