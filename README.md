@@ -41,3 +41,7 @@ in style.scss add those imports
 @import url("~@ux-aspects/ux-aspects/styles/ux-aspects.css");
 @import url("~@micro-focus/quantum-ux-aspects"); 
 
+## DEPLOY 
+set https_proxy=http://web-proxy.il.softwaregrp.net:8080
+firebase login
+firebase deploy

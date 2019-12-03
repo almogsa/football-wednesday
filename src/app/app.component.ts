@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Player} from 'features/players/models';
 import {select, Store} from '@ngrx/store';
-import {selectAllPlayers} from 'features/players/selectors';
+import {selectAllPlayers, selectPlayersArrived} from 'features/players/selectors';
 import {State} from 'features';
 
 @Component({
@@ -14,7 +14,7 @@ import {State} from 'features';
 
 export class AppComponent implements OnInit {
 
-  constructor( public store: Store<State> ){
+  constructor( public store: Store<State> ) {
 
   }
   players$: Observable<Player[]>;
@@ -22,9 +22,8 @@ export class AppComponent implements OnInit {
   players: Player[]
 
   ngOnInit() {
-     this.store.pipe(select(selectAllPlayers)).subscribe(players => {
-       this.players= players;
+     this.store.pipe(select(selectPlayersArrived)).subscribe(players => {
+       this.players = players;
      });
   }
-  
 }

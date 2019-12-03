@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <style>
   body {
-
+    height:80vh;
   }
 
   .links {
@@ -46,10 +46,11 @@
   }
 
   .game-container {
-    height: 90vh;
+    touch-action: manipulation;
+    height: 100%;
     display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 20px 40px 20px 20px 20px minmax(0, 1fr) 0.2fr;
+    grid-template-rows: 20px 40px 20px 20px 20px minmax(0, 1fr) 0.1fr;
     grid-gap: 5px;
     grid-template-areas: ". . .  " ". exec .  " ". score .  " ". total .  " " . level ." ". game ." ". . .";
     border: 1px solid greenyellow;
@@ -86,9 +87,16 @@
     user-select: none;
   }
 
+  /*@media screen and (max-width: 600px) {*/
+  /*  .game {*/
+  /*    height: 50%;*/
+  /*   // background-color: red;*/
+  /*  }*/
+  /*}*/
+
 </style>
 <body>
-<div class="game-container">
+<div id ="game-container" class="game-container">
   <div class="container">
     <div id='num1'></div>
     <div> *</div>
@@ -100,9 +108,9 @@
   <div id='total' class="total"> סה"כ :</div>
   <div id='level' class="level"> רמה :</div>
   <div id="fail" class="fail" style="display: none"></div>
-  <div class="game"></div>
+  <div id="game" class="game"></div>
 </div>
-<div id="more_players">
+<div id="more_players" style="overflow: hidden;">
   <audio id="playme1" src="https://www.baraksofer.com/officefun/sounds/DingLing.mp3" preload="auto"></audio>
   <audio id="playme2" src="https://www.pacdv.com/sounds/people_sound_effects/yes_1.wav" preload="auto"></audio>
   <audio id="playme3" src="https://freesound.org/data/previews/196/196250_1332991-lq.mp3" preload="auto"></audio>
@@ -133,6 +141,13 @@
   var aySound = new Array();
   var score = 0;
 
+  // DISABLE DOUBLE CLICK
+  document.getElementById('game-container').ondblclick = function () {
+    return false;
+  };
+  document.addEventListener('touchmove', function (event) {
+    if (event.scale !== 1) { event.preventDefault(); }
+  }, false);
 
   function start() {
     total++;
@@ -170,17 +185,25 @@
 
 
   //Circle Data Set
-  var circleData = [
+  var data = [
     {"cx": 12, "cy": 70, "radius": 10, "color": "purple", "label": "24"},
     {"cx": 37, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
     {"cx": 62, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
     {"cx": 86, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
   ];
   var svgContainer = d3.select(".game").append("svg")
-    .attr("width", 'auto')
-    .attr("height", 'auto')
-    .attr("viewBox", '0,0,100,100');
+    .attr("width", '100%')
+    .attr("height", '100%')
+    .attr("preserveAspectRatio", 'xMidYMin')
+    .attr("viewBox", '0,0,width,height');
   var width = svgContainer.style('width').replace("px", "");
+  var height = svgContainer.style('height').replace("px", "");
+  svgContainer.on("dblclick.zoom", null);
+  svgContainer.on("mousedown.zoom", null)
+    .on("touchstart.zoom", null)
+    .on("touchmove.zoom", null)
+    .on("touchend.zoom", null);
+
   console.log('width', width);
 
   // buildData();
@@ -194,7 +217,7 @@
 
 
     //Create the SVG Viewport
-
+    console.log('width2', width);
     svgContainer.selectAll("g").remove();
     var num1 = getRandomInt(0, 5);
 
@@ -207,9 +230,10 @@
     document.getElementById('num1').innerText = num1;
     document.getElementById('num2').innerText = num2;
 
-    random = getRandomInt(0, circleData.length - 1);
-    circleData = circleData.map(function (x, index) {
-      return {...x, label: getRandomInt(0, 100), cx: x.cx, cy: x.cy}
+    random = getRandomInt(0, data.length - 1);
+    circleData = data.map(function (x, index) {
+      console.log('CX: ',x.cx);
+      return {...x, label: getRandomInt(0, 100), cx: x.cx * (width/100), cy: x.cy}
     });
     circleData[random].label = num1 * num2;
     /*Create and place the "blocks" containing the circle and the text */
@@ -218,9 +242,15 @@
         .data(circleData)
         .enter()
         .append("g")
+        .attr("class", "zoom")
         .attr("transform", function (d) {
-          return "translate(" + d.cx + ",90)"
+          return "translate(" + d.cx + ","+height+")"
         })
+        //.call(zoom)
+        .on("dblclick.zoom", null)
+        .on("touchstart.zoom", null)
+      .on("touchmove.zoom", null)
+      .on("touchend.zoom", null);
 
     var circles = elemEnter.append("circle");
 
@@ -229,7 +259,7 @@
     //.attr("cx", function(d, i) { return i * 100 + 30; })
     //.attr("cy", function (d) { return d.cy; })
       .attr("r", function (d) {
-        return d.radius;
+        return d.radius * (width-50)/100;
       })
       .style("opacity", "1")
       .style("fill", function (d) {
@@ -238,18 +268,21 @@
 
 
     elemEnter.append("text")
-      .attr("dx", function (d) {
-        return -2.5
+      .attr("x", function (d) {
+        //return  -d.radius - 5
+       // return  d -5
       })
-      .attr("dy", function (d) {
-        return 2.5
+      .attr("y", function (d) {
+      //  return d + 88
       })
       //.text(function(d){return  "( " + d.cx + ", " + d.cy +" )";});
       .text(function (d) {
         return d.label;
       })
       .attr("font-family", "sans-serif")
-      .attr("font-size", "5px")
+      .attr("font-size", "4vw")
+      .attr("alignment-baseline", "middle")
+      .attr("text-anchor", "middle")
 
 
     elemEnter

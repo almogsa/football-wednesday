@@ -40,7 +40,8 @@ export class PlayersListComponent implements OnInit {
       admin: true,
       injured: false,
       position: 'LR',
-      birth: '3/4/1976'
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/empty_profile.png'
     };
     this.store.dispatch(PlayersActions.addPlayer({player}));
     this.counter++;

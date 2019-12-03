@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {Player} from 'features/players/models';
 
 @Component({
@@ -9,9 +9,10 @@ import {Player} from 'features/players/models';
 export class FieldComponent implements OnInit {
 
   @Input() players: Player[];
-  avatar:string = '../../../../../assets/empty_profile.png';
-  constructor() { 
-    console.log('field players : ', this.players)
+  avatar = '../../../../../assets/empty_profile.png';
+
+  constructor() {
+    console.log('field players : ', this.players);
   }
 
   ngOnInit() {

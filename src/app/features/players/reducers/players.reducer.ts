@@ -13,10 +13,10 @@ export const playersAdapter: EntityAdapter<Player> = createEntityAdapter<Player>
 });
 
 export const initialState: PlayersState = playersAdapter.getInitialState({
-  ids: ['123'],
+  ids: ['101', '102', '103', '104', '105', '106'],
   entities: {
-    ['123']: {
-      id: '123',
+    ['101']: {
+      id: '101',
       name: 'Oren Farhi',
       s_name: 'Zizo',
       arrive: true,
@@ -25,7 +25,73 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       phone: '0525597072',
       strength: 60,
       admin: true,
-      birth: '3/4/1976'
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/almog.png'
+    },
+    ['102']: {
+      id: '102',
+      name: 'Beni Abargil',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/firmino.png'
+    },
+    ['103']: {
+      id: '103',
+      name: 'Oren Farhi',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/chris.png'
+    },
+    ['104']: {
+      id: '104',
+      name: 'Alon Cohen',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/empty_profile.png'
+    },
+    ['105']: {
+      id: '105',
+      name: 'ZiZI fdf Farhi',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/almog.png'
+    },
+    ['106']: {
+      id: '106',
+      name: 'Almog Sade',
+      s_name: 'Zizo',
+      arrive: true,
+      image: '',
+      number: 8,
+      phone: '0525597072',
+      strength: 60,
+      admin: true,
+      birth: '3/4/1976',
+      avatar: '../../../../../assets/empty_profile.png'
     }
   }
 });

@@ -32,10 +32,15 @@ export const selectPlayersTotal = createSelector(
   selectTotal
 );
 export const selectPlayersArrived = createSelector(
-  selectEntities,
-  (entities, params) => entities.filter(player => player.arrived)
+  selectAllPlayers,
+  (entities) => entities.filter(player => player.arrive === true)
+);
+export const selectPlayersBench = createSelector(
+  selectAllPlayers,
+  (entities) => entities.filter(player => player.arrive === false)
 );
 // export const selectSelectedPlayer = createSelector(
 //   selectPlayersEntities,
 //   (entities, params) => params && entities[params.state.params.id]
 // );
+

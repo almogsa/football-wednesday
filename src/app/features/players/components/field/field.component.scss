@@ -6,14 +6,7 @@
   border: 1px solid black;
  // flex-direction:column;
 }
- .avatar {
-  vertical-align: middle;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  box-shadow: 0 0 0 2px #fff, 0 0 0 2px #999, 0 0px 5px 4px rgba(0, 0, 0, 0.2);
-  
-}
+
 .bench-background {
   background-image: url(../../../../../assets/playersBase.png);
   background-position: 100% 100%;
@@ -38,4 +31,18 @@
 }
 .field{
   grid-area: field;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 20% 20% 10%;
+  grid-auto-rows: 20% 10% 10%;
+  text-align: center;
+  align-items: center;
+
+}
+.first-item{
+  grid-column: span 2;
+  align-self: end;
+}
+.last-item{
+  grid-column: span 2;
 }

@@ -1,8 +1,3 @@
-<p>Player Details</p>
-<div>Name : {{player.name}}</div>
-<div>Number: {{player.number}}</div>
-<div>Strength  {{player.strength}}</div>
-<div>Arrive : {{player.arrive}}</div>
-<button (click)="deletePlayer(player)">delete</button>
-
-
+<div class="player"><img class="avatar" [src]="player.avatar"/>
+  <div class="player-name">{{player.name}}</div>
+</div>
