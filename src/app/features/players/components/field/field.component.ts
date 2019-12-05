@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Player} from 'features/players/models';
 
 @Component({
@@ -8,14 +8,20 @@ import {Player} from 'features/players/models';
 })
 export class FieldComponent implements OnInit {
 
-  @Input() players: Player[];
+  @Input() arrive: Player[];
+  @Input() bench: Player[];
+  @Input() cader: Player[];
+  @Output() update: EventEmitter<Player> =  new EventEmitter<Player>();
   avatar = '../../../../../assets/empty_profile.png';
 
   constructor() {
-    console.log('field players : ', this.players);
+    // console.log('field players : ', this.cader);
   }
 
   ngOnInit() {
   }
 
+  handleUpdate(event) {
+    this.update.emit(event);
+  }
 }

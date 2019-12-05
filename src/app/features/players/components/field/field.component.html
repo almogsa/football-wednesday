@@ -1,15 +1,18 @@
 <!--<div>Players: {{players.length}}</div>-->
 <div class="game-container">
-  <div class="header bench-background ">Header</div>
+  <div class="header bench-background ">
+    <app-player *ngFor="let player of bench;let i = index;let first = first; let last = last" [player]="player"
+    ></app-player>
+  </div>
   <div class=" players-main field height--100">
-    <app-player *ngFor="let player of players;let i = index;let first = first; let last = last" [player]="player"
+    <app-player *ngFor="let player of arrive;let i = index;let first = first; let last = last" [player]="player"
                 [class.first-item]="first"
                 [class.last-item]="last"
                 [class.last-item]="i==9"
     ></app-player>
   </div>
   <div class="footer bench-background">
-    <app-player *ngFor="let player of players;let i = index;let first = first; let last = last" [player]="player"
+    <app-player (update)="handleUpdate($event)" *ngFor="let player of cader;let i = index;let first = first; let last = last" [player]="player"
     ></app-player>
   </div>
 </div>

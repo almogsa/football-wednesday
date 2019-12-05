@@ -35,7 +35,8 @@ export const selectPlayersArrived = createSelector(
   selectAllPlayers,
   (entities) => entities.filter(player => player.arrive === true)
 );
-export const selectPlayersBench = createSelector(
+
+export const selectCaderPlayers = createSelector(
   selectAllPlayers,
   (entities) => entities.filter(player => player.arrive === false)
 );

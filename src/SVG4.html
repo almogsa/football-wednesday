@@ -40,7 +40,7 @@
   .container {
     display: grid;
 
-    grid-template-columns: 25px 25px 25px 15px 15px;
+    grid-template-columns: auto auto auto auto auto;
     grid-area: exec;
     font-size: 2.5em;
     grid-gap: 20px;
@@ -148,7 +148,7 @@
   var aySound = new Array();
   var score = 0;
 
-  var audioGood = ['Totah','kolHakavod','Melech','Yafe','Katan'];
+  var audioGood = ['Totah','kolHakavod','Melech','yafe','Katan'];
   var audioBad = ['GoToSleep','Hafsaka','luzer','Tinok','TryAgain'];
 
   // DISABLE DOUBLE CLICK
@@ -351,7 +351,7 @@
 
       let elementById = document.getElementById('fail');
       var t = 'טעית נסה מספר  ';
-      elementById.innerText = t + (num1 * num2 < Number(elem.label) ? 'קטן ' : ' גדול') + ' יותר ';
+      //elementById.innerText = t + (num1 * num2 < Number(elem.label) ? 'קטן ' : ' גדול') + ' יותר ';
       if (elementById.style.display === 'none') {
         elementById.style.display = 'block';
         elementById.style.color = 'red';

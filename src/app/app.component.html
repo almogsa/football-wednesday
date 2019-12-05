@@ -5,7 +5,7 @@
     <app-players-list></app-players-list>
   </ux-tab>
   <ux-tab heading="FIELD" class="height--100">
-    <app-field [players]="players"></app-field>
+    <app-field [arrive]="players" [bench]="benchPlayers" [cader]="caderPlayers" (update)="handleUpdate($event)"></app-field>
   </ux-tab>
   <ux-tab  heading="SETTINGS" >
   </ux-tab>
