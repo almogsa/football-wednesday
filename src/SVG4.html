@@ -8,7 +8,7 @@
   body {
     height:80vh;
   }
-
+  @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
   .links {
     stroke: #000;
     stroke-opacity: 0.2;
@@ -34,6 +34,7 @@
 
   .level {
     grid-area: level;
+    font-size: 0.8em;
   }
 
   .container {
@@ -49,30 +50,38 @@
   }
 
   .game-container {
+    background:url('./assets/board.png') 0% 0% / 100% 100% no-repeat;
+    font:25pt 'Gloria Hallelujah';
+    color:rgba(255,255,255,0.7);
+    text-shadow:0 0 4px rgba(255,255,255,0.6);
     touch-action: manipulation;
     height: 100%;
     display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 20px 40px 20px 20px 20px minmax(0, 1fr) 0.1fr;
+    grid-template-rows: 20px 40px 20px 20px 20px 10px minmax(0, 1fr) 0.1fr;
     grid-gap: 5px;
-    grid-template-areas: ". . .  " ". exec .  " ". score .  " ". total .  " " . level ." ". game ." ". . .";
-    border: 1px solid greenyellow;
+    grid-template-areas: ". . .  " ". exec .  " ". score .  " ". total .  " " . level ." " . . ."". game ." ". . .";
+    border: 1px solid black;
+
+
 
   }
 
   .game {
     grid-area: game;
-    background-color: bisque;
     height: 100%;
+    border:2px solid #ffffff;
   }
 
   .score {
     grid-area: score;
+    font-size: 0.8em;
 
   }
 
   .total {
     grid-area: total;
+    font-size: 0.8em;
   }
 
   .success {
@@ -88,6 +97,16 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+
+  .greenboard {background: #63856a; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #63856a 1%, #3c5a40 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#63856a), color-stop(100%,#3c5a40)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #63856a 1%,#3c5a40 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63856a', endColorstr='#3c5a40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   }
 
   /*@media screen and (max-width: 600px) {*/
@@ -112,6 +131,7 @@
   <div id='level' class="level"> רמה :</div>
   <div id="fail" class="fail" style="display: none"></div>
   <div id="game" class="game"></div>
+
 </div>
 <div id="more_players" style="overflow: hidden;">
   <audio id="soundtrack" src="" preload="auto" type="audio/m4a"></audio>
@@ -152,7 +172,7 @@
       score = 0;
       duration = duration - (level < 4 ? 2000 : 1000);
       console.log('duration', duration);
-      if (level === 4) {
+      if (level === 4 || level === 13) {
         duration = 10000;
       }
       document.getElementById('playme20').play();
@@ -177,10 +197,10 @@
 
   //Circle Data Set
   var data = [
-    {"cx": 12, "cy": 70, "radius": 10, "color": "purple", "label": "24"},
-    {"cx": 37, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
-    {"cx": 62, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
-    {"cx": 86, "cy": 70, "radius": 10, "color": "purple", "label": "30"},
+    {"cx": 12, "cy": 70, "radius": 10, "color": "white", "label": "24"},
+    {"cx": 37, "cy": 70, "radius": 10, "color": "white", "label": "30"},
+    {"cx": 62, "cy": 70, "radius": 10, "color": "white", "label": "30"},
+    {"cx": 86, "cy": 70, "radius": 10, "color": "white", "label": "30"},
   ];
   var svgContainer = d3.select(".game").append("svg")
     .attr("width", '100%')
@@ -221,8 +241,11 @@
     var num2 = getRandomInt(0, 5);
     if (level > 3) {
       num1 = getRandomInt(5, 10);
-
       num2 = getRandomInt(5, 10);
+    }
+    if (level > 12) {
+      num1 = getRandomInt(8, 20);
+      num2 = getRandomInt(8, 20);
     }
     document.getElementById('num1').innerText = num1;
     document.getElementById('num2').innerText = num2;
@@ -256,7 +279,8 @@
     //.attr("cx", function(d, i) { return i * 100 + 30; })
     //.attr("cy", function (d) { return d.cy; })
       .attr("r", function (d) {
-        return d.radius * (width-50)/100;
+        //return d.radius * (width-100)/100;
+        return (width/13);
       })
       .style("opacity", "1")
       .style("fill", function (d) {
