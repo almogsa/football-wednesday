@@ -1,10 +1,8 @@
 .players-main{
-  background: url('../../../../../assets/soccer_field.png') 0% 0% / 100% 100% no-repeat;
-  // height:  calc(100% - 120px);
+  background: url('../../../../../assets/footballcourt.png') 0% 0% / 100% 100% no-repeat;
   width: 100%;
- // display:flex;
-  border: 1px solid black;
- // flex-direction:column;
+  height: 100%;
+  border: 3px solid #fffff;
 }
 
 .bench-background {
@@ -14,23 +12,23 @@
 .game-container {
   display: grid;
   height: 100%;
-  grid-template-areas: "header header header"
-                       "field field field"
-                      "footer footer footer";
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px 1fr 100px;
+  grid-template-rows: auto 1fr minmax(auto,100px);
 }
 .header{
-  grid-area: header;
+  //grid-area: header;
 
 
 }
 .footer{
-  grid-area: footer;
+  overflow: scroll;
+  //grid-area: footer;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px,1fr));
+  grid-column-gap: 10px;
 
 }
 .field{
-  grid-area: field;
+  //grid-area: field;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 20% 20% 10%;

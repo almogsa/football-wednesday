@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>לוח הכפל</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+</head>
 <style>
   body {
     height:80vh;
@@ -111,23 +114,7 @@
   <div id="game" class="game"></div>
 </div>
 <div id="more_players" style="overflow: hidden;">
-  <audio id="playme1" src="https://www.baraksofer.com/officefun/sounds/DingLing.mp3" preload="auto"></audio>
-  <audio id="playme2" src="https://www.pacdv.com/sounds/people_sound_effects/yes_1.wav" preload="auto"></audio>
-  <audio id="playme3" src="https://freesound.org/data/previews/196/196250_1332991-lq.mp3" preload="auto"></audio>
-  <audio id="playme4" src="https://www.pacdv.com/sounds/people_sound_effects/you_got_it_1.wav" preload="auto"></audio>
-  <audio id="playme5" src="https://www.pacdv.com/sounds/voices/wow-1.wav" preload="auto"></audio>
-  <audio id="playme6" src="https://www.pacdv.com/sounds/voices/yes-1.wav" preload="auto"></audio>
-  <audio id="playme7" src="https://www.pacdv.com/sounds/people_sound_effects/you_got_it_1.wav" preload="auto"></audio>
-  <audio id="playme8" src="https://www.baraksofer.com/officefun/sounds/Buzz01.mp3" preload="auto"></audio>
-  <audio id="playme9" src="https://www.pacdv.com/sounds/voices/mmm-1.wav" preload="auto"></audio>
-  <audio id="playme10" src="https://www.pacdv.com/sounds/voices/no-1.wav" preload="auto"></audio>
-  <audio id="playme11" src="https://www.pacdv.com/sounds/voices/no-2.wav" preload="auto"></audio>
-  <audio id="playme12" src="https://www.pacdv.com/sounds/voices/no-4.wav" preload="auto"></audio>
-  <audio id="playme13" src="https://www.pacdv.com/sounds/voices/no-5.wav" preload="auto"></audio>
-  <audio id="playme14" src="https://www.pacdv.com/sounds/voices/oh-my-god-1.wav" preload="auto"></audio>
-  <audio id="playme15" src="https://www.pacdv.com/sounds/voices/urghhh.wav" preload="auto"></audio>
-  <audio id="playme16" src="https://www.pacdv.com/sounds/voices/what-are-you-doing.wav" preload="auto"></audio>
-  <audio id="playme17" src="https://www.pacdv.com/sounds/voices/im-sorry.wav" preload="auto"></audio>
+  <audio id="soundtrack" src="" preload="auto" type="audio/m4a"></audio>
   <audio id="playme20" src="https://www.pacdv.com/sounds/people_sound_effects/applause-2.wav" preload="auto"></audio>
 </div>
 
@@ -141,6 +128,9 @@
   var aySound = new Array();
   var score = 0;
 
+  var audioGood = ['Totah','kolHakavod','Melech','Yafe','Katan'];
+  var audioBad = ['GoToSleep','Hafsaka','luzer','Tinok','TryAgain'];
+
   // DISABLE DOUBLE CLICK
   document.getElementById('game-container').ondblclick = function () {
     return false;
@@ -151,6 +141,7 @@
 
   function start() {
     total++;
+
     if (total === 40) {
       total = 1;
       score = 0;
@@ -212,6 +203,12 @@
 
     svgContainer.selectAll("g").remove();
   }
+  function  playAudio(name) {
+    let audio = new Audio(`./assets/audio/${name}.m4a`);
+    audio.load();
+    return audio.play();
+  }
+
 
   function buildData() {
 
@@ -306,10 +303,12 @@
   function handleClick(elem) {
     var num1 = document.getElementById('num1').innerText;
     var num2 = document.getElementById('num2').innerText;
+
+    //x.play();
     if (num1 * num2 === Number(elem.label)) {
       console.log('good');
-
-      document.getElementById('playme' + getRandomInt(1, 7)).play();
+      playAudio(audioGood[getRandomInt(0, audioGood.length-1)]);
+      //document.getElementById('playme' + getRandomInt(1, 7)).play();
       score++;
       d3.select(this)
         .transition()
@@ -323,7 +322,8 @@
       timer = setInterval(start, 0);
       clearData();
     } else {
-      document.getElementById('playme' + getRandomInt(8, 17)).play();
+      playAudio(audioBad[getRandomInt(0, audioBad.length-1)]);
+      //document.getElementById('playme' + getRandomInt(8, 17)).play();
 
       let elementById = document.getElementById('fail');
       var t = 'טעית נסה מספר  ';
