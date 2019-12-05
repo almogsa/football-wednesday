@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
      this.store.pipe(select(selectPlayersArrived)).subscribe(players => {
-       this.players = players;
+       this.players = players.slice(0, 10);
      });
   }
 }
