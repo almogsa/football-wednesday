@@ -65,7 +65,7 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       strength: 60,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/empty_profile.png'
+      avatar: '../../../../../assets/almog.png'
     },
     ['105']: {
       id: '105',
@@ -91,7 +91,7 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       strength: 60,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/empty_profile.png'
+      avatar: '../../../../assets/empty_profile.png'
     }
   }
 });

@@ -23,4 +23,5 @@ export class PlayerComponent implements OnInit {
     console.log(' Footer click on player: ', player);
     this.update.emit(player);
   }
+
 }

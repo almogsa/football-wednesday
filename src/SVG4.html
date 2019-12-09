@@ -2,13 +2,15 @@
 <html>
 <head>
   <title>לוח הכפל</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <style>
   body {
-    height:80vh;
+    height: 80vh;
   }
+
   @import url(http://fonts.googleapis.com/css?family=Gloria+Hallelujah);
+  @import url(https://fonts.googleapis.com/css?family=Waiting+for+the+Sunrise);
   .links {
     stroke: #000;
     stroke-opacity: 0.2;
@@ -50,27 +52,89 @@
   }
 
   .game-container {
-    background:url('./assets/board.png') 0% 0% / 100% 100% no-repeat;
-    font:25pt 'Gloria Hallelujah';
-    color:rgba(255,255,255,0.7);
-    text-shadow:0 0 4px rgba(255,255,255,0.6);
+    background: url('./assets/board.png') 0% 0% / 100% 100% no-repeat;
+    font: 25pt 'Gloria Hallelujah';
+    color: rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
     touch-action: manipulation;
     height: 100%;
     display: grid;
     grid-template-columns: 5% 1fr 5%;
-    grid-template-rows: 20px 40px 20px 20px 20px 10px minmax(0, 1fr) 0.1fr;
+    grid-template-rows: 20px 50px 5px 25px 20px 20px 20px 10px minmax(0, 1fr) 0.1fr;
     grid-gap: 5px;
-    grid-template-areas: ". . .  " ". exec .  " ". score .  " ". total .  " " . level ." " . . ."". game ." ". . .";
+    grid-template-areas: ". . .  " ". exec .  " ". . ." ". psilot ." ". score .  " ". total .  " " . level ." " . . ." ". game ." ". . .";
     border: 1px solid black;
 
 
+  }
+  .game-over{
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    z-index: 10;
+    position: relative;
 
+    background: url('./assets/board.png') 0% 0% / 100% 100% no-repeat;
+
+    /*animation: typing 3.5s steps(40, end);*/
+  }
+  .typewriter h1 {
+    font-family: 'Waiting for the Sunrise', cursive;
+    font-size:30px;
+    margin: 10px 50px;
+    letter-spacing: 6px;
+    font-weight: bold;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: .15em solid orange; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    /*animation: typing 3.5s steps(40, end);*/
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes type2 {
+    0% {
+      width: 0;
+    }
+    1% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 1;
+      border: none;
+    }
+  }
+  .example{
+
+    justify-self: center;
+    text-align: center;
+    /*position: absolute;*/
+    /*left: 50%;*/
+    /*top: 50%;*/
+
+    /*transform: translate(-50%, -50%);*/
+    font-size: 2.5em;
+    font-family: 'Waiting for the Sunrise', cursive;
+    font-size:30px;
+
+    letter-spacing: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 200px;
+    opacity: 0;
+    -webkit-animation: type2 2s steps(40, end);
+    animation: type2 1s steps(40, end);
+
+    animation-fill-mode: forwards;
   }
 
   .game {
     grid-area: game;
     height: 100%;
-    border:2px solid #ffffff;
+    border: 2px solid #ffffff;
   }
 
   .score {
@@ -82,6 +146,13 @@
   .total {
     grid-area: total;
     font-size: 0.8em;
+  }
+  .psilot{
+    grid-area: psilot;
+    align-items: center;
+    display: grid;
+    font-size: 0.8em;
+    grid-template-columns: 86px repeat(auto-fill,minmax(40px, 1fr));
   }
 
   .success {
@@ -98,15 +169,201 @@
     -ms-user-select: none;
     user-select: none;
   }
+  .game-over-container{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+  }
 
-  .greenboard {background: #63856a; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover,  #63856a 1%, #3c5a40 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#63856a), color-stop(100%,#3c5a40)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #63856a 1%,#3c5a40 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #63856a 1%,#3c5a40 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#63856a', endColorstr='#3c5a40',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+  .smiley {
+    display: inline-block;
+    /*margin: 80px;*/
+    width: 25px;
+    height: 25px;
+    background: #fbb03b;
+    background: radial-gradient(circle at 40% 40%, #fddf18 50%, #fbb03b, orange 95%);
+    /*box-shadow: rgba(211, 165, 110, .4) 0 30px 30px 1px,*/
+    /*rgb(245, 245, 245) 0 20px 10px 1px;*/
+    border-radius: 100%;
+    position: relative;
+  }
+  .smiley--sad {
+    background: linear-gradient(rgba(255, 0, 0, .4), rgba(255, 0, 0, 0) 50%),
+    radial-gradient(circle at 40% 40%, #fddf18 50%, #fbb03b, orange 95%);
+  }
+
+  .smiley-face {
+    height: 100%;
+  }
+  .smiley-face--happy {
+    position: relative;
+    animation: move-happy-face 4s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes move-happy-face
+  {
+    0% {
+      top: 0;
+    }
+    3% {
+      top: 4%;
+    }
+    6% {
+      top: 4%;
+    }
+    9% {
+      top: 0%;
+    }
+    100% {
+      top: 0%;
+    }
+  }
+
+  .smiley-eyes {
+    width: 60%;
+    height: 13%;
+    position: relative;
+    left: 20%;
+  }
+  .smiley-eyes--happy {
+    top: 30%;
+  }
+  .smiley-eyes--sad {
+    height: 15%;
+    top: 50%;
+  }
+
+  .smiley-eye {
+    background: #603813;
+    width: 22.5%;
+    height: 100%;
+    border-radius: 100%;
+    position: absolute;
+  }
+  .smiley-eye:last-child {
+    right: 0;
+  }
+
+  .smiley-eyes--happy .smiley-eye:last-child {
+    animation: wink 4s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes wink {
+    0% {
+      height: 100%;
+      top: 0;
+    }
+    3% {
+      height: 20%;
+      top: 40%;
+    }
+    6% {
+      height: 20%;
+      top: 40%;
+    }
+    9% {
+      height: 100%;
+      top: 0;
+    }
+    100% {
+      height: 100%;
+      top: 0;
+    }
+  }
+
+  .smiley-eyes--sad .smiley-eye {
+    transform: rotate(7deg) scaleX(.8);
+  }
+  .smiley-eyes--sad .smiley-eye:last-child {
+    transform: rotate(-7deg) scaleX(.8);
+  }
+
+  .smiley-mouth {
+    background: #603813;
+    position: absolute;
+  }
+  .smiley-mouth--happy {
+    width: 60%;
+    height: 30%;
+    top: 53%;
+    left: 20%;
+    border-bottom-left-radius: 50% 100%;
+    border-bottom-right-radius: 50% 100%;
+    overflow: hidden;
+  }
+  .smiley-tongue {
+    background: #c1272d;
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+    border-radius: 60% 60% 0 0;
+  }
+
+  .smiley-mouth--sad {
+    width: 24%;
+    height: 10%;
+    left: 38%;
+    bottom: 15%;
+    border-top-left-radius: 50% 100%;
+    border-top-right-radius: 50% 100%;
+  }
+
+  .smiley-face--sad {
+    animation: move-sad-face 4s;
+    animation-delay: 2s;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes move-sad-face {
+    0% {
+      transform: translateX(0%);
+    }
+    3% {
+      transform: translateX(-17%);
+    }
+    5% {
+      transform: translateX(12%);
+    }
+    8% {
+      transform: translateX(-7%);
+    }
+    10% {
+      transform: translateX(2%);
+    }
+    13% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  button{
+    background: none repeat scroll 0 0 #CB4E4E;
+    border-radius: 50%;
+    box-shadow: 0 8px #AB3C3C;
+    color: #FFFFFF;
+    width: 150px;
+    height: 150px;
+    border: 0px;
+    cursor: pointer;
+    position: relative;
+    font-size: 25px;
+    margin: 5% auto;
+    display: block;
+    outline: none;
+  }
+  button:hover{
+    box-shadow: 0px 5px #AB3C3C;
+    top: 2px;
+  }
+  button:active{
+    box-shadow: 0px 0px #AB3C3C;
+    top: 5px;
   }
 
   /*@media screen and (max-width: 600px) {*/
@@ -118,7 +375,16 @@
 
 </style>
 <body>
-<div id ="game-container" class="game-container">
+
+<!--<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50.1 50.8" class="svg-icon svg-icon&#45;&#45;smiley">-->
+<!--  <circle fill="none" stroke="currentColor" cx="25" cy="25.5" r="14.5"/>-->
+<!--  <circle fill="none" stroke="currentColor" cx="21.2" cy="21.9" r="1.4"/>-->
+<!--  <path fill="none" stroke="currentColor" d="M28.9,23.3c-0.8,0-1.4-0.6-1.4-1.4s0.6-1.4,1.4-1.4s1.4,0.6,1.4,1.4C30.3,22.6,29.7,23.3,28.9,23.3"/>-->
+<!--  <path fill="none" stroke="currentColor" d="M26.7,21.5c0.4,0,0.4,0.7,1,0.7s0.6-0.7,1.2-0.7c0.7,0,0.6,0.7,1.2,0.7s0.7-0.7,1-0.7" />-->
+<!--  <path fill="none" stroke="currentColor" d="M17.3 28.7c1 2.8 4.1 4.8 7.8 4.8s6.7-2 7.7-4.8"/>-->
+<!--</svg>-->
+
+<div id="game-container" class="game-container">
   <div class="container">
     <div id='num1'></div>
     <div> *</div>
@@ -126,56 +392,117 @@
     <div> =</div>
     <div> ?</div>
   </div>
+  <div id='psilot' class="psilot">
+    <div>פסילות : </div>
+    <div id="smile-1" class="smiley" style="display: none">
+      <div class="smiley-face smiley-face--happy">
+        <div class="smiley-eyes smiley-eyes--happy">
+          <div class="smiley-eye"></div>
+          <div class="smiley-eye"></div>
+        </div>
+        <div class="smiley-mouth smiley-mouth--happy">
+          <div class="smiley-tongue"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div id='score' class="score"> ניקוד :</div>
   <div id='total' class="total"> סה"כ :</div>
   <div id='level' class="level"> רמה :</div>
   <div id="fail" class="fail" style="display: none"></div>
   <div id="game" class="game"></div>
+  <div id="game-over" class="game-over" style="display: none">
+  <div class="game-over-container">
+    <div class="example">game over</div>
+    <div class="" style="align-self: start;"><button id="new-game">משחק חדש</button></div>
+  </div>
+  </div>
 
 </div>
+
 <div id="more_players" style="overflow: hidden;">
   <audio id="soundtrack" src="" preload="auto" type="audio/m4a"></audio>
-  <audio id="playme20" src="https://www.pacdv.com/sounds/people_sound_effects/applause-2.wav" preload="auto"></audio>
 </div>
 
 
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
-
+  var i =1;
   var total = 0;
   var level = 1;
+  var error = 3;
   var duration = 8000;
   var aySound = new Array();
   var score = 0;
 
-  var audioGood = ['Totah','kolHakavod','Melech','yafe','Katan'];
-  var audioBad = ['GoToSleep','Hafsaka','luzer','Tinok','TryAgain'];
 
+  var audioGood = ['Totah.m4a', 'kolHakavod.m4a', 'Melech.m4a', 'yafe.m4a',
+    'Katan.m4a', 'alon-excelent.mp3', 'alon-kli.mp3', 'alon-pizuz.mp3', 'alon-yesh.mp3', 'or-totach.mp3',
+    'keren-ko-hakavod.mp3', 'keren-excelent.mp3'];
+  var audioBad = ['GoToSleep.m4a', 'Hafsaka.m4a', 'luzer.m4a', 'Tinok.m4a', 'TryAgain.m4a',
+    'alon-ai.mp3', 'alon-luzer.mp3', 'alon-mistake.mp3', 'alon-no.mp3', 'keren-maze.mp3', 'keren-ops.mp3'];
+  var audioLevel = ['alon-level.mp3', 'or-level-up.mp3', 'amit-level.mp3', 'keren-level.mp3'];
+  var newGame= document.getElementById('new-game');
+  newGame.addEventListener('click',function () {
+    console.log('new game');
+     total = 0;
+     level = 1;
+     error = 3;
+     duration = 8000;
+     score = 0;
+    updateScope();
+    buildData();
+    clearInterval(timer);
+    timer = setInterval(start, duration);
+    document.getElementById('game-over').style.display='none';
+
+  })
   // DISABLE DOUBLE CLICK
   document.getElementById('game-container').ondblclick = function () {
     return false;
   };
   document.addEventListener('touchmove', function (event) {
-    if (event.scale !== 1) { event.preventDefault(); }
+    if (event.scale !== 1) {
+      event.preventDefault();
+    }
   }, false);
-
+  for (var i1 = 0 ; i1 < error; i1++){
+    duplicate(document.getElementById('smile-1'));
+  }
+  function duplicate(node) {
+    var clone = node.cloneNode(true); // "deep" clone
+    clone.id = "smile-" + ++i;
+    clone.style.display='block';
+    // or clone.id = ""; if the divs don't need an ID
+    node.parentNode.appendChild(clone);
+  }
   function start() {
     total++;
-
-    if (total === 40) {
-      total = 1;
-      score = 0;
+    if (total === 12) {
+      // GAME OVER
+      clearData();
+      clearInterval(timer);
+      document.getElementById('game-over').style.display='block';
+      total = 0;
+      //document.getElementById('total').innerText = 'סה"כ : ' + total;
+      // alert(' GAME OVER');
     }
+    // if (total === 15) {
+    //   total = 1;
+    //   score = 0;
+    // }
     if (total > 5 && score / total > 0.6) {
       total = 0;
       level = level + 1;
+      error = error + 1;
       score = 0;
       duration = duration - (level < 4 ? 2000 : 1000);
       console.log('duration', duration);
       if (level === 4 || level === 13) {
         duration = 10000;
       }
-      document.getElementById('playme20').play();
+      playAudio(audioLevel[getRandomInt(0, audioLevel.length - 1)]);
+
     }
     document.getElementById('total').innerText = 'סה"כ : ' + total;
     document.getElementById('level').innerText = 'רמה : ' + level;
@@ -184,12 +511,12 @@
     if (failElem.style.display === 'block') {
       failElem.style.display = 'none';
     }
+
     buildData();
     clearInterval(timer);
     timer = setInterval(start, duration);
 
   }
-
   timer = setInterval(start);
   //  clearInterval(timer);
   //timer = setInterval(start, duration);
@@ -223,8 +550,9 @@
 
     svgContainer.selectAll("g").remove();
   }
-  function  playAudio(name) {
-    let audio = new Audio(`./assets/audio/${name}.m4a`);
+
+  function playAudio(name) {
+    let audio = new Audio(`./assets/audio/${name}`);
     audio.load();
     return audio.play();
   }
@@ -252,8 +580,8 @@
 
     random = getRandomInt(0, data.length - 1);
     circleData = data.map(function (x, index) {
-      console.log('CX: ',x.cx);
-      return {...x, label: getRandomInt(0, 100), cx: x.cx * (width/100), cy: x.cy}
+      console.log('CX: ', x.cx);
+      return {...x, label: getRandomInt(0, 100), cx: x.cx * (width / 100), cy: x.cy}
     });
     circleData[random].label = num1 * num2;
     /*Create and place the "blocks" containing the circle and the text */
@@ -264,13 +592,13 @@
         .append("g")
         .attr("class", "zoom")
         .attr("transform", function (d) {
-          return "translate(" + d.cx + ","+height+")"
+          return "translate(" + d.cx + "," + height + ")"
         })
         //.call(zoom)
         .on("dblclick.zoom", null)
         .on("touchstart.zoom", null)
-      .on("touchmove.zoom", null)
-      .on("touchend.zoom", null);
+        .on("touchmove.zoom", null)
+        .on("touchend.zoom", null);
 
     var circles = elemEnter.append("circle");
 
@@ -280,7 +608,7 @@
     //.attr("cy", function (d) { return d.cy; })
       .attr("r", function (d) {
         //return d.radius * (width-100)/100;
-        return (width/13);
+        return (width / 13);
       })
       .style("opacity", "1")
       .style("fill", function (d) {
@@ -291,10 +619,10 @@
     elemEnter.append("text")
       .attr("x", function (d) {
         //return  -d.radius - 5
-       // return  d -5
+        // return  d -5
       })
       .attr("y", function (d) {
-      //  return d + 88
+        //  return d + 88
       })
       //.text(function(d){return  "( " + d.cx + ", " + d.cy +" )";});
       .text(function (d) {
@@ -328,10 +656,9 @@
     var num1 = document.getElementById('num1').innerText;
     var num2 = document.getElementById('num2').innerText;
 
-    //x.play();
     if (num1 * num2 === Number(elem.label)) {
       console.log('good');
-      playAudio(audioGood[getRandomInt(0, audioGood.length-1)]);
+      playAudio(audioGood[getRandomInt(0, audioGood.length - 1)]);
       //document.getElementById('playme' + getRandomInt(1, 7)).play();
       score++;
       d3.select(this)
@@ -346,7 +673,16 @@
       timer = setInterval(start, 0);
       clearData();
     } else {
-      playAudio(audioBad[getRandomInt(0, audioBad.length-1)]);
+      error = error - 1;
+      if (error === 0) {
+        // GAME OVER
+        clearData();
+        clearInterval(timer);
+        document.getElementById('game-over').style.display='block';
+       // alert(' GAME OVER');
+      }
+
+      playAudio(audioBad[getRandomInt(0, audioBad.length - 1)]);
       //document.getElementById('playme' + getRandomInt(8, 17)).play();
 
       let elementById = document.getElementById('fail');
@@ -357,7 +693,7 @@
         elementById.style.color = 'red';
 
       }
-      score--;
+      score > 0 ? score-- : '';
       updateScope();
     }
 
@@ -372,28 +708,20 @@
     }
 
     elementById.innerText = ' ניקוד: ' + score;
-    ;
+    let psilot = document.getElementById('psilot');
+    var elements = psilot.getElementsByClassName("smiley");
+    while (elements[1]) {
+      elements[1].parentNode.removeChild(elements[1]);
+    }
+    for (var i2 = 0 ; i2 < error; i2++){
+      duplicate(document.getElementById('smile-1'));
+    }
   }
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 
   }
-
-  //Add the SVG Text Element to the svgContainer
-  //var text = svgContainer.selectAll("text")
-  //                        .data(circleData)
-  //                        .enter()
-  //                        .append("text");
-
-  //Add SVG Text Element Attributes
-  //var textLabels = elemEnter.append("text")
-  //               .attr("x", function(d) { return d.cx; })
-  //             .attr("y", function(d) { return d.cy; })
-  //            .text( function (d) { return "( " + d.cx + ", " + d.cy +" )"; })
-  //            .attr("font-family", "sans-serif")
-  //            .attr("font-size", "20px")
-  //            .attr("fill", "red");
 
 </script>
 </body>

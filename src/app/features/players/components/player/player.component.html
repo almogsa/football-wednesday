@@ -1,4 +1,4 @@
-<div class="player" (click)="handleClick(player)">
+<div *ngIf="player" class="player" (click)="handleClick(player)">
   <img class="avatar" [src]="player.avatar"/>
   <div class="player-name">{{player.name}}</div>
 </div>

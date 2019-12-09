@@ -32,7 +32,7 @@ export class PlayersListComponent implements OnInit {
       name: 'Player_' + this.counter,
       description: 'description',
       s_name: 'Zizo',
-      arrive: true,
+      arrive: false,
       image: '',
       number: 8,
       phone: '0525597072',
@@ -41,6 +41,8 @@ export class PlayersListComponent implements OnInit {
       injured: false,
       position: 'LR',
       birth: '3/4/1976',
+      goals: 0,
+      manOfTheWeek: false,
       avatar: '../../../../../assets/empty_profile.png'
     };
     this.store.dispatch(PlayersActions.addPlayer({player}));

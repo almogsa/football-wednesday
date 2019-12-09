@@ -14,7 +14,9 @@ export interface Player {
   injured: boolean;
   position: string;
   birth: string;
-  avatar:string;
+  goals: number;
+  manOfTheWeek: boolean;
+  avatar: string;
 }
 
 export type PlayersFilter = 'ALL' | 'DONE' | 'ACTIVE';

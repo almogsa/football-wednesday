@@ -5,7 +5,7 @@
     ></app-player>
   </div>
   <div class=" players-main field height--100">
-    <app-player *ngFor="let player of arrive;let i = index;let first = first; let last = last" [player]="player"
+    <app-player (update)="handleDetails($event)" *ngFor="let player of arrive;let i = index;let first = first; let last = last" [player]="player"
                 [class.first-item]="first"
                 [class.last-item]="last"
                 [class.last-item]="i==9"

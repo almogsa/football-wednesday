@@ -1,15 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
-<ux-tabset class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
-  <ux-tab heading="PLAYERS" >
-    <app-players-list></app-players-list>
-  </ux-tab>
-  <ux-tab heading="FIELD" class="height--100">
-    <app-field [arrive]="players" [bench]="benchPlayers" [cader]="caderPlayers" (update)="handleUpdate($event)"></app-field>
-  </ux-tab>
-  <ux-tab  heading="SETTINGS" >
-  </ux-tab>
-</ux-tabset>
+  <app-players-container></app-players-container>
 
-
+</div>
 <!-- <router-outlet></router-outlet> -->
