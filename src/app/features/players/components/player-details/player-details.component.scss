@@ -1,0 +1,51 @@
+.player {
+  text-align: center;
+}
+
+.avatar {
+  vertical-align: middle;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 2px #999, 0 0px 5px 4px rgba(0, 0, 0, 0.2);
+
+}
+.player-name {
+  color:#ffffff;
+}
+.team-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 10px;
+}
+.team-member-avatar {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+.team-member-name {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.team-member-email {
+  font-weight: 300;
+}
+.m-md {
+  margin: 20px;
+}
+
+.team-member-social-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 45px;
+}
+.team-member-social-link {
+  font-size: 2.1875rem;
+  color: #676a6c;
+  opacity: .7;
+  cursor: pointer;
+  transition: .3s ease-in-out;
+}

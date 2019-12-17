@@ -1,0 +1,28 @@
+<ux-flippable-card *ngIf="player" class="m-md ux-focus-indicator horizontal" [width]="280" height="180">
+
+
+  <ux-flippable-card-front>
+    <div class="team-card-content">
+      <img class="team-member-avatar" [src]="player.avatar">
+      <h3 class="team-member-name">{{player.name}}</h3>
+      <p class="team-member-email">{{player.number}}</p>
+    </div>
+  </ux-flippable-card-front>
+
+
+  <ux-flippable-card-back>
+    <div class="team-member-social-content">
+      <a class="team-member-social-link ux-focus-indicator" href="{{'tel:'+ player.phone}}">
+        <i class="fas fa-phone"></i>
+      </a>
+<!--      <a class="team-member-social-link ux-focus-indicator" href="https://github.com/ashh640">-->
+<!--        <ux-icon class="ux-icon ux-icon-social-github"></ux-icon>-->
+<!--      </a>-->
+    </div>
+  </ux-flippable-card-back>
+
+</ux-flippable-card>
+
+
+
+
