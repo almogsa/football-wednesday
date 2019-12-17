@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../features.state';
 import {Observable} from 'rxjs';
-import {Player} from '../../models';
+import {ActiveTab, Player, TabsName} from '../../models';
 import {selectCaderPlayers, selectPlayersArrived} from '../../selectors';
 import {PlayersActions} from '../../actions';
 
@@ -13,17 +13,25 @@ import {PlayersActions} from '../../actions';
 })
 export class PlayersContainerComponent implements OnInit {
 
-  constructor( public store: Store<State> ) {
-
-  }
-
-
   players$: Observable<Player[]>;
   title = 'football-wednesday';
   players: Player[];
   player: Player;
   benchPlayers: Player[];
   caderPlayers: Player[];
+  activeTab: string;
+  tabs: ActiveTab[] = [{name: TabsName.FIELD, active: true}, {name: TabsName.PLAYERS, active: false}, {
+    name: TabsName.DETAILS,
+    active: false
+  }, {name: TabsName.SETTINGS, active: false}];
+
+  constructor(public store: Store<State>) {
+    this.tabs.forEach((tab: ActiveTab) => {
+      console.log(tab);
+
+    });
+  }
+
 
   ngOnInit() {
     this.store.pipe(select(selectPlayersArrived)).subscribe(players => {
@@ -37,11 +45,28 @@ export class PlayersContainerComponent implements OnInit {
   }
 
   handleUpdate(player: Player) {
-    this.store.dispatch(PlayersActions.updatePlayer({player: {id: player.id, changes: { arrive: true}}}));
+    this.store.dispatch(PlayersActions.updatePlayer({player: {id: player.id, changes: {arrive: true}}}));
   }
 
   handleDetails(player: Player) {
-    console.log('player details: ', player)
+    console.log('player details: ', player);
     this.player = player;
+    this.tabs.forEach((tab: ActiveTab) => {
+      if (tab.name === TabsName.DETAILS) {
+        tab.active =  true;
+      } else {
+        tab.active =  false;
+      }
+    });
+    this.tabs = [].concat(this.tabs);
+    console.log('TABS :', this.tabs);
+    this.getActiveTab();
+
+  }
+
+  getActiveTab() {
+    const tabActive = this.tabs.find((tab) => tab.active);
+    this.activeTab = TabsName[tabActive.name];
+    console.log('active', this.activeTab);
   }
 }

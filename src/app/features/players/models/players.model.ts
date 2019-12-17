@@ -18,8 +18,15 @@ export interface Player {
   manOfTheWeek: boolean;
   avatar: string;
 }
+export enum TabsName { 'FIELD' , 'PLAYERS' , 'DETAILS' , 'SETTINGS' }
+
+export interface ActiveTab {
+  name: TabsName;
+  active: boolean;
+}
 
 export type PlayersFilter = 'ALL' | 'DONE' | 'ACTIVE';
+
 
 // export interface PlayersState {
 //   items: Player[];

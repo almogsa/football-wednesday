@@ -4,22 +4,23 @@ import { PlayerComponent, PlayersListComponent, FieldComponent } from 'features/
 import {
   AccessibilityModule,
   ColorServiceModule,
-  colorSets,
+  colorSets, FlippableCardModule,
   HoverActionModule, IconModule,
   SelectionModule,
   SparkModule, TabsetModule,
-  TooltipModule
+  TooltipModule,
 } from '@ux-aspects/ux-aspects';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PlayersContainerComponent } from './components/players-container/players-container.component';
+import { PlayerDetailsComponent } from './components/player-details/player-details.component';
 
 
 
 @NgModule({
-  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent],
+  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent, PlayerDetailsComponent],
   exports: [
     PlayersListComponent,
     FieldComponent,
@@ -40,7 +41,8 @@ import { PlayersContainerComponent } from './components/players-container/player
     SparkModule,
     TooltipModule,
     TabsetModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FlippableCardModule,
   ]
 })
 export class PlayersModule { }
