@@ -1,5 +1,13 @@
 .player {
   text-align: center;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ // position: relative;
+  //display: grid;
+  //grid-template-columns: 1fr 10px;
+  //justify-content: center;
 }
 
 .avatar {
@@ -10,6 +18,27 @@
   box-shadow: 0 0 0 2px #fff, 0 0 0 2px #999, 0 0px 5px 4px rgba(0, 0, 0, 0.2);
 
 }
+
 .player-name {
-  color:#ffffff;
+  color: #ffffff;
+}
+
+.captain {
+  background-color: #65DF0E;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 50%;
+  display: inline-block;
+  //top: 11px;
+  //position: relative;
+  //left: -4px;
+  position: absolute;
+  right: -16px;
+  top: 16px;
+
 }

@@ -19,7 +19,7 @@
   grid-template-columns: repeat(auto-fit, minmax(auto, 55px));
   grid-gap: 10px;
   justify-content: center;
-  padding-top: 6px;
+ // padding-top: 6px;
 
 }
 .footer{
@@ -28,25 +28,19 @@
   grid-gap: 10px;
   justify-content: center;
   max-height: 100px;
-  padding-top: 6px;
+  box-sizing: border-box;
+ // padding-top: 6px;
   overflow-y: scroll;
-  /* overflow: hidden; */
-  /* grid-auto-columns: minmax(auto, 50px); */
-  /* grid-auto-flow: column; */
-  /* overflow: scroll; */
-  /* justify-items: center; */
-
 
 }
 .field{
-  //grid-area: field;
+
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 20% 20% 10%;
   grid-auto-rows: 20% 10% 10%;
   text-align: center;
   align-items: center;
-
 }
 .first-item{
   grid-column: span 2;

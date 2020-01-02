@@ -1,17 +1,17 @@
 <div>
-  <ux-tabset class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
-    <ux-tab heading="FIELD" class="height--100"  [active]="false">
+  <ux-tabset #tabsetComponent [aria-label]="label"  class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
+    <ux-tab heading="FIELD" class="height--100"  [active]="activeTab === 'FIELD'">
       <app-field [arrive]="players" [bench]="benchPlayers" [cader]="caderPlayers"
                (details)="handleDetails($event)"  (update)="handleUpdate($event) "></app-field>
     </ux-tab>
     <ux-tab heading="PLAYERS" [active]="activeTab === 'PLAYERS'">
-      <app-players-list></app-players-list>
+      <app-players-list (back)="handleBack()"></app-players-list>
     </ux-tab>
-    <ux-tab heading="DETAILS" [active]="activeTab === 'DETAILS'">
-      <app-player-details [player]="player"></app-player-details>
+    <ux-tab heading="LINE" [active]="activeTab === 'LINE'">
     </ux-tab>
     <ux-tab heading="SETTINGS" [active]="activeTab === 'SETTINGS'">
     </ux-tab>
   </ux-tabset>
+
 
 </div>

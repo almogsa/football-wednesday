@@ -17,7 +17,7 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
   entities: {
     ['101']: {
       id: '101',
-      name: 'Oren Farhi',
+      name: 'Dubi Koren',
       s_name: 'Zizo',
       arrive: false,
       image: '',
@@ -26,7 +26,8 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       strength: 60,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png'
+      avatar: '../../../../../assets/almog.png',
+      captain: true
     },
     ['102']: {
       id: '102',
@@ -36,10 +37,11 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 60,
+      strength: 40,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/firmino.png'
+      avatar: '../../../../../assets/firmino.png',
+      captain: true
     },
     ['103']: {
       id: '103',
@@ -49,10 +51,11 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 60,
+      strength: 50,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/chris.png'
+      avatar: '../../../../../assets/chris.png',
+      captain: true
     },
     ['104']: {
       id: '104',
@@ -62,10 +65,11 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 60,
+      strength: 70,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png'
+      avatar: '../../../../../assets/almog.png',
+      captain: false
     },
     ['105']: {
       id: '105',
@@ -75,10 +79,11 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 60,
+      strength: 80,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png'
+      avatar: '../../../../../assets/almog.png',
+      captain: false
     },
     ['106']: {
       id: '106',
@@ -88,10 +93,11 @@ export const initialState: PlayersState = playersAdapter.getInitialState({
       image: '',
       number: 8,
       phone: '0525597072',
-      strength: 60,
+      strength: 90,
       admin: true,
       birth: '3/4/1976',
-      avatar: '../../../../assets/empty_profile.png'
+      avatar: '../../../../assets/empty_profile.png',
+      captain: false
     }
   }
 });

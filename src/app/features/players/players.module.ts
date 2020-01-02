@@ -6,8 +6,8 @@ import {
   ColorServiceModule,
   colorSets, FlippableCardModule,
   HoverActionModule, IconModule,
-  SelectionModule,
-  SparkModule, TabsetModule,
+  SelectionModule, SliderModule,
+  SparkModule, TabsetModule, TabsetService,
   TooltipModule,
 } from '@ux-aspects/ux-aspects';
 import {BrowserModule} from '@angular/platform-browser';
@@ -16,7 +16,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PlayersContainerComponent } from './components/players-container/players-container.component';
 import { PlayerDetailsComponent } from './components/player-details/player-details.component';
+import {RouterModule, Routes} from '@angular/router';
 
+const appRoutes: Routes = [
+  { path: 'field', component: PlayersContainerComponent },
+  { path: 'details', component: PlayersContainerComponent },
+];
 
 
 @NgModule({
@@ -27,6 +32,7 @@ import { PlayerDetailsComponent } from './components/player-details/player-detai
     PlayerComponent,
     PlayersContainerComponent
   ],
+  providers: [TabsetService],
   imports: [
     CommonModule,
     ColorServiceModule.forRoot(colorSets.keppel),
@@ -43,6 +49,11 @@ import { PlayerDetailsComponent } from './components/player-details/player-detai
     TabsetModule,
     FontAwesomeModule,
     FlippableCardModule,
+    SliderModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ]
 })
 export class PlayersModule { }

@@ -1,5 +1,5 @@
-<p>players-list works!</p>
-<div>Players List</div>
+
+<button (click)="handleBack()">BACK</button>
 <!--<div  *ngFor="let player of players$ | async">-->
 <!--  <app-player [player]="player" (delete)="onDelete($event)"></app-player>-->
 
@@ -15,7 +15,10 @@
     <th>Name</th>
     <th>Author</th>
     <th>Date</th>
-    <th>Work Completed (%)</th>
+    <th>Admin</th>
+    <th>Number</th>
+    <th>Position</th>
+    <th>Strength</th>
     <th class="text-center">Status</th>
     <th></th>
   </tr>
@@ -30,9 +33,12 @@
     <td class="text-black">{{ player.name }}</td>
     <td>{{ player.position }}</td>
     <td>{{ player.birth | date: 'shortDate' }}</td>
+    <td>{{ player.admin }}</td>
+    <td>{{ player.number }}</td>
+    <td>{{ player.position }}</td>
     <td>
-      <ux-spark theme="chart2" [value]="player.strength" [inlineLabel]="player.strength"
-                barHeight="3"></ux-spark>
+      <ux-slider [value]="player.strength" [options]="slider.options"></ux-slider>
+
     </td>
     <td class="text-center">
       <ux-icon [name]="player.arrive ? 'checkmark' : 'close'"

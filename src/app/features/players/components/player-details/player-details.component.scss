@@ -49,3 +49,13 @@
   cursor: pointer;
   transition: .3s ease-in-out;
 }
+.player-details-container{
+  display: grid;
+  height: 100%;
+  justify-content: center;
+  background-color: #E4E4E4;
+  grid-template-columns: 10px 1fr 10px;
+}
+.player-content{
+  grid-column: 2;
+}

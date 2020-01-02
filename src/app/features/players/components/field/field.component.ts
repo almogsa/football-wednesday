@@ -15,7 +15,7 @@ export class FieldComponent implements OnInit {
   @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
   @Output() details: EventEmitter<Player> = new EventEmitter<Player>();
   avatar = '../../../../../assets/empty_profile.png';
-
+  playerDetails: Player;
   constructor() {
     // console.log('field players : ', this.cader);
   }
@@ -28,6 +28,10 @@ export class FieldComponent implements OnInit {
   }
 
   handleDetails(player: Player) {
-    this.details.emit(player);
+    this.playerDetails = player;
+    // this.details.emit(player);
+  }
+  handleBack() {
+    this.playerDetails = null;
   }
 }

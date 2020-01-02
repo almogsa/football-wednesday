@@ -1,5 +1,4 @@
-<!--<div>Players: {{players.length}}</div>-->
-<div class="game-container">
+<div  *ngIf="!playerDetails" class="game-container">
   <div class="header bench-background ">
     <app-player *ngFor="let player of bench;let i = index;let first = first; let last = last" [player]="player"
     ></app-player>
@@ -9,6 +8,7 @@
                 [class.first-item]="first"
                 [class.last-item]="last"
                 [class.last-item]="i==9"
+
     ></app-player>
   </div>
   <div class="footer bench-background">
@@ -16,3 +16,4 @@
     ></app-player>
   </div>
 </div>
+<app-player-details  *ngIf="playerDetails" [player]="playerDetails" (back)="handleBack()"></app-player-details>

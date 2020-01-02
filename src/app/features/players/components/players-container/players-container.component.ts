@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../features.state';
 import {Observable} from 'rxjs';
 import {ActiveTab, Player, TabsName} from '../../models';
 import {selectCaderPlayers, selectPlayersArrived} from '../../selectors';
 import {PlayersActions} from '../../actions';
+import {TabsetService} from '@ux-aspects/ux-aspects';
 
 @Component({
   selector: 'app-players-container',
@@ -19,13 +20,15 @@ export class PlayersContainerComponent implements OnInit {
   player: Player;
   benchPlayers: Player[];
   caderPlayers: Player[];
+  label = 'xx';
+  @ViewChild('tabsetComponent', {static: true}) someElement;
   activeTab: string;
   tabs: ActiveTab[] = [{name: TabsName.FIELD, active: true}, {name: TabsName.PLAYERS, active: false}, {
     name: TabsName.DETAILS,
     active: false
   }, {name: TabsName.SETTINGS, active: false}];
 
-  constructor(public store: Store<State>) {
+  constructor(public store: Store<State>, private tabsetService: TabsetService) {
     this.tabs.forEach((tab: ActiveTab) => {
       console.log(tab);
 
@@ -68,5 +71,18 @@ export class PlayersContainerComponent implements OnInit {
     const tabActive = this.tabs.find((tab) => tab.active);
     this.activeTab = TabsName[tabActive.name];
     console.log('active', this.activeTab);
+  }
+  handleBack() {
+    this.tabs.forEach((tab: ActiveTab) => {
+      if (tab.name === TabsName.FIELD) {
+        tab.active =  true;
+      } else {
+        tab.active =  false;
+      }
+    });
+    this.getActiveTab()
+   // this.someElement._tabset.select(this.someElement._tabset.tabs[0])
+    // trigger change detect of tabset component
+    this.label = Math.random() + '';
   }
 }

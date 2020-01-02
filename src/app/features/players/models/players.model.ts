@@ -17,6 +17,7 @@ export interface Player {
   goals: number;
   manOfTheWeek: boolean;
   avatar: string;
+  captain: boolean;
 }
 export enum TabsName { 'FIELD' , 'PLAYERS' , 'DETAILS' , 'SETTINGS' }
 
