@@ -1,23 +1,14 @@
 
-<button (click)="handleBack()">BACK</button>
-<!--<div  *ngFor="let player of players$ | async">-->
-<!--  <app-player [player]="player" (delete)="onDelete($event)"></app-player>-->
-
-<!--</div>-->
-<button (click)="addPlayer()">Add Player</button>
-
-<button (click)="updatePlayer()">Update Player</button>
-
-<button (click)="resetPlayers()">Reset Player</button>
+<button class="btn btn-back" (click)="handleBack()">BACK</button>
 <table class="table table-hover">
   <thead>
   <tr class="table-header-dark">
     <th>Name</th>
-    <th>Author</th>
+    <th>Position</th>
     <th>Date</th>
     <th>Admin</th>
     <th>Number</th>
-    <th>Position</th>
+    <th>Captain</th>
     <th>Strength</th>
     <th class="text-center">Status</th>
     <th></th>
@@ -35,32 +26,27 @@
     <td>{{ player.birth | date: 'shortDate' }}</td>
     <td>{{ player.admin }}</td>
     <td>{{ player.number }}</td>
-    <td>{{ player.position }}</td>
-    <td>
+    <td>{{ player.captain }}</td>
+    <td>{{ player.strength }}</td>
+    <!--<td>
       <ux-slider [value]="player.strength" [options]="slider.options"></ux-slider>
 
-    </td>
+    </td>-->
     <td class="text-center">
       <ux-icon [name]="player.arrive ? 'checkmark' : 'close'"
                [attr.aria-label]="player.arrive ? 'Approved' : 'Not approved'">
       </ux-icon>
     </td>
     <td>
-      <button type="button"
+      <button type="button" (click)="handleView(player)"
               class="hover-action-btn"
               aria-label="View"
               uxTooltip="View"
               uxHoverAction>
         <ux-icon name="view" class="hover-action-icon"></ux-icon>
       </button>
-      <button type="button"
-              class="hover-action-btn"
-              aria-label="Share"
-              uxTooltip="Share"
-              uxHoverAction>
-        <ux-icon name="share" class="hover-action-icon"></ux-icon>
-      </button>
-      <button type="button"
+
+      <button type="button" (click)="handleDeletePlayer(player)"
               class="hover-action-btn"
               aria-label="Delete"
               uxTooltip="Delete"
@@ -72,3 +58,20 @@
   </tr>
   </tbody>
 </table>
+<div>
+<div class="action-button-group">
+  <button class="btn btn-danger" (click)="resetPlayers()">Reset Players</button>
+  <button class="btn btn-primary"(click)="addPlayer()">Add Player</button>
+
+<!--  <button class="btn btn-primary" (click)="updatePlayer()">Update Player</button>-->
+
+
+
+</div>
+
+<div class="player-modal" *ngIf="playerDetails">
+  <!-- Modal -->
+  <app-player-details   [player]="playerDetails" (update)="handleUpdatePlayer($event)" (back)="handleBack()"></app-player-details>
+</div>
+
+

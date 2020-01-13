@@ -19,8 +19,12 @@ export class PlayersListComponent implements OnInit {
   players$: Observable<Player[]>;
   selected: Player[] = [];
   @Output() back: EventEmitter<void> = new EventEmitter<void>();
+  @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
   counter = 1;
-  slider:any;
+  slider: any;
+  showModal = false;
+  playerDetails: Partial<Player>;
   constructor(  public store: Store<State>) {
 
   }
@@ -54,22 +58,6 @@ export class PlayersListComponent implements OnInit {
             lower: ['#fdf690', '#3BAA43']
           }
         }
-       /* track: {
-          height: SliderSize.Narrow,
-          ticks: {
-            major: {
-              steps: 50
-            },
-            minor: {
-              steps: 10
-            }
-          },
-          colors: {
-            lower: '#f2f2f2',
-            range: 'rgba(96,121,141, 0.75)',
-            higher: '#f2f2f2'
-          }
-        }*/
       }
     };
 
@@ -98,22 +86,28 @@ export class PlayersListComponent implements OnInit {
     };
     this.store.dispatch(PlayersActions.addPlayer({player}));
     this.counter++;
+    // https://cdn5.vectorstock.com/i/1000x1000/20/84/avatar-man-soccer-player-graphic-vector-9422084.jpg
+    // https://www.w3schools.com/howto/img_avatar.png
+    this.playerDetails = {id: this.counter.toString(), arrive: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
   }
 
-  onDelete(playerId: string) {
-    console.log('delete player', playerId);
-    this.store.dispatch(PlayersActions.deletePlayer({id: playerId}));
+  handleDeletePlayer(player: Player) {
+    this.delete.emit(player.id);
   }
-
-  updatePlayer() {
-    this.store.dispatch((PlayersActions.updatePlayer({player: {id: '1', changes: { name: 'almog', arrive: true}}})));
-  }
-
   resetPlayers() {
     this.store.dispatch((PlayersActions.resetPlayers()));
   }
   handleBack() {
     console.log('handle back');
+    this.playerDetails = null;
     this.back.emit();
+  }
+  handleView(player: Player) {
+    console.log('handle view' , player);
+    this.showModal = true;
+    this.playerDetails = player;
+  }
+  handleUpdatePlayer(player: Player) {
+    this.update.emit(player);
   }
 }

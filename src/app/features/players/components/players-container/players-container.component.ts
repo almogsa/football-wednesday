@@ -85,4 +85,11 @@ export class PlayersContainerComponent implements OnInit {
     // trigger change detect of tabset component
     this.label = Math.random() + '';
   }
+
+  handleUpdatePlayer($event: Player) {
+    this.store.dispatch(PlayersActions.upsertPlayer({player: $event}));
+  }
+  handleDeletePlayer(playerId: string) {
+    this.store.dispatch(PlayersActions.deletePlayer({id: playerId}));
+  }
 }

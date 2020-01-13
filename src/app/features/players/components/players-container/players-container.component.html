@@ -5,7 +5,7 @@
                (details)="handleDetails($event)"  (update)="handleUpdate($event) "></app-field>
     </ux-tab>
     <ux-tab heading="PLAYERS" [active]="activeTab === 'PLAYERS'">
-      <app-players-list (back)="handleBack()"></app-players-list>
+      <app-players-list (update)="handleUpdatePlayer($event)" (delete)="handleDeletePlayer($event)" (back)="handleBack() "></app-players-list>
     </ux-tab>
     <ux-tab heading="LINE" [active]="activeTab === 'LINE'">
     </ux-tab>

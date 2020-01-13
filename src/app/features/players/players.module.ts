@@ -18,6 +18,8 @@ import { PlayersContainerComponent } from './components/players-container/player
 import { PlayerDetailsComponent } from './components/player-details/player-details.component';
 import {RouterModule, Routes} from '@angular/router';
 
+
+
 const appRoutes: Routes = [
   { path: 'field', component: PlayersContainerComponent },
   { path: 'details', component: PlayersContainerComponent },
