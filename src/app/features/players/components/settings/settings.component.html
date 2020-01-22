@@ -1,0 +1,27 @@
+<div *ngIf="!(isAuthenticated$ | async)" class="setting-container height--100 width--100">
+  <h1>Login here</h1>
+
+  <form class="login" #myform="ngForm" (ngSubmit)="handleSubmit(myform)" action="" method="post">
+
+    <div><label for="username">Username</label>
+      <input type="text" name="username" id="username" ngModel></div>
+    <div><label for="password">Password</label>
+      <input type="password" name="password" id="password" ngModel></div>
+
+    <div class="actions">
+      <input type="submit" name="login" value="Login">
+      <input (click)="handleLogout()" type="button" name="logout" value="Logout">
+    </div>
+  </form>
+
+  <!--<div class="account">
+    <p>Create a new account <a href="">here</a>.</p>
+  </div>-->
+
+
+</div>
+<div *ngIf="(isAuthenticated$ | async)">
+
+  <app-players-list></app-players-list>
+
+</div>

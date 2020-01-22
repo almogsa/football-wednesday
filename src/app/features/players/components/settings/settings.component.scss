@@ -1,0 +1,117 @@
+
+
+h1,
+.login,
+.account,
+.contact{
+  width:80%;
+  margin: 0 auto;
+}
+.account {
+  align-self: end;
+}
+
+@supports (display: flex) {
+  .setting-container {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+  }
+
+  h1, .login, .account, .contact {
+    margin: 0;
+    width: 80%;
+  }
+}
+
+@supports (display: grid) {
+  .setting-container {
+    display: grid;
+    grid-template-columns: 80%;
+    align-content: center;
+    align-items: stretch;
+  }
+  @media (min-width: 650px) {
+    .setting-container {
+      grid-template-columns: repeat(2, minmax(150px, 30%));
+    }
+    h1,
+    .login {
+      grid-column-end: span 2;
+      width: auto;
+    }
+    .login > div {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      align-items: center;
+    }
+    .login > div.actions {
+      grid-template-columns: 1fr 1fr 1fr;
+      padding-top: 5px;
+    }
+    .account {
+      border-right: 1px dotted rgb(191, 216, 227);
+      padding: 0 10px 0 0;
+      align-self: end;
+      width: auto;
+    }
+    .contact {
+      padding: 0 0 0 10px;
+      width: auto;
+    }
+    input[type="submit"] {
+      grid-column: 2;
+    }
+    .actions a {
+      justify-self: end;
+    }
+  }
+}
+
+h1 {
+  background-color: rgba(191, 216, 227, 0.8);
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 10px;
+  font-size: 24px;
+  line-height: 1.4;
+}
+
+.login {
+  background-color: rgba(191, 216, 227, .4);
+  border: 1px solid rgba(191, 216, 227, .8);
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.login > div {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: center;
+}
+.login > div.actions {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+input[type="submit"] , input[type="button"] {
+  border: 1px solid rgba(191, 216, 227, .8);
+  border-radius: 5px;
+  color: #fff;
+  background-color: rgb(54, 134, 169);
+  font-size: 110%;
+}
+
+input[type="text"],
+input[type="password"] {
+  border: 1px solid rgba(191, 216, 227, .8);
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 110%;
+  width: 100%;
+}
+
+.actions a {
+  font-size: 80%;
+}

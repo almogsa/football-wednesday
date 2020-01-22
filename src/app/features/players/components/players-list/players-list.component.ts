@@ -88,7 +88,9 @@ export class PlayersListComponent implements OnInit {
     this.counter++;
     // https://cdn5.vectorstock.com/i/1000x1000/20/84/avatar-man-soccer-player-graphic-vector-9422084.jpg
     // https://www.w3schools.com/howto/img_avatar.png
-    this.playerDetails = {id: this.counter.toString(), arrive: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
+    this.playerDetails = {id: this.counter.toString(), arrive: false,
+      admin: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
+    this.counter++;
   }
 
   handleDeletePlayer(player: Player) {

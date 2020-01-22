@@ -24,9 +24,13 @@ export class FieldComponent implements OnInit {
   }
 
   handleUpdate(player: Player) {
+    console.log('field component handle update ', player);
     this.update.emit(player);
   }
 
+  handleArrivePlayer(player: Player)  {
+    this.update.emit({...player, arrive: true});
+  }
   handleDetails(player: Player) {
     this.playerDetails = player;
     // this.details.emit(player);

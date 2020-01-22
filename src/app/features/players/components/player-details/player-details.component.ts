@@ -58,8 +58,8 @@ export class PlayerDetailsComponent implements OnInit {
     this.delete.emit(player.id);
   }
 
-  handleClick(player: Player) {
-    console.log(' Footer click on player: ', player);
+  handleUpdate(player: Player) {
+    console.log(' Update Player: ', player);
     this.update.emit(player);
     this.handleBack();
   }

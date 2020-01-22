@@ -17,6 +17,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { PlayersContainerComponent } from './components/players-container/players-container.component';
 import { PlayerDetailsComponent } from './components/player-details/player-details.component';
 import {RouterModule, Routes} from '@angular/router';
+import { SettingsComponent } from './components/settings/settings.component';
 
 
 
@@ -27,7 +28,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent, PlayerDetailsComponent],
+  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent, PlayerDetailsComponent, SettingsComponent],
   exports: [
     PlayersListComponent,
     FieldComponent,

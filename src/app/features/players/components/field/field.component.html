@@ -12,8 +12,8 @@
     ></app-player>
   </div>
   <div class="footer bench-background">
-    <app-player (update)="handleUpdate($event)" *ngFor="let player of cader;let i = index;let first = first; let last = last" [player]="player"
+    <app-player (update)="handleArrivePlayer($event)" *ngFor="let player of cader;let i = index;let first = first; let last = last" [player]="player"
     ></app-player>
   </div>
 </div>
-<app-player-details  *ngIf="playerDetails" [player]="playerDetails" (back)="handleBack()"></app-player-details>
+<app-player-details  *ngIf="playerDetails" [player]="playerDetails" (update)="handleUpdate($event)" (back)="handleBack()"></app-player-details>

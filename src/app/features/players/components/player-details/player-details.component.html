@@ -51,26 +51,41 @@
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Strength </label>
 
-            <div class="col-sm-6">
-              <ux-slider class="form-control" [value]="_player.strength"  name="strength" (valueChange)="sliderChanged($event)" [options]="slider.options"></ux-slider>
-              <!--<input type="range" [value]="_player.strength" name="strength" [(ngModel)]="_player.strength" placeholder="Enter birth"
+            <div class="col-sm-4">
+              <!--<ux-slider class="form-control" [value]="_player.strength"  name="strength" (valueChange)="sliderChanged($event)" [options]="slider.options"></ux-slider>-->
+             <!-- <input class="col-sm-4" type="range" [value]="_player.strength" name="strength" [(ngModel)]="_player.strength" oninput="amountInput.value=strength.value"
+                     class="form-control">-->
+              <input class="col-sm-4" type="range" [value]="_player.strength" name="strength" [(ngModel)]="_player.strength" #ranger (input)="sliderChanged(ranger.value)"
                      class="form-control">
-              <output for="strength" onforminput="value = strength.valueAsNumber;"></output>-->
+<!--              <output class="col-sm-2" name="amountInput" value="strength.value" ></output>-->
+            </div>
+            <div class="col-sm-2">
+              <!--<ux-slider class="form-control" [value]="_player.strength"  name="strength" (valueChange)="sliderChanged($event)" [options]="slider.options"></ux-slider>-->
+
+              <output class="col-sm-2 form-control"  for="strength" name="amountInput" >{{_player.strength}}</output>
             </div>
 
-          </div>
+            </div>
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Admin</label>
             <div class="col-sm-6">
-              <input type="checkbox" [value]="_player.admin" name="admin" [(ngModel)]="_player.admin" placeholder="Enter birth"
-                     class="form-control">
+              <label class="switch">
+                <input class="form-control" type="checkbox" [value]="_player.admin" name="admin" [(ngModel)]="_player.admin">
+                <span class="slider round"></span>
+              </label>
+<!--              <input type="checkbox" [value]="_player.admin" name="admin" [(ngModel)]="_player.admin" placeholder="Enter birth"-->
+<!--                     class="form-control">-->
             </div>
           </div>
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Captain</label>
             <div class="col-sm-6">
-              <input type="text" [value]="_player.captain" name="captain" [(ngModel)]="_player.captain" placeholder="is captain"
-                     class="form-control">
+              <label class="switch">
+                <input class="form-control" type="checkbox" [value]="_player.captain" name="captain" [(ngModel)]="_player.captain">
+                <span class="slider round"></span>
+              </label>
+<!--              <input type="text" [value]="_player.captain" name="captain" [(ngModel)]="_player.captain" placeholder="is captain"-->
+<!--                     class="form-control">-->
             </div>
           </div>
           <div class="form-group">
@@ -83,14 +98,18 @@
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Arrive</label>
             <div class="col-sm-6">
-              <input type="text" [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive" placeholder="Enter birth"
-                     class="form-control">
+              <label class="switch">
+                <input class="form-control" type="checkbox" [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive">
+                <span class="slider round"></span>
+              </label>
+<!--              <input type="text" [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive" placeholder="Enter birth"
+                     class="form-control">-->
             </div>
           </div>
 
           <div class="form-group">
             <div class="col-sm-offset-2">
-              <button (click)="handleClick(_player)" class="btn button-primary" type="submit">Update
+              <button (click)="handleUpdate(_player)" class="btn button-primary" type="submit">Update
               </button>
             </div>
             <div class="col-sm-offset-1 col-sm-2">

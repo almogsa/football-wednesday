@@ -10,6 +10,7 @@
     <ux-tab heading="LINE" [active]="activeTab === 'LINE'">
     </ux-tab>
     <ux-tab heading="SETTINGS" [active]="activeTab === 'SETTINGS'">
+      <app-settings (login)="onSubmit($event)" (logout)="onLogout()"></app-settings>
     </ux-tab>
   </ux-tabset>
 

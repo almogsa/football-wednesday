@@ -6,6 +6,8 @@ import {ActiveTab, Player, TabsName} from '../../models';
 import {selectCaderPlayers, selectPlayersArrived} from '../../selectors';
 import {PlayersActions} from '../../actions';
 import {TabsetService} from '@ux-aspects/ux-aspects';
+import {AuthActions} from 'core/auth';
+
 
 @Component({
   selector: 'app-players-container',
@@ -47,8 +49,9 @@ export class PlayersContainerComponent implements OnInit {
     // this.player = {};
   }
 
-  handleUpdate(player: Player) {
-    this.store.dispatch(PlayersActions.updatePlayer({player: {id: player.id, changes: {arrive: true}}}));
+  handleUpdate($event: Player) {
+    this.store.dispatch(PlayersActions.upsertPlayer({player: $event}));
+    // this.store.dispatch(PlayersActions.updatePlayer({player: {id: player.id, changes: {arrive: true}}}));
   }
 
   handleDetails(player: Player) {
@@ -56,9 +59,9 @@ export class PlayersContainerComponent implements OnInit {
     this.player = player;
     this.tabs.forEach((tab: ActiveTab) => {
       if (tab.name === TabsName.DETAILS) {
-        tab.active =  true;
+        tab.active = true;
       } else {
-        tab.active =  false;
+        tab.active = false;
       }
     });
     this.tabs = [].concat(this.tabs);
@@ -72,16 +75,17 @@ export class PlayersContainerComponent implements OnInit {
     this.activeTab = TabsName[tabActive.name];
     console.log('active', this.activeTab);
   }
+
   handleBack() {
     this.tabs.forEach((tab: ActiveTab) => {
       if (tab.name === TabsName.FIELD) {
-        tab.active =  true;
+        tab.active = true;
       } else {
-        tab.active =  false;
+        tab.active = false;
       }
     });
-    this.getActiveTab()
-   // this.someElement._tabset.select(this.someElement._tabset.tabs[0])
+    this.getActiveTab();
+    // this.someElement._tabset.select(this.someElement._tabset.tabs[0])
     // trigger change detect of tabset component
     this.label = Math.random() + '';
   }
@@ -89,7 +93,18 @@ export class PlayersContainerComponent implements OnInit {
   handleUpdatePlayer($event: Player) {
     this.store.dispatch(PlayersActions.upsertPlayer({player: $event}));
   }
+
   handleDeletePlayer(playerId: string) {
     this.store.dispatch(PlayersActions.deletePlayer({id: playerId}));
+  }
+
+  onSubmit($event: any) {
+    if ($event.user === 'admin' && $event.password === 'admin') {
+      console.log('LOGGED IN ');
+      this.store.dispatch(AuthActions.authLogin());
+    }
+  }
+  onLogout() {
+    this.store.dispatch(AuthActions.authLogout());
   }
 }
