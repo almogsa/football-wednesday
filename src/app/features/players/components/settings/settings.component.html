@@ -1,22 +1,25 @@
+
+<!--https://www.uplabs.com/posts/login-logout-animation-concept-->
+
 <div class="cont" *ngIf="!(isAuthenticated$ | async) ">
   <div class="demo">
     <form class="login" #myform="ngForm" (ngSubmit)="handleSubmit(myform)" action="" method="post">
     <div class="login">
-      <div class="login__check"></div>
+      <div style="display: none" class="relative flex-container justify-content--center align-items--center"><div class="login__check"></div></div>
       <div class="login__form">
-        <div class="login__row">
+        <div class="login__row user">
           <svg class="login__icon name svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 a10,8 0 0,1 20,0z M10,0 a4,4 0 0,1 0,8 a4,4 0 0,1 0,-8"></path>
           </svg>
           <input type="text" class="login__input name" name="username" placeholder="Username" ngModel>
         </div>
-        <div class="login__row">
+        <div class="login__row password">
           <svg class="login__icon pass svg-icon" viewBox="0 0 20 20">
             <path d="M0,20 20,20 20,8 0,8z M10,13 10,16z M4,8 a6,8 0 0,1 12,0"></path>
           </svg>
           <input type="password" class="login__input pass" name="password" placeholder="Password" ngModel>
         </div>
-        <button type="submit" class="login__submit">Sign in</button>
+        <div class="sign"><button type="submit" [class.processing]="processing"  class="login__submit sign relative">Sign in</button></div>
     <!--    <p class="login__signup">Don't have an account? &nbsp;<a>Sign up</a></p>-->
       </div>
     </div>
@@ -51,7 +54,13 @@
 
 </div>-->
 <div *ngIf="(isAuthenticated$ | async)" class="height--100 width--100">
-
+<div class="app active">
+  <div class="app__logout" (click)="handleLogout()" [class.clicked]="processing">
+    <svg class="app__logout-icon svg-icon" viewBox="0 0 20 20">
+      <path d="M6,3 a8,8 0 1,0 8,0 M10,0 10,12"></path>
+    </svg>
+  </div>
   <app-players-list></app-players-list>
+</div>
 
 </div>

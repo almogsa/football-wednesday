@@ -15,6 +15,8 @@ export class SettingsComponent implements OnInit {
   @Output() login: EventEmitter<any> = new EventEmitter<any>();
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
   isAuthenticated$: Observable<boolean>;
+  public processing = false;
+  public success = false;
   constructor(private store: Store<State>) {
   }
 
@@ -23,10 +25,19 @@ export class SettingsComponent implements OnInit {
   }
 
   handleSubmit($event: any) {
-    this.login.emit({user: $event.form.controls.username.value, password: $event.form.controls.password.value});
+    this.processing = true;
+    setTimeout(() => {
+      this.processing = false;
+      this.success = true;
+      this.login.emit({user: $event.form.controls.username.value.toLowerCase(), password: $event.form.controls.password.value.toLowerCase()});
+    } , 1000);
   }
 
   handleLogout() {
-    this.logout.emit();
+    this.processing = true;
+    setTimeout(() => {
+      this.processing = false;
+      this.logout.emit();
+    }, 3000);
   }
 }
