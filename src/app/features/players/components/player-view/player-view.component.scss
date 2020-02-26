@@ -1,0 +1,43 @@
+
+
+:host {
+  display:grid;
+  grid-template:  "img header " auto
+  "img description " minmax(100px,1fr) / 100px minmax(0,1fr)
+
+;
+  //grid-template-columns: auto minmax(0,1fr);
+  //grid-template-rows:  100px minmax(100px,1fr);
+
+  grid-gap:20px;
+  background: white;
+  border-radius: 10px;
+  border:2px solid gray;
+  box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.3);
+  padding:20px;
+}
+img {
+  object-fit: cover;
+  grid-area: img;
+  height:150px;
+  width:100px;
+  border:2px solid lightgray;
+}
+header{
+  grid-area: header;
+  font-weight: bold;
+  font-size: 125%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.description{
+  grid-area: description;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 1;
+
+}
