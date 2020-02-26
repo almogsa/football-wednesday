@@ -1,7 +1,7 @@
 
 <!--https://www.uplabs.com/posts/login-logout-animation-concept-->
-
-<div class="cont" *ngIf="!(isAuthenticated$ | async) ">
+<div class="myapp-login">
+<div class="cont " *ngIf="!(isAuthenticated$ | async) ">
   <div class="demo">
     <form class="login" #myform="ngForm" (ngSubmit)="handleSubmit(myform)" action="" method="post">
     <div class="login">
@@ -60,7 +60,22 @@
       <path d="M6,3 a8,8 0 1,0 8,0 M10,0 10,12"></path>
     </svg>
   </div>
-  <app-players-list></app-players-list>
+
+
+  <!--<app-players-list></app-players-list>-->
+
 </div>
 
+</div>
+</div>
+<div class="settings-view">
+<div   *ngIf="(isAuthenticated$ | async)" class="action-button-group ">
+  <button class="btn btn-danger" (click)="resetPlayers()">Reset Players</button>
+  <button class="btn btn-primary"(click)="addPlayer()">Add Player</button>
+
+  <!--  <button class="btn btn-primary" (click)="updatePlayer()">Update Player</button>-->
+
+
+
+</div>
 </div>

@@ -1,5 +1,12 @@
 
-<button class="btn btn-back" (click)="handleBack()">BACK</button>
+<button  class="btn btn-back" (click)="handleBack()">BACK</button>
+
+  <div *ngFor="let player of players" >
+    <app-player-view (viewPlayer)="handleView($event)" [player]="player"></app-player-view>
+  </div>
+
+
+<div *ngIf="false">
 <table class="table table-hover">
   <thead>
   <tr class="table-header-dark">
@@ -58,7 +65,7 @@
   </tr>
   </tbody>
 </table>
-<div>
+
 <div class="action-button-group">
   <button class="btn btn-danger" (click)="resetPlayers()">Reset Players</button>
   <button class="btn btn-primary"(click)="addPlayer()">Add Player</button>
@@ -68,10 +75,11 @@
 
 
 </div>
-
-<div class="player-modal" *ngIf="playerDetails">
-  <!-- Modal -->
-  <app-player-details   [player]="playerDetails" (update)="handleUpdatePlayer($event)" (back)="handleBack()"></app-player-details>
 </div>
+<!--<div  *ngIf="playerDetails">
+  &lt;!&ndash; Modal &ndash;&gt;
+  <app-player-details   [player]="playerDetails" (update)="handleUpdatePlayer($event)" (back)="handleBack()"></app-player-details>
+</div>-->
+
 
 

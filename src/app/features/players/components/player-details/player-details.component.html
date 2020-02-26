@@ -48,7 +48,7 @@
             </div>
 
           </div>
-          <div class="form-group">
+          <div *ngIf="isAuthenticated" class="form-group">
             <label class="control-label form-label col-sm-2">Strength </label>
 
             <div class="col-sm-4">
@@ -68,22 +68,30 @@
             </div>
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Admin</label>
-            <div class="col-sm-6">
-              <label class="switch">
-                <input class="form-control" type="checkbox" [value]="_player.admin" name="admin" [(ngModel)]="_player.admin">
-                <span class="slider round"></span>
+            <div class="col-sm-6 padding-t--4px">
+
+              <label class="switch switch-green">
+                <input type="checkbox" class="switch-input" checked  [value]="_player.admin" name="admin" [(ngModel)]="_player.admin">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
               </label>
+
+
+
 <!--              <input type="checkbox" [value]="_player.admin" name="admin" [(ngModel)]="_player.admin" placeholder="Enter birth"-->
 <!--                     class="form-control">-->
             </div>
           </div>
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Captain</label>
-            <div class="col-sm-6">
-              <label class="switch">
-                <input class="form-control" type="checkbox" [value]="_player.captain" name="captain" [(ngModel)]="_player.captain">
-                <span class="slider round"></span>
+            <div class="col-sm-6 padding-t--4px">
+
+              <label class="switch switch-green">
+                <input type="checkbox" class="switch-input" checked   [value]="_player.captain" name="captain" [(ngModel)]="_player.captain">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
               </label>
+
 <!--              <input type="text" [value]="_player.captain" name="captain" [(ngModel)]="_player.captain" placeholder="is captain"-->
 <!--                     class="form-control">-->
             </div>
@@ -97,11 +105,15 @@
           </div>
           <div class="form-group">
             <label class="control-label form-label col-sm-2">Arrive</label>
-            <div class="col-sm-6">
-              <label class="switch">
-                <input class="form-control" type="checkbox" [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive">
-                <span class="slider round"></span>
+            <div class="col-sm-6 padding-t--4px">
+
+              <label class="switch switch-green">
+                <input type="checkbox" class="switch-input" checked  [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive">
+                <span class="switch-label" data-on="On" data-off="Off"></span>
+                <span class="switch-handle"></span>
               </label>
+
+
 <!--              <input type="text" [value]="_player.arrive" name="arrive" [(ngModel)]="_player.arrive" placeholder="Enter birth"
                      class="form-control">-->
             </div>

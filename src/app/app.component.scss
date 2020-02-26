@@ -1,0 +1,37 @@
+.cover {
+  //background-image: url("../assets/cover.jpg") no-repeat;
+  background: url('../assets/cover.jpg') 0% 0% / 100% 100% no-repeat;
+  width: 100%;
+  height: 100%;
+//  background-size: cover;
+  height: 100vh;
+  position: relative;
+  opacity: 0.9;
+  .spinner {
+    position: absolute;
+    font-size: 24px;
+    color: red;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+  }
+  img {
+    display: block;
+    animation: rotate 3s linear infinite;
+    transform: translate(-50%,-50%);
+  }
+}
+@keyframes rotate {
+  from{
+    -webkit-transform: rotate(0deg);
+  }
+  to{
+    -webkit-transform: rotate(360deg);
+  }
+
+}
+

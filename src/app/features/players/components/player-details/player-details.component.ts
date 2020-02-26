@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Player} from '../../models';
 import {SliderCalloutTrigger, SliderSize, SliderStyle} from '@ux-aspects/ux-aspects';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-player-details',
@@ -11,6 +12,7 @@ import {SliderCalloutTrigger, SliderSize, SliderStyle} from '@ux-aspects/ux-aspe
 export class PlayerDetailsComponent implements OnInit {
 
   @Input() player: Player;
+  @Input() isAuthenticated: boolean;
   @Output() delete: EventEmitter<string> = new EventEmitter<string>();
   @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
   @Output() back: EventEmitter<void> = new EventEmitter<void>();

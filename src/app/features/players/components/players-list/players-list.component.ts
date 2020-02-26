@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Player} from 'features/players/models';
 import {select, Store} from '@ngrx/store';
@@ -21,10 +21,11 @@ export class PlayersListComponent implements OnInit {
   @Output() back: EventEmitter<void> = new EventEmitter<void>();
   @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
   @Output() delete: EventEmitter<string> = new EventEmitter<string>();
+  @Output() showDetails: EventEmitter<Player> = new EventEmitter<Player>();
+  @Input() players: Player[];
   counter = 1;
   slider: any;
   showModal = false;
-  playerDetails: Partial<Player>;
   constructor(  public store: Store<State>) {
 
   }
@@ -88,8 +89,8 @@ export class PlayersListComponent implements OnInit {
     this.counter++;
     // https://cdn5.vectorstock.com/i/1000x1000/20/84/avatar-man-soccer-player-graphic-vector-9422084.jpg
     // https://www.w3schools.com/howto/img_avatar.png
-    this.playerDetails = {id: this.counter.toString(), arrive: false,
-      admin: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
+    // this.playerDetails = {id: this.counter.toString(), arrive: false,
+    //   admin: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
     this.counter++;
   }
 
@@ -101,13 +102,14 @@ export class PlayersListComponent implements OnInit {
   }
   handleBack() {
     console.log('handle back');
-    this.playerDetails = null;
+    // this.playerDetails = null;
     this.back.emit();
   }
   handleView(player: Player) {
     console.log('handle view' , player);
-    this.showModal = true;
-    this.playerDetails = player;
+    this.showDetails.emit(player);
+    // this.showModal = true;
+    // this.playerDetails = player;
   }
   handleUpdatePlayer(player: Player) {
     this.update.emit(player);

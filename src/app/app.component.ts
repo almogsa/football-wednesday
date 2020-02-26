@@ -14,12 +14,15 @@ import {PlayersActions} from './features/players/actions';
 
 
 export class AppComponent implements OnInit {
-
+  loading = true;
   constructor() {
 
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.loading = false;
+    }, 4000);
   }
 
 }

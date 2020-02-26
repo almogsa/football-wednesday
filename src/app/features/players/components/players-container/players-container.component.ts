@@ -3,10 +3,10 @@ import {select, Store} from '@ngrx/store';
 import {State} from '../../../features.state';
 import {Observable} from 'rxjs';
 import {ActiveTab, Player, TabsName} from '../../models';
-import {selectCaderPlayers, selectPlayersArrived} from '../../selectors';
+import {selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from '../../selectors';
 import {PlayersActions} from '../../actions';
 import {TabsetService} from '@ux-aspects/ux-aspects';
-import {AuthActions} from 'core/auth';
+import {AuthActions, AuthSelectors} from 'core/auth';
 
 
 @Component({
@@ -19,10 +19,13 @@ export class PlayersContainerComponent implements OnInit {
   players$: Observable<Player[]>;
   title = 'football-wednesday';
   players: Player[];
+  allPlayers: Player[];
   player: Player;
   benchPlayers: Player[];
   caderPlayers: Player[];
   label = 'xx';
+  playerDetails: Player;
+  isAuthenticated$: Observable<boolean>;
   @ViewChild('tabsetComponent', {static: true}) someElement;
   activeTab: string;
   tabs: ActiveTab[] = [{name: TabsName.FIELD, active: true}, {name: TabsName.PLAYERS, active: false}, {
@@ -46,7 +49,10 @@ export class PlayersContainerComponent implements OnInit {
     this.store.pipe(select(selectCaderPlayers)).subscribe(players => {
       this.caderPlayers = players;
     });
-    // this.player = {};
+    this.store.pipe(select(selectAllPlayers)).subscribe(players => {
+      this.allPlayers = players;
+    });
+    this.isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
   }
 
   handleUpdate($event: Player) {
@@ -85,7 +91,6 @@ export class PlayersContainerComponent implements OnInit {
       }
     });
     this.getActiveTab();
-    // this.someElement._tabset.select(this.someElement._tabset.tabs[0])
     // trigger change detect of tabset component
     this.label = Math.random() + '';
   }
@@ -106,5 +111,9 @@ export class PlayersContainerComponent implements OnInit {
   }
   onLogout() {
     this.store.dispatch(AuthActions.authLogout());
+  }
+
+  handleShowDetails($event: Player) {
+    this.playerDetails = $event;
   }
 }
