@@ -1,10 +1,9 @@
 
-<button  class="btn btn-back" (click)="handleBack()">BACK</button>
 
   <div *ngFor="let player of players" >
     <app-player-view (viewPlayer)="handleView($event)" [player]="player"></app-player-view>
   </div>
-
+<div class="add-player" (click)="addPlayer()"> <ux-icon name="user-add" ></ux-icon></div>
 
 <div *ngIf="false">
 <table class="table table-hover">
