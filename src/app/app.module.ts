@@ -5,6 +5,9 @@ import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {FeaturesModule} from './features/features.module';
 import {PlayersModule} from './features/players';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,9 @@ import {PlayersModule} from './features/players';
     CoreModule,
     SharedModule,
     FeaturesModule,
-    PlayersModule
+    PlayersModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
 
   ],
   providers: [],
