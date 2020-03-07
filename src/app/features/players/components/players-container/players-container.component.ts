@@ -7,6 +7,7 @@ import {selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from '../../
 import {PlayersActions} from '../../actions';
 import {TabsetService} from '@ux-aspects/ux-aspects';
 import {AuthActions, AuthSelectors} from 'core/auth';
+import { PlayersService } from './../../services/players.service';
 
 
 @Component({
@@ -33,11 +34,23 @@ export class PlayersContainerComponent implements OnInit {
     active: false
   }, {name: TabsName.SETTINGS, active: false}];
 
-  constructor(public store: Store<State>, private tabsetService: TabsetService) {
+  constructor(public store: Store<State>, private tabsetService: TabsetService,private playersService: PlayersService) {
     this.tabs.forEach((tab: ActiveTab) => {
       console.log(tab);
 
     });
+    this.playersService.getPlayers().subscribe(r => console.log('Players Firebase : ', r));
+    this.playersService.getPlayers().subscribe(data => {
+      this.players = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data()
+        } as Player;
+      })
+      console.log('Players: ',this.players);
+    });
+    
+    
   }
 
 
