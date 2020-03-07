@@ -18,7 +18,7 @@ import { PlayersContainerComponent } from './components/players-container/player
 import { PlayerDetailsComponent } from './components/player-details/player-details.component';
 import {RouterModule, Routes} from '@angular/router';
 import { SettingsComponent } from './components/settings/settings.component';
-import { PlayerViewComponent } from './components/player-view/player-view.component';
+//import { PlayerViewComponent } from './components/player-view/player-view.component';
 
 
 
@@ -29,7 +29,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent, PlayerDetailsComponent, SettingsComponent, PlayerViewComponent],
+  declarations: [PlayerComponent, PlayersListComponent, FieldComponent, PlayersContainerComponent, PlayerDetailsComponent, SettingsComponent],
   exports: [
     PlayersListComponent,
     FieldComponent,

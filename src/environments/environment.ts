@@ -4,6 +4,15 @@
 
 export const environment = {
   production: false,
+  firebaseConfig: {
+    apiKey: "AIzaSyANNoCi23YNLY5P3DbWKN2xrotTbzor8Xk",
+    authDomain: "football-ngrx.firebaseapp.com",
+    databaseURL: "https://football-ngrx.firebaseio.com",
+    projectId: "football-ngrx",
+    storageBucket: "football-ngrx.appspot.com",
+    messagingSenderId: "329911594370",
+    appId: "1:329911594370:web:62b2d3e464ca0531e7b39b"
+  },
   test: true
 };
 
