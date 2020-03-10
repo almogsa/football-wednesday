@@ -34,12 +34,13 @@ export class PlayersContainerComponent implements OnInit {
     active: false
   }, {name: TabsName.SETTINGS, active: false}];
 
-  constructor(public store: Store<State>, private tabsetService: TabsetService,private playersService: PlayersService) {
+  constructor(public store: Store<State>, private tabsetService: TabsetService, private playersService: PlayersService) {
     this.tabs.forEach((tab: ActiveTab) => {
       console.log(tab);
 
     });
-    this.playersService.getPlayers().subscribe(r => console.log('Players Firebase : ', r));
+    this.store.dispatch(PlayersActions.load());
+   /* this.playersService.getPlayers().subscribe(r => console.log('Players Firebase : ', r));
     this.playersService.getPlayers().subscribe(data => {
       this.players = data.map(e => {
         return {
@@ -47,10 +48,8 @@ export class PlayersContainerComponent implements OnInit {
           ...e.payload.doc.data()
         } as Player;
       })
-      console.log('Players: ',this.players);
-    });
-    
-    
+      console.log('Players: ', this.players);
+    });*/
   }
 
 

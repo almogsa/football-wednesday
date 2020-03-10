@@ -13,93 +13,7 @@ export const playersAdapter: EntityAdapter<Player> = createEntityAdapter<Player>
 });
 
 export const initialState: PlayersState = playersAdapter.getInitialState({
-  ids: ['101', '102', '103', '104', '105', '106'],
-  entities: {
-    ['101']: {
-      id: '101',
-      name: 'Dubi Koren',
-      s_name: 'Zizo',
-      arrive: false,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 60,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png',
-      captain: true
-    },
-    ['102']: {
-      id: '102',
-      name: 'Beni Abargil',
-      s_name: 'Zizo',
-      arrive: false,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 40,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../../assets/firmino.png',
-      captain: true
-    },
-    ['103']: {
-      id: '103',
-      name: 'Oren Farhi',
-      s_name: 'Zizo',
-      arrive: true,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 50,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../../assets/chris.png',
-      captain: true
-    },
-    ['104']: {
-      id: '104',
-      name: 'Alon Cohen',
-      s_name: 'Zizo',
-      arrive: true,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 70,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png',
-      captain: false
-    },
-    ['105']: {
-      id: '105',
-      name: 'ZiZI fdf Farhi',
-      s_name: 'Zizo',
-      arrive: true,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 80,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../../assets/almog.png',
-      captain: false
-    },
-    ['106']: {
-      id: '106',
-      name: 'Almog Sade',
-      s_name: 'Zizo',
-      arrive: true,
-      image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 90,
-      admin: true,
-      birth: '3/4/1976',
-      avatar: '../../../../assets/empty_profile.png',
-      captain: false
-    }
-  }
+  loading: false
 });
 
 const reducer = createReducer(
@@ -136,6 +50,14 @@ const reducer = createReducer(
   }),
   on(PlayersActions.loadPlayers, (state, { players }) => {
     return playersAdapter.addAll(players, state);
+  }),
+  on(PlayersActions.loadPlayersSuccess, (state, { players }) => {
+    return playersAdapter.addAll(players, state);
+  }),
+  on(PlayersActions.loadPlayersFailed, (state, { error }) => {
+    console.log('Error :' ,  error);
+    return state;
+      // return playersAdapter.addAll(players, state);
   }),
   on(PlayersActions.clearPlayers, state => {
     return playersAdapter.removeAll({ ...state, selectedplayerId: null });

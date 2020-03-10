@@ -33,4 +33,6 @@ export type PlayersFilter = 'ALL' | 'DONE' | 'ACTIVE';
 //   items: Player[];
 //   filter: PlayersFilter;
 // }
-export interface PlayersState extends EntityState<Player> {}
+export interface PlayersState extends EntityState<Player> {
+  loading: boolean;
+}

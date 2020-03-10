@@ -12,6 +12,9 @@ export const actionPlayersFilter = createAction(
  );
 
 export const loadPlayers = createAction('[Players/API] Load Players', props<{ players: Player[] }>());
+export const load = createAction('[Players/API] Load');
+export const loadPlayersSuccess = createAction('[Players/API] Load Players Success', props<{ players: Player[] }>());
+export const loadPlayersFailed = createAction('[Players/API] Load Players Failed', props<{ error: string }>());
 export const addPlayer = createAction('[Players/API] Add Player', props<{ player: Player }>());
 export const upsertPlayer = createAction('[Players/API] Upsert Player', props<{ player: Player }>());
 export const addPlayers = createAction('[Players/API] Add Players', props<{ players: Player[] }>());

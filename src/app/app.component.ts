@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Player} from 'features/players/models';
+import * as fromRoot from 'features/players/models';
+import {Player, PlayersState} from 'features/players/models';
 import {select, Store} from '@ngrx/store';
-import {selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from 'features/players/selectors';
-import {State} from 'features';
+import {isLoading, selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from 'features/players/selectors';
+import {FeaturesState, State} from 'features';
 import {PlayersActions} from './features/players/actions';
 
 @Component({
@@ -15,13 +16,18 @@ import {PlayersActions} from './features/players/actions';
 
 export class AppComponent implements OnInit {
   loading = true;
-  constructor() {
+  constructor(public store: Store<State>) {
 
   }
 
   ngOnInit() {
+
+    this.store.pipe(select(isLoading)).subscribe(result => {
+      this.loading = result;
+      console.log('loading', result);
+    });
     setTimeout(() => {
-      this.loading = false;
+      // this.loading = false;
     }, 4000);
   }
 

@@ -6,6 +6,7 @@ import {DevToolsService} from './services/dev-tools.service';
 import {FeaturesModule} from '../features/features.module';
 import {environment} from '../../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {EffectsModule} from '@ngrx/effects';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     FeaturesModule,
     // ngrx
     StoreModule.forRoot(reducers, {metaReducers}), !environment.production ? StoreDevtoolsModule.instrument() : [],
+    EffectsModule.forRoot([]),
   ],
   providers: [
     DevToolsService,
