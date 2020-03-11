@@ -3,7 +3,7 @@ import {createSelector, State} from '@ngrx/store';
 // import { selectRouterState } from '../../../core/core.module';
 
 
-import { playersAdapter } from '../reducers/players.reducer';
+import {playersAdapter} from '../reducers/players.reducer';
 import {FeaturesState, selectFeatures} from '../../features.state';
 import {PlayersState} from '../models';
 import {AppState} from '../../../core/core.state';
@@ -15,7 +15,6 @@ export const {
   selectTotal,
 } = playersAdapter.getSelectors();
 
-export const isLoading = (state: State) => state.features.players.loading;
 
 export const selectPlayersState = createSelector(
   selectFeatures,
@@ -43,6 +42,12 @@ export const selectCaderPlayers = createSelector(
   selectAllPlayers,
   (entities) => entities.filter(player => player.arrive === false)
 );
+
+export const isLoading = createSelector(
+  selectPlayersState,
+  (state) => state.loading)
+
+
 
 // export const selectSelectedPlayer = createSelector(
 //   selectPlayersEntities,

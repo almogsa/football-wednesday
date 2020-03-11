@@ -36,7 +36,7 @@ export class PlayersService {
     this.firestore.doc(FIREBASE_DB + '/' + playerId).delete();
   }
   queryPlayers() {
-    this.firestore.collection(FIREBASE_DB, ref => ref.where('arrive', '==', true))
+    return this.firestore.collection(FIREBASE_DB, ref => ref.where('arrive', '==', true))
       .valueChanges();
   }
   resetPlayers() {
