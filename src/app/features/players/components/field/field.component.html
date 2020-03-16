@@ -16,4 +16,4 @@
     ></app-player>
   </div>
 </div>
-<app-player-details  *ngIf="playerDetails" [player]="playerDetails" (update)="handleUpdate($event)" (back)="handleBack()"></app-player-details>
+<app-player-details  *ngIf="playerDetails" [player]="playerDetails" [isAuthenticated]="isAuthenticated" (update)="handleUpdate($event)" (back)="handleBack()"></app-player-details>

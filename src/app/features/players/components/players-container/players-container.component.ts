@@ -7,7 +7,7 @@ import {selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from '../../
 import {PlayersActions} from '../../actions';
 import {TabsetService} from '@ux-aspects/ux-aspects';
 import {AuthActions, AuthSelectors} from 'core/auth';
-import { PlayersService } from './../../services/players.service';
+import {PlayersService} from './../../services/players.service';
 
 
 @Component({
@@ -27,6 +27,7 @@ export class PlayersContainerComponent implements OnInit {
   label = 'xx';
   playerDetails: Player;
   isAuthenticated$: Observable<boolean>;
+  isAuthenticated: boolean;
   @ViewChild('tabsetComponent', {static: true}) someElement;
   activeTab: string;
   tabs: ActiveTab[] = [{name: TabsName.FIELD, active: true}, {name: TabsName.PLAYERS, active: false}, {
@@ -40,16 +41,16 @@ export class PlayersContainerComponent implements OnInit {
 
     });
     this.store.dispatch(PlayersActions.load());
-   /* this.playersService.getPlayers().subscribe(r => console.log('Players Firebase : ', r));
-    this.playersService.getPlayers().subscribe(data => {
-      this.players = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          ...e.payload.doc.data()
-        } as Player;
-      })
-      console.log('Players: ', this.players);
-    });*/
+    /* this.playersService.getPlayers().subscribe(r => console.log('Players Firebase : ', r));
+     this.playersService.getPlayers().subscribe(data => {
+       this.players = data.map(e => {
+         return {
+           id: e.payload.doc.id,
+           ...e.payload.doc.data()
+         } as Player;
+       })
+       console.log('Players: ', this.players);
+     });*/
   }
 
 
@@ -64,7 +65,10 @@ export class PlayersContainerComponent implements OnInit {
     this.store.pipe(select(selectAllPlayers)).subscribe(players => {
       this.allPlayers = players;
     });
-    this.isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
+    this.store.pipe(select(AuthSelectors.selectIsAuthenticated)).subscribe(auth => {
+      console.log('players container store selector selectIsAuthenticated ' , auth);
+      this.isAuthenticated = auth;
+    });
   }
 
   handleUpdate($event: Player) {
@@ -75,6 +79,12 @@ export class PlayersContainerComponent implements OnInit {
   handleDetails(player: Player) {
     console.log('player details: ', player);
     this.player = player;
+    this.setActiveTab(TabsName.DETAILS);
+    this.getActiveTab();
+
+  }
+
+  setActiveTab(tabName: TabsName) {
     this.tabs.forEach((tab: ActiveTab) => {
       if (tab.name === TabsName.DETAILS) {
         tab.active = true;
@@ -84,8 +94,6 @@ export class PlayersContainerComponent implements OnInit {
     });
     this.tabs = [].concat(this.tabs);
     console.log('TABS :', this.tabs);
-    this.getActiveTab();
-
   }
 
   getActiveTab() {
@@ -121,6 +129,7 @@ export class PlayersContainerComponent implements OnInit {
       this.store.dispatch(AuthActions.authLogin());
     }
   }
+
   onLogout() {
     this.store.dispatch(AuthActions.authLogout());
   }

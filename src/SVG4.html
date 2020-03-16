@@ -436,12 +436,14 @@
   var score = 0;
 
 
-  var audioGood = ['Totah.m4a', 'kolHakavod.m4a', 'Melech.m4a', 'yafe.m4a',
+ /* var audioGood = ['Totah.m4a', 'kolHakavod.m4a', 'Melech.m4a', 'yafe.m4a',
     'Katan.m4a', 'alon-excelent.mp3', 'alon-kli.mp3', 'alon-pizuz.mp3', 'alon-yesh.mp3', 'or-totach.mp3',
-    'keren-ko-hakavod.mp3', 'keren-excelent.mp3'];
-  var audioBad = ['GoToSleep.m4a', 'Hafsaka.m4a', 'luzer.m4a', 'Tinok.m4a', 'TryAgain.m4a',
-    'alon-ai.mp3', 'alon-luzer.mp3', 'alon-mistake.mp3', 'alon-no.mp3', 'keren-maze.mp3', 'keren-ops.mp3'];
-  var audioLevel = ['alon-level.mp3', 'or-level-up.mp3', 'amit-level.mp3', 'keren-level.mp3'];
+    'keren-ko-hakavod.mp3', 'keren-excelent.mp3'];*/
+  /*var audioBad = ['GoToSleep.m4a', 'Hafsaka.m4a', 'luzer.m4a', 'Tinok.m4a', 'TryAgain.m4a',
+    'alon-ai.mp3', 'alon-luzer.mp3', 'alon-mistake.mp3', 'alon-no.mp3', 'keren-maze.mp3', 'keren-ops.mp3'];*/
+  var audioLevel = ['continue.mp3'];
+  var audioBad = ['error.mp3'];
+  var audioGood = ['hit.mp3'];
   var newGame= document.getElementById('new-game');
   newGame.addEventListener('click',function () {
     console.log('new game');
@@ -511,7 +513,8 @@
       if (level === 4 || level === 12) {
         duration = 10000;
       }
-      playAudio(audioLevel[getRandomInt(0, audioLevel.length - 1)]);
+      //playAudio(audioLevel[getRandomInt(0, audioLevel.length - 1)]);
+      playAudio(audioLevel[0]);
 
     }
     document.getElementById('total').innerText = 'סה"כ : ' + total;
@@ -573,6 +576,8 @@
 
     //Create the SVG Viewport
     console.log('width2', width);
+    var range = 0;
+    var range1 = 50;
     svgContainer.selectAll("g").remove();
     var num1 = getRandomInt(0, 5);
 
@@ -580,10 +585,14 @@
     if (level > 3) {
       num1 = getRandomInt(5, 10);
       num2 = getRandomInt(5, 10);
+      range = 50;
+      range1 = 100;
     }
     if (level > 12) {
-      num1 = getRandomInt(8, 20);
-      num2 = getRandomInt(8, 20);
+      num1 = getRandomInt(10, 20);
+      num2 = getRandomInt(10, 20);
+      range = 100;
+      range1 = 400;
     }
     document.getElementById('num1').innerText = num1;
     document.getElementById('num2').innerText = num2;
@@ -591,7 +600,7 @@
     random = getRandomInt(0, data.length - 1);
     circleData = data.map(function (x, index) {
       console.log('CX: ', x.cx);
-      return {...x, label: getRandomInt(0, 100), cx: x.cx * (width / 100), cy: x.cy}
+      return {...x, label: getRandomInt(range, range1), cx: x.cx * (width / 100), cy: x.cy}
     });
     circleData[random].label = num1 * num2;
     /*Create and place the "blocks" containing the circle and the text */
@@ -668,8 +677,9 @@
 
     if (num1 * num2 === Number(elem.label)) {
       console.log('good');
-      playAudio(audioGood[getRandomInt(0, audioGood.length - 1)]);
-      //document.getElementById('playme' + getRandomInt(1, 7)).play();
+      //playAudio(audioGood[getRandomInt(0, audioGood.length - 1)]);
+      playAudio(audioGood[0]);
+
       score++;
       d3.select(this)
         .transition()
@@ -692,7 +702,8 @@
        // alert(' GAME OVER');
       }
 
-      playAudio(audioBad[getRandomInt(0, audioBad.length - 1)]);
+      //playAudio(audioBad[getRandomInt(0, audioBad.length - 1)]);
+      playAudio(audioBad[0]);
       //document.getElementById('playme' + getRandomInt(8, 17)).play();
 
       let elementById = document.getElementById('fail');

@@ -24,6 +24,7 @@ export class PlayerDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('is Aut', this.isAuthenticated)
     this._player = {...this.player};
     this.slider = {
       value: 60,

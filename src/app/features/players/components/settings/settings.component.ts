@@ -60,28 +60,23 @@ export class SettingsComponent implements OnInit {
     const player: Player = {
       id: this.counter.toString(),
       name: 'Player_' + this.counter,
-      description: 'description',
-      s_name: 'Zizo',
+      description: '',
+      s_name: '',
       arrive: false,
       image: '',
-      number: 8,
-      phone: '0525597072',
-      strength: 60,
-      admin: true,
+      number: 0,
+      phone: '',
+      strength: 50,
+      admin: false,
       injured: false,
       position: 'LR',
-      birth: '3/4/1976',
+      birth: '1/1/1974',
       goals: 0,
       manOfTheWeek: false,
       avatar: '../../../../../assets/empty_profile.png',
       captain: false
     };
     this.store.dispatch(PlayersActions.addPlayer({player}));
-    this.counter++;
-    // https://cdn5.vectorstock.com/i/1000x1000/20/84/avatar-man-soccer-player-graphic-vector-9422084.jpg
-    // https://www.w3schools.com/howto/img_avatar.png
-    // this.playerDetails = {id: this.counter.toString(), arrive: false,
-    //   admin: false, captain: false, avatar: '../../../../../assets/empty_profile.png'};
     this.counter++;
   }
 }

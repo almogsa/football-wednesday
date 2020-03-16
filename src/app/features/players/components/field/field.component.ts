@@ -10,6 +10,7 @@ import {event} from 'd3-selection';
 export class FieldComponent implements OnInit {
 
   @Input() arrive: Player[];
+  @Input() isAuthenticated: boolean;
   @Input() bench: Player[];
   @Input() cader: Player[];
   @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
