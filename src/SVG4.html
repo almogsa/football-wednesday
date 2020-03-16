@@ -444,6 +444,9 @@
   var audioLevel = ['continue.mp3'];
   var audioBad = ['error.mp3'];
   var audioGood = ['hit.mp3'];
+  var audioGoodObject = getAudio(audioGood[0]);
+  var audioBadObject = getAudio(audioBad[0]);
+  var audioLevelObject = getAudio(audioLevel[0]);
   var newGame= document.getElementById('new-game');
   newGame.addEventListener('click',function () {
     console.log('new game');
@@ -514,7 +517,7 @@
         duration = 10000;
       }
       //playAudio(audioLevel[getRandomInt(0, audioLevel.length - 1)]);
-      playAudio(audioLevel[0]);
+      playAudio(audioLevelObject);
 
     }
     document.getElementById('total').innerText = 'סה"כ : ' + total;
@@ -564,9 +567,13 @@
     svgContainer.selectAll("g").remove();
   }
 
-  function playAudio(name) {
+  function getAudio(name) {
     let audio = new Audio(`./assets/audio/${name}`);
     audio.load();
+    return audio;
+  }
+  function playAudio(audio) {
+
     return audio.play();
   }
 
@@ -678,7 +685,7 @@
     if (num1 * num2 === Number(elem.label)) {
       console.log('good');
       //playAudio(audioGood[getRandomInt(0, audioGood.length - 1)]);
-      playAudio(audioGood[0]);
+      playAudio(audioGoodObject);
 
       score++;
       d3.select(this)
@@ -703,7 +710,7 @@
       }
 
       //playAudio(audioBad[getRandomInt(0, audioBad.length - 1)]);
-      playAudio(audioBad[0]);
+      playAudio(audioBadObject);
       //document.getElementById('playme' + getRandomInt(8, 17)).play();
 
       let elementById = document.getElementById('fail');

@@ -14,6 +14,7 @@ export class FieldComponent implements OnInit {
   @Input() bench: Player[];
   @Input() cader: Player[];
   @Output() update: EventEmitter<Player> = new EventEmitter<Player>();
+  @Output() delete: EventEmitter<string> = new EventEmitter<string>();
   @Output() details: EventEmitter<Player> = new EventEmitter<Player>();
   avatar = '../../../../../assets/empty_profile.png';
   playerDetails: Player;
@@ -38,5 +39,8 @@ export class FieldComponent implements OnInit {
   }
   handleBack() {
     this.playerDetails = null;
+  }
+  handleDelete($event) {
+    this.delete.emit($event);
   }
 }

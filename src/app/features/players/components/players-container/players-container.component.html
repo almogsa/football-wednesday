@@ -6,7 +6,7 @@
     </ux-tab>
     <ux-tab heading="PLAYERS" [active]="activeTab === 'PLAYERS'">
       <app-players-list  (showDetails)="handleShowDetails($event)" *ngIf="!playerDetails"(update)="handleUpdatePlayer($event)" [players]="allPlayers" (delete)="handleDeletePlayer($event)" (back)="handleBack() "></app-players-list>
-      <app-player-details [isAuthenticated]="isAuthenticated" (back)="playerDetails = null" (update)="handleUpdatePlayer($event)" [player]="playerDetails" *ngIf="playerDetails"></app-player-details>
+      <app-player-details [isAuthenticated]="isAuthenticated" (back)="playerDetails = null" (delete)="handleDeletePlayer($event)" (update)="handleUpdatePlayer($event)" [player]="playerDetails" *ngIf="playerDetails"></app-player-details>
     </ux-tab>
     <ux-tab heading="LINE" [active]="activeTab === 'LINE'">
     </ux-tab>
