@@ -1,0 +1,161 @@
+<html>
+<!--<script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>-->
+<!--<script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>-->
+<!--<script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>-->
+<!--<script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>-->
+<!--<script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>-->
+<!--<script  src="http://localhost:4500/memory.js"></script>-->
+
+
+<!--<script  type="text/javascript" src="memory.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/typescript/3.8.3/typescript.min.js.map"></script>-->
+
+<head>
+  <!--  <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>-->
+
+  <!--  <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.1.0/rxjs.umd.js"></script>
+</head>
+<body>
+
+<script type="text/javascript" >
+  // RxJS v6+
+  document.addEventListener('DOMContentLoaded', function() {
+    // your code here
+    console.log('start script');
+
+    const {EMPTY, from, fromEvent, generate, interval, merge, noop} = rxjs;
+    const {
+      map,
+      pluck,
+      scan,
+      sequenceEqual,
+      switchMap,
+      take,
+      tap
+    } = rxjs.operators;
+
+
+
+    const random = () => Math.floor(Math.random() * Math.floor(8));
+    const setInfo = (text) => {
+      (document.getElementById('info').innerHTML = text);
+      if (text === 'GAME OVER!'){
+        button.style.display='block';
+        playSound('over');
+      }
+    }
+    const button = window.document.getElementById("new");
+    button.addEventListener('click',start);
+    button.style.display='none';
+    function start(){
+      button.style.display='none';
+      game$.subscribe();
+    }
+
+      const sounds = {
+        0: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
+        1: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
+        2: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
+        3: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"),
+        4: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
+        5: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
+        6: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound3.mp3"),
+        7: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound4.mp3"),
+        8: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3"),
+        9: new Audio("https://s3.amazonaws.com/freecodecamp/simonSound2.mp3"),
+        'over': new Audio("./assets/audio/game_over.mp3"),
+
+      };
+
+      function playSound(sound) {
+        console.log('play sound', sound)
+        var thisSound = sound;
+        sounds[thisSound].currentTime = 0;
+        sounds[thisSound].play();
+      }
+      const displayLevelChange = () => document
+        .querySelectorAll('.child')
+        .forEach((c) => (c.style.background = 'gray'));
+      const checkIfGameOver$ = (randomSequence) => (userSequence) => from(userSequence).pipe(sequenceEqual(from(randomSequence)), tap(match => !match && userSequence.length === randomSequence.length
+        ? setInfo('GAME OVER!')
+        : noop));
+      const takePlayerInput$ = (randomSequence) => _ => fromEvent(document, 'click').pipe(take(randomSequence.length), scan((acc, curr) => [
+        ...acc,
+        parseInt(curr.target['id'])
+      ], []), switchMap(checkIfGameOver$(randomSequence)), switchMap(result => result
+        ? (displayLevelChange(), memoryGame$(randomSequence.length + 1))
+        : EMPTY));
+      const showSequenceToMemorize$ = (memorySize) => (randomSequence) => interval(1000).pipe(tap(i => setInfo(i === memorySize - 1 ? `YOUR TURN` : `${memorySize - i} elements`)), take(randomSequence.length), map(index => randomSequence[index]), tap(value => document.getElementById(`${value}`).click()), switchMap(takePlayerInput$(randomSequence)));
+      const memoryGame$ = memorySize => generate(1, x => x <= memorySize, x => x + 1).pipe(scan((acc, _) => [...acc, random() + 1], []), switchMap(showSequenceToMemorize$(memorySize)));
+      const elementClick$ = (event, color) => fromEvent(document.querySelectorAll('.child'), event).pipe(pluck('srcElement'), tap((e) => (e.style.background = color)),
+        tap((e) => {
+          console.log(e);
+          color === 'lightgray' ? playSound(e.id): '';
+        } ))
+      const clicks$ = merge(elementClick$('click', 'lightgray'), elementClick$('transitionend', 'white'));
+      const game$ = merge(clicks$, memoryGame$(2));
+      game$.subscribe();
+  }, false);
+
+
+</script>
+
+</body>
+
+
+<style>
+  .game-container{
+    display: grid;
+    padding: 20px;
+    justify-content: center;
+  }
+  .parent {
+    border-spacing: 5px;
+    width: 50%;
+    padding: .5em;
+  }
+
+  .parent.perspective {
+    perspective: 50em;
+  }
+
+  .child {
+    margin: .5em;
+    max-width: 2em;
+    min-width: 2em;
+    height: 2.8em;
+    padding: .5em;
+    display: table-cell;
+    border: 1px solid rgba(0, 0, 0, .5);
+  }
+
+  .parent.perspective .child {
+    transform: rotateX(40deg);
+    transition: all .3s ease-in;
+  }
+</style>
+<div class="game-container">
+<div id="info">Train Your Memory!</div>
+
+<div id="grid" class="grid parent perspective">
+  <div>
+    <div class="child" id="1"></div>
+    <div class="child" id="2"></div>
+    <div class="child" id="3"></div>
+  </div>
+  <div>
+    <div class="child" id="4"></div>
+    <div class="child" id="5"></div>
+    <div class="child" id="6"></div>
+  </div>
+  <div>
+    <div class="child" id="7"></div>
+    <div class="child" id="8"></div>
+    <div class="child" id="9"></div>
+  </div>
+</div>
+  <button id="new"> New Game </button>
+</div>
+</html>
