@@ -20,7 +20,6 @@ export class PlayersService {
   }
 
   getPlayers() {
-    console.log('get player service');
     return this.firestore.collection(FIREBASE_DB).snapshotChanges();
   }
 
@@ -45,7 +44,7 @@ export class PlayersService {
       response.docs.forEach((doc) => {
         const docRef = this.firestore.firestore.doc(FIREBASE_DB + '/' + doc.id);
         batch.update(docRef, {arrive: false});
-        console.log(doc);
+        // console.log(doc);
       });
       batch.commit();
     });

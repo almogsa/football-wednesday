@@ -344,5 +344,15 @@
     grid-auto-flow: column;
 
   }
+  .reset-button {
+    width: 130px;
+    transition:width 0.5s;
+  }
+  .reset-button-anim {
+    width: 40px;
+    border-radius: 50%;
+    height: 40px;
+
+  }
 }
 

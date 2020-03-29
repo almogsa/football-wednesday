@@ -70,7 +70,11 @@
 </div>
 <div class="settings-view">
 <div   *ngIf="(isAuthenticated$ | async)" class="action-button-group ">
-  <button class="btn btn-danger" (click)="resetPlayers()">Reset Players</button>
+  <div class="flex-container align-items--center">
+    <div *ngIf="reset" class="app-spinner absolute   "[class.opacity-full]="reset"> </div>
+    <button
+      #resetButton class="btn btn-danger reset-button" [class.reset-button-anim]="reset"   (click)="resetPlayers()">Reset Players</button>
+  </div>
   <button class="btn btn-primary"(click)="addPlayer()">Add Player</button>
 
   <!--  <button class="btn btn-primary" (click)="updatePlayer()">Update Player</button>-->

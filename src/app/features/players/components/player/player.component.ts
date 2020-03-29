@@ -20,7 +20,7 @@ export class PlayerComponent implements OnInit {
   }
 
   handleClick(player: Player) {
-    console.log(' Footer click on player: ', player);
+    // console.log(' Footer click on player: ', player);
     this.update.emit(player);
   }
 

@@ -15,7 +15,6 @@ export class PlayerViewComponent implements OnInit {
   ngOnInit() {
   }
   handleViewPlayer() {
-    console.log('player click')
     this.viewPlayer.emit(this.player);
   }
 }

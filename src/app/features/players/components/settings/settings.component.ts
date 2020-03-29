@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {AuthSelectors} from 'core/auth';
 import {Observable} from 'rxjs';
 import {select, Store} from '@ngrx/store';
@@ -17,9 +17,11 @@ export class SettingsComponent implements OnInit {
   @Output() login: EventEmitter<any> = new EventEmitter<any>();
   @Output() logout: EventEmitter<void> = new EventEmitter<void>();
   @Output() delete: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild('resetButton', {static: false}) resetButton: ElementRef;
   isAuthenticated$: Observable<boolean>;
   public processing = false;
   public success = false;
+  public reset = false;
   counter = 1;
   constructor(private store: Store<State>) {
   }
@@ -53,7 +55,17 @@ export class SettingsComponent implements OnInit {
   }
 
   resetPlayers() {
-    this.store.dispatch((PlayersActions.resetPlayers()));
+    this.reset = true;
+    this.resetButton.nativeElement.innerText = '';
+    setTimeout(_ => {
+      this.store.dispatch((PlayersActions.resetPlayers()));
+      if (this.resetButton) {
+        this.resetButton.nativeElement.innerText = 'Done!';
+        this.resetButton.nativeElement.classList.remove('btn-danger');
+        this.resetButton.nativeElement.classList.add('btn-success');
+      }
+      this.reset = false;
+    }, 3000);
   }
   addPlayer() {
     console.log('Add Player');

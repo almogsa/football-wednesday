@@ -101,12 +101,10 @@ export class PlayersListComponent implements OnInit {
     this.store.dispatch((PlayersActions.resetPlayers()));
   }
   handleBack() {
-    console.log('handle back');
     // this.playerDetails = null;
     this.back.emit();
   }
   handleView(player: Player) {
-    console.log('handle view' , player);
     this.showDetails.emit(player);
     // this.showModal = true;
     // this.playerDetails = player;

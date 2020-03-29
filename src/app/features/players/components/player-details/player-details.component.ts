@@ -68,15 +68,12 @@ export class PlayerDetailsComponent implements OnInit {
   }
 
   handleBack() {
-    console.log('handle back');
     this.back.emit();
   }
   handleDelete(player: Player) {
-    console.log('handle delete');
     this.delete.emit(player.id);
   }
   sliderChanged($event) {
-    console.log('Slider changed: ', Math.floor($event));
     this._player.strength = Math.floor($event);
   }
 

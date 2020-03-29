@@ -37,7 +37,6 @@ export class PlayersContainerComponent implements OnInit {
 
   constructor(public store: Store<State>, private tabsetService: TabsetService, private playersService: PlayersService) {
     this.tabs.forEach((tab: ActiveTab) => {
-      console.log(tab);
 
     });
     this.store.dispatch(PlayersActions.load());
@@ -99,7 +98,7 @@ export class PlayersContainerComponent implements OnInit {
   getActiveTab() {
     const tabActive = this.tabs.find((tab) => tab.active);
     this.activeTab = TabsName[tabActive.name];
-    console.log('active', this.activeTab);
+    // console.log('active', this.activeTab);
   }
 
   handleBack() {
