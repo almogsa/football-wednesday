@@ -1,5 +1,5 @@
-<div *ngIf="player" class="player" (click)="handleClick(player)">
-  <div class="relative"> <img class="avatar" [src]="player.avatar"/>
+<div *ngIf="player" class="player" [class.bench-animation] = "clicked && animate" (click)="handleClick(player)">
+  <div class="relative"> <img class="avatar"  [src]="player.avatar"/>
     <div *ngIf="player.captain" class="captain">C</div>
   </div>
   <div class="player-name">{{player.name}}</div>

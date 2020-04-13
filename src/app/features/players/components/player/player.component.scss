@@ -2,12 +2,11 @@
   text-align: center;
   padding-top: 5px;
   display: flex;
+  top:80%;
+  left: 50%;
   flex-direction: column;
   align-items: center;
- // position: relative;
-  //display: grid;
-  //grid-template-columns: 1fr 10px;
-  //justify-content: center;
+  transition: 1s all;
 }
 
 .avatar {
@@ -16,9 +15,16 @@
   width: 30px;
   border-radius: 50%;
   box-shadow: 0 0 0 2px #fff, 0 0 0 2px #999, 0 0px 5px 4px rgba(0, 0, 0, 0.2);
-
 }
 
+.bench-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition:1s all;
+
+}
 .player-name {
   color: #ffffff;
 }
@@ -34,9 +40,6 @@
   font-weight: 600;
   border-radius: 50%;
   display: inline-block;
-  //top: 11px;
-  //position: relative;
-  //left: -4px;
   position: absolute;
   right: -16px;
   top: 16px;

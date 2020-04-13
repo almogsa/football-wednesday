@@ -5,9 +5,10 @@ import {Observable} from 'rxjs';
 import {ActiveTab, Player, TabsName} from '../../models';
 import {selectAllPlayers, selectCaderPlayers, selectPlayersArrived} from '../../selectors';
 import {PlayersActions} from '../../actions';
-import {TabsetService} from '@ux-aspects/ux-aspects';
 import {AuthActions, AuthSelectors} from 'core/auth';
 import {PlayersService} from './../../services/players.service';
+import {TabsetService} from '@ux-aspects/ux-aspects';
+import {filter, map} from 'rxjs/operators';
 
 
 @Component({
@@ -19,11 +20,11 @@ export class PlayersContainerComponent implements OnInit {
 
   players$: Observable<Player[]>;
   title = 'football-wednesday';
-  players: Player[];
-  allPlayers: Player[];
   player: Player;
-  benchPlayers: Player[];
-  caderPlayers: Player[];
+  caderPlayers$: Observable<Player[]>;
+  arrivePlayers$: Observable<Player[]>;
+  benchPlayers$: Observable<Player[]>;
+  allPlayers$: Observable<any>;
   label = 'xx';
   playerDetails: Player;
   isAuthenticated$: Observable<boolean>;
@@ -54,18 +55,19 @@ export class PlayersContainerComponent implements OnInit {
 
 
   ngOnInit() {
-    this.store.pipe(select(selectPlayersArrived)).subscribe(players => {
-      this.players = players.slice(0, 10);
-      this.benchPlayers = players.slice(10);
-    });
-    this.store.pipe(select(selectCaderPlayers)).subscribe(players => {
-      this.caderPlayers = players;
-    });
-    this.store.pipe(select(selectAllPlayers)).subscribe(players => {
+    // this.store.pipe(select(selectPlayersArrived)).subscribe(players => {
+    //   this.players = players.slice(0, 10);
+    //   this.benchPlayers = players.slice(10);
+    // });
+    this.arrivePlayers$ = this.store.pipe(select(selectPlayersArrived), map(players => players.splice(0, 10)));
+    this.benchPlayers$ = this.store.pipe(select(selectPlayersArrived), map(players => players.splice(0, 10)));
+    this.caderPlayers$ = this.store.pipe(select(selectAllPlayers), map((players) => players.filter((player) =>  player.arrive === false)))
+    this.allPlayers$ = this.store.pipe(select(selectAllPlayers));
+    /*this.store.pipe(select(selectAllPlayers)).subscribe(players => {
       this.allPlayers = players;
-    });
+    });*/
     this.store.pipe(select(AuthSelectors.selectIsAuthenticated)).subscribe(auth => {
-      console.log('players container store selector selectIsAuthenticated ' , auth);
+      console.log('players container store selector selectIsAuthenticated ', auth);
       this.isAuthenticated = auth;
     });
   }

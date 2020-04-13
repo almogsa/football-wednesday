@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Player} from 'features/players/models';
 
 @Component({
@@ -9,8 +9,11 @@ import {Player} from 'features/players/models';
 export class PlayerComponent implements OnInit {
 
   @Input() player: Player;
+  @Input() animate = false;
   @Output() delete: EventEmitter<string> =  new EventEmitter<string>();
   @Output() update: EventEmitter<Player> =  new EventEmitter<Player>();
+
+  clicked = false;
   constructor() { }
 
   ngOnInit() {
@@ -21,7 +24,16 @@ export class PlayerComponent implements OnInit {
 
   handleClick(player: Player) {
     // console.log(' Footer click on player: ', player);
-    this.update.emit(player);
+    this.clicked = true;
+    if (this.animate) {
+      setTimeout(_ => {
+        this.clicked = false;
+        this.update.emit(player);
+      }, 1000);
+    } else {
+      this.clicked = false;
+      this.update.emit(player);
+    }
   }
 
 }

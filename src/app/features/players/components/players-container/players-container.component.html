@@ -1,14 +1,12 @@
 <div>
   <ux-tabset #tabsetComponent [aria-label]="label"  class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
     <ux-tab heading="FIELD" class="height--100"  [active]="activeTab === 'FIELD'">
-      <app-field [arrive]="players" [bench]="benchPlayers" [cader]="caderPlayers" [isAuthenticated]="isAuthenticated"
+      <app-field [arrive]="arrivePlayers$ | async" [bench]="benchPlayers$ | async" [cader]="(caderPlayers$ | async)" [isAuthenticated]="isAuthenticated"
                (details)="handleDetails($event)"  (update)="handleUpdate($event) "></app-field>
     </ux-tab>
     <ux-tab heading="PLAYERS" [active]="activeTab === 'PLAYERS'">
       <app-players-list  (showDetails)="handleShowDetails($event)" *ngIf="!playerDetails"(update)="handleUpdatePlayer($event)" [players]="allPlayers" (delete)="handleDeletePlayer($event)" (back)="handleBack() "></app-players-list>
       <app-player-details [isAuthenticated]="isAuthenticated" (back)="playerDetails = null" (delete)="handleDeletePlayer($event)" (update)="handleUpdatePlayer($event)" [player]="playerDetails" *ngIf="playerDetails"></app-player-details>
-    </ux-tab>
-    <ux-tab heading="LINE" [active]="activeTab === 'LINE'">
     </ux-tab>
     <ux-tab heading="SETTINGS" [active]="activeTab === 'SETTINGS'">
       <app-settings (login)="onSubmit($event)" (logout)="onLogout()"></app-settings>

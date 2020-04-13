@@ -4,9 +4,7 @@ import {Player} from 'features/players/models';
 import {select, Store} from '@ngrx/store';
 import {State} from 'features';
 import {PlayersActions} from 'features/players/actions';
-
 import {selectAllPlayers} from 'features/players/selectors';
-import {SliderCalloutTrigger, SliderSize, SliderSnap, SliderStyle} from '@ux-aspects/ux-aspects';
 
 @Component({
   selector: 'app-players-list',
@@ -32,35 +30,6 @@ export class PlayersListComponent implements OnInit {
 
   ngOnInit() {
     this.players$ = this.store.pipe(select(selectAllPlayers));
-    this.slider = {
-      value: 60,
-      options: {
-        handles: {
-          style: SliderStyle.Line,
-          callout: {
-            trigger: SliderCalloutTrigger.Hover,
-            formatter: value => value ? value.toFixed(0) : value
-          }
-        },
-        track: {
-          min: 0,
-          max: 100,
-          height: SliderSize.Narrow,
-          ticks: {
-            major: {
-              steps: 50,
-
-            },
-            minor: {
-              steps: 5,
-            }
-          },
-          colors: {
-            lower: ['#fdf690', '#3BAA43']
-          }
-        }
-      }
-    };
 
   }
 
