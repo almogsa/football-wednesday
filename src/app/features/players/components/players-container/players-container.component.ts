@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {State} from '../../../features.state';
 import {Observable} from 'rxjs';
@@ -14,17 +14,20 @@ import {filter, map} from 'rxjs/operators';
 @Component({
   selector: 'app-players-container',
   templateUrl: './players-container.component.html',
-  styleUrls: ['./players-container.component.scss']
+  styleUrls: ['./players-container.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayersContainerComponent implements OnInit {
+
 
   players$: Observable<Player[]>;
   title = 'football-wednesday';
   player: Player;
   caderPlayers$: Observable<Player[]>;
   arrivePlayers$: Observable<Player[]>;
+  allPlayers$: Observable<Player[]>;
   benchPlayers$: Observable<Player[]>;
-  allPlayers$: Observable<any>;
+  lineUpPlayers$: Observable<any>;
   label = 'xx';
   playerDetails: Player;
   isAuthenticated$: Observable<boolean>;
@@ -61,8 +64,10 @@ export class PlayersContainerComponent implements OnInit {
     // });
     this.arrivePlayers$ = this.store.pipe(select(selectPlayersArrived), map(players => players.splice(0, 10)));
     this.benchPlayers$ = this.store.pipe(select(selectPlayersArrived), map(players => players.splice(0, 10)));
-    this.caderPlayers$ = this.store.pipe(select(selectAllPlayers), map((players) => players.filter((player) =>  player.arrive === false)))
+    this.caderPlayers$ = this.store.pipe(select(selectAllPlayers), map((players) => players.filter((player) =>  player.arrive === false)));
     this.allPlayers$ = this.store.pipe(select(selectAllPlayers));
+    this.lineUpPlayers$ = this.store.pipe(select(selectAllPlayers), map((players) => players.filter((player) =>  player.arrive === true)));
+    // this.lineUpPlayers$ = this.store.pipe(select(selectPlayersArrived));
     /*this.store.pipe(select(selectAllPlayers)).subscribe(players => {
       this.allPlayers = players;
     });*/
@@ -71,7 +76,6 @@ export class PlayersContainerComponent implements OnInit {
       this.isAuthenticated = auth;
     });
   }
-
   handleUpdate($event: Player) {
     this.store.dispatch(PlayersActions.upsertPlayer({player: $event}));
     // this.store.dispatch(PlayersActions.updatePlayer({player: {id: player.id, changes: {arrive: true}}}));

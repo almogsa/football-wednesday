@@ -1,0 +1,28 @@
+
+<div  *ngIf="players.length > 8 else noContent" class="game-container-line">
+  <div class=" players-main field-line height--100">
+    <div *ngFor="let team of lineUpArrays; let i = index;let first = first; let last = last" class="team-border">
+      <app-player   *ngFor="let player of team;let i = index;let first = first; let last = last" [player]="player"
+                   [class.first-item2]="first"
+                   [class.last-item2]="last"
+                   [class.last-item2]="i==4"
+
+      ></app-player>
+      <ng-container *ngTemplateOutlet="teamEvaluation; context: {sumArray : myContext , index: i};"></ng-container>
+
+    </div>
+  </div>
+</div>
+<div>
+
+
+</div>
+<ng-template #noContent>
+  <div class="no-data">
+   No data yet..
+  </div>
+</ng-template>
+
+<ng-template #teamEvaluation let-sumArray="sumArray" let-index="index">
+  <h2 class="absolute">Team power: {{sumArray[index]}} </h2>
+</ng-template>

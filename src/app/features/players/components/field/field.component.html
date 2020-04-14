@@ -1,27 +1,5 @@
-<!--// INDICATORS-->
-<div class="grid-indicators">
-  <div *ngIf="arrive.length < 9" class="label label-critical">{{arrive.length}}</div>
-  <div class="label label-ok m-r-sm" *ngIf="arrive.length > 8">{{arrive.length + bench.length}}</div>
-  <button (click)="lineUpHandler()" type="button" class="btn btn-icon btn-circular button-primary" aria-label="Add">
-    <span class="ux-icon ux-icon-cycle" aria-hidden="true"></span>
-  </button>
-</div>
 
-<div  *ngIf="!playerDetails && lineUp" class="game-container-line">
-
-  <div class=" players-main field-line height--100">
-    <div *ngFor="let team of lineUpArrays; let i = index;let first = first; let last = last" class="team-border">
-      <app-player  [@simpleFadeAnimation]="'in'" (update)="handleDetails($event)" *ngFor="let player of team;let i = index;let first = first; let last = last" [player]="player"
-                   [class.first-item2]="first"
-                   [class.last-item2]="last"
-                   [class.last-item2]="i==4"
-
-      ></app-player>
-    </div>
-  </div>
-
-</div>
-<div  *ngIf="!playerDetails && !lineUp" class="game-container">
+<div  *ngIf="!playerDetails" class="game-container">
   <div class="header bench-background ">
     <app-player (update)="handleDetails($event)" *ngFor="let player of bench;let i = index;let first = first; let last = last" [player]="player"
     ></app-player>

@@ -21,6 +21,7 @@ import { SettingsComponent } from './components/settings/settings.component';
 import { PlayerViewComponent } from './components/player-view/player-view.component';
 import {PlayersEffects} from './effects/players.effects';
 import {EffectsModule} from '@ngrx/effects';
+import { LineUpComponent } from './components/line-up/line-up.component';
 
 
 
@@ -32,7 +33,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [PlayerComponent, PlayersListComponent, FieldComponent,
-    PlayersContainerComponent, PlayerDetailsComponent, SettingsComponent, PlayerViewComponent],
+    PlayersContainerComponent, PlayerDetailsComponent, SettingsComponent, PlayerViewComponent, LineUpComponent],
   exports: [
     PlayersListComponent,
     FieldComponent,
