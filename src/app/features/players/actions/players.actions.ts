@@ -27,3 +27,5 @@ export const deletePlayers = createAction('[Players/API] Delete Players', props<
 export const deletePlayersByPredicate = createAction('[Player/API] Delete Players By Predicate', props<{ predicate: Predicate<Player> }>());
 export const clearPlayers = createAction('[Players/API] Clear Players');
 export const resetPlayers = createAction('[Players/API] Reset Players');
+export const successOperation = createAction('[Players/API] Success Operation Players');
+export const operationFailed = createAction('[Players/API] Operation Failed', props<{ error: string }>());

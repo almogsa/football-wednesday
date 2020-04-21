@@ -1,0 +1,24 @@
+.app-notification {
+  position: fixed;
+  top:10;
+  left: 50%;
+  color: white;
+  animation: fade 0.5s ease-in-out;
+  width: 300px;
+  text-align: center;
+  padding: 17px 0;
+  background-color: #e5004c;
+  color: #fff;
+  border-radius: 3px;
+  flex: none;
+  transition: top 250ms ease-in-out;
+  transform: translate(-50%,0);
+}
+@keyframes fade {
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}

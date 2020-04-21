@@ -22,6 +22,7 @@ import { PlayerViewComponent } from './components/player-view/player-view.compon
 import {PlayersEffects} from './effects/players.effects';
 import {EffectsModule} from '@ngrx/effects';
 import { LineUpComponent } from './components/line-up/line-up.component';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 
 
@@ -40,7 +41,7 @@ const appRoutes: Routes = [
     PlayerComponent,
     PlayersContainerComponent
   ],
-  providers: [TabsetService],
+  providers: [TabsetService, AngularFireAuth],
   imports: [
     CommonModule,
     ColorServiceModule.forRoot(colorSets.keppel),

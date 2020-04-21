@@ -1,5 +1,9 @@
 import {Component, Input, OnChanges, OnInit, Renderer2, SimpleChanges, TemplateRef, ViewChild} from '@angular/core';
 import {Player} from '../../models';
+import {select, Store} from '@ngrx/store';
+import {AuthSelectors} from '../../../../core/auth';
+import {Observable} from 'rxjs';
+import {State} from '../../../features.state';
 
 
 const SET_PLAYERS = 4;
@@ -17,8 +21,9 @@ export class LineUpComponent implements OnInit, OnChanges {
   avatar = '../../../../../assets/empty_profile.png';
   public lineUpArrays = [];
   public myContext = {};
+  auth$: Observable<boolean>;
   @ViewChild('sums', {static: false}) sums: TemplateRef<any>;
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private store: Store<State>) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.players.currentValue.length > 8) {
@@ -26,6 +31,7 @@ export class LineUpComponent implements OnInit, OnChanges {
     }
   }
   ngOnInit() {
+    this.auth$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
   }
   lineUpHandler() {
     const players = this.players;

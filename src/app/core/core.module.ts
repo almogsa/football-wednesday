@@ -7,6 +7,7 @@ import {FeaturesModule} from '../features/features.module';
 import {environment} from '../../environments/environment';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
+import {AuthEffects} from './auth/auth.effects';
 
 
 @NgModule({
@@ -16,7 +17,7 @@ import {EffectsModule} from '@ngrx/effects';
     FeaturesModule,
     // ngrx
     StoreModule.forRoot(reducers, {metaReducers}), !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([ AuthEffects ]),
   ],
   providers: [
     DevToolsService,

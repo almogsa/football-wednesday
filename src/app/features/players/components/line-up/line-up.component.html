@@ -22,7 +22,7 @@
    No data yet..
   </div>
 </ng-template>
-
+<div>Auth: {{this.auth$ | async}}</div>
 <ng-template #teamEvaluation let-sumArray="sumArray" let-index="index">
-  <h2 class="absolute">Team power: {{sumArray[index]}} </h2>
+  <h2 *ngIf="this.auth$ | async" class="absolute">Team power: {{sumArray[index]}} </h2>
 </ng-template>

@@ -28,18 +28,21 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.isAuthenticated$ = this.store.pipe(select(AuthSelectors.selectIsAuthenticated));
+    this.store.pipe(select(AuthSelectors.selectIsAuthenticated)).subscribe(auth => {
+      if (auth) {
+        this.processing = false;
+        this.processing = false;
+        this.success = true;
+      }
+    });
   }
 
   handleSubmit($event: any) {
     this.processing = true;
-    setTimeout(() => {
-      this.processing = false;
-      this.success = true;
-      this.login.emit({
-        user: $event.form.controls.username.value.toLowerCase(),
-        password: $event.form.controls.password.value.toLowerCase()
-      });
-    }, 1000);
+    this.login.emit({
+      user: $event.form.controls.username.value.toLowerCase(),
+      password: $event.form.controls.password.value.toLowerCase()
+    });
   }
 
   handleLogout() {

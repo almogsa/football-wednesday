@@ -59,8 +59,16 @@ const reducer = createReducer(
     return state;
       // return playersAdapter.addAll(players, state);
   }),
+  on(PlayersActions.operationFailed, (state, { error }) => {
+    console.log('Error :' ,  error);
+    return state;
+    // return playersAdapter.addAll(players, state);
+  }),
   on(PlayersActions.clearPlayers, state => {
     return playersAdapter.removeAll({ ...state, selectedplayerId: null });
+  }),
+  on(PlayersActions.successOperation, state => {
+    return state;
   }),
   on(PlayersActions.resetPlayers, (state) => {
   const updates = [];

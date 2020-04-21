@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { ofType, createEffect, Actions } from '@ngrx/effects';
-import { tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {ofType, createEffect, Actions} from '@ngrx/effects';
+import {catchError, map, switchMap, tap} from 'rxjs/operators';
 
-import { LocalStorageService } from '../local-storage/local-storage.service';
+import {LocalStorageService} from '../local-storage/local-storage.service';
 
-import { authLogin, authLogout } from './auth.actions';
+import { authLogin, authLogout, authSuccess, authFailed, authLogoutSuccess, authLogoutFailed } from './auth.actions';
+import {FirebaseAuthService} from './firebase-auth.service';
+import {of} from 'rxjs';
 
 export const AUTH_KEY = 'AUTH';
 
@@ -14,6 +16,7 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private localStorageService: LocalStorageService,
+    private firebaseAuthService: FirebaseAuthService,
     private router: Router
   ) {}
 
@@ -21,24 +24,30 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(authLogin),
-        tap(() =>
-          this.localStorageService.setItem(AUTH_KEY, { isAuthenticated: true })
-        )
-      ),
-    { dispatch: false }
-  );
+        switchMap((action) => {
+            // return this.firebaseAuthService.auth().pipe(
+            return this.firebaseAuthService.signInWithEmailAndPassword(action.user.name, action.user.password).pipe(
+              map(data => {
+                return authSuccess();
+                this.localStorageService.setItem(AUTH_KEY, {isAuthenticated: true});
+              }),
+              catchError(error => of(authFailed(error)))
+            );
+        })
+      ));
 
   logout = createEffect(
     () =>
       this.actions$.pipe(
         ofType(authLogout),
-        tap(() => {
-          this.router.navigate(['']);
-          this.localStorageService.setItem(AUTH_KEY, {
-            isAuthenticated: false
-          });
+        switchMap((action) => {
+          return this.firebaseAuthService.SignOut().pipe(
+            map(data => {
+              console.log('user log out');
+              return authLogoutSuccess();
+            }),
+            catchError(error => of(authLogoutFailed(error)))
+          );
         })
-      ),
-    { dispatch: false }
-  );
+      ));
 }

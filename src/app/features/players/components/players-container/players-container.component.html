@@ -1,5 +1,5 @@
 <div>
-  <ux-tabset #tabsetComponent [aria-label]="label"  class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
+  <ux-tabset [aria-label]="label"  class="tabs-primary  absolute width--100 height--100 cdls-tabs-full">
     <ux-tab heading="FIELD" class="height--100"  [active]="activeTab === 'FIELD'">
       <ng-template uxTabHeading >
         <span class="margin-r--5px">FIELD</span>
@@ -24,3 +24,9 @@
 
 
 </div>
+<!--ng-container *ngTemplateOutlet="notify; context: {message2 : notification$| async};"></ng-container-->
+<ng-container *ngIf="notification$ | async" [ngTemplateOutlet]="notify"  [ngTemplateOutletContext]= " {message : notification$ | async}"></ng-container>
+
+<ng-template let-message="message" #notify>
+  <div  class="app-notification notification"> {{message}}</div>
+</ng-template>

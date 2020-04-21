@@ -43,6 +43,7 @@ in style.scss add those imports
 
 ## DEPLOY 
 set https_proxy=http://web-proxy.il.softwaregrp.net:8080
-firebase login
+firebase login  or firebase login --reauth
+
 npm run build
 firebase deploy
